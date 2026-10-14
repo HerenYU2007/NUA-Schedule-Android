@@ -27,6 +27,9 @@ public class MainActivity extends AppearanceActivity {
     private LocalDate selectedDate, renderedToday;
     private int page=1; private boolean expandedCompleted=true;
     private LinearLayout content; private WeekSwipeScrollView scroll;
+    private boolean emptyPromptHandled;
+    private AlertDialog emptyPrompt;
+    private boolean openingImport;
     private final Handler ticker=new Handler(Looper.getMainLooper());
     private final Runnable tick=new Runnable(){@Override public void run(){if(!isFinishing()){
         if(page==0||!ScheduleRepository.today().equals(renderedToday))render();
@@ -37,6 +40,7 @@ public class MainActivity extends AppearanceActivity {
         ScheduleRuleStore.applySaved(this);
         selectedDate=state!=null&&state.containsKey("selected_date")?LocalDate.ofEpochDay(state.getLong("selected_date")):ScheduleRepository.today();
         page=state==null?(getIntent().getBooleanExtra("open_agenda",false)?0:1):state.getInt("page",1);
+        emptyPromptHandled=state!=null&&state.getBoolean("empty_prompt_handled",false);
         content=findViewById(R.id.page_content);scroll=findViewById(R.id.page_scroll);
         findViewById(R.id.tab_agenda).setOnClickListener(v->selectPage(0));
         findViewById(R.id.tab_timetable).setOnClickListener(v->selectPage(1));
@@ -47,14 +51,43 @@ public class MainActivity extends AppearanceActivity {
         findViewById(R.id.page_date).setOnClickListener(v->{if(page!=2)datePicker();});
         findViewById(R.id.display_mode).setOnClickListener(v->{if(AppearanceSettings.saveGrid(this,!AppearanceSettings.grid(this)))render();else toast("显示模式保存失败");});
         render();
-        AppUpdates.checkOnOpen(this);
     }
+    // Cold launch and reopening the main screen: network work remains off the UI thread.
+    @Override protected void onStart(){super.onStart();AppUpdates.checkOnOpen(this);}
     private void selectPage(int selected){page=selected;scroll.scrollTo(0,0);render();}
     private void changeWeek(int direction){selectedDate=selectedDate.plusWeeks(direction);render();scroll.scrollTo(0,0);content.setAlpha(.4f);content.animate().alpha(1).setDuration(180).start();}
-    @Override protected void onResume(){super.onResume();ScheduleRuleStore.applySaved(this);if(content!=null)render();refreshWidget();AgendaReminders.schedule(this);AppUpdates.resumeInstall(this);ticker.removeCallbacks(tick);ticker.postDelayed(tick,30000);}
+    @Override protected void onResume(){super.onResume();openingImport=false;ScheduleRuleStore.applySaved(this);if(content!=null)render();refreshWidget();AgendaReminders.schedule(this);AppUpdates.resumeInstall(this);ticker.removeCallbacks(tick);ticker.postDelayed(tick,30000);}
     @Override protected void onPause(){ticker.removeCallbacks(tick);super.onPause();}
-    @Override public void onWindowFocusChanged(boolean focused){super.onWindowFocusChanged(focused);if(focused&&content!=null)AppUpdates.presentPending(this);}
-    @Override protected void onSaveInstanceState(Bundle state){state.putLong("selected_date",selectedDate.toEpochDay());state.putInt("page",page);super.onSaveInstanceState(state);}
+    @Override public void onWindowFocusChanged(boolean focused){
+        super.onWindowFocusChanged(focused);
+        if(focused&&content!=null&&!isFinishing()&&!isDestroyed()){
+            if(showEmptySchedulePrompt())return;
+            if(canPresentSoftwareUpdate())AppUpdates.presentPending(this);
+        }
+    }
+    @Override protected void onSaveInstanceState(Bundle state){state.putLong("selected_date",selectedDate.toEpochDay());state.putInt("page",page);state.putBoolean("empty_prompt_handled",emptyPromptHandled);super.onSaveInstanceState(state);}
+    @Override protected void onDestroy(){if(emptyPrompt!=null){emptyPrompt.setOnDismissListener(null);emptyPrompt.dismiss();emptyPrompt=null;}super.onDestroy();}
+    private boolean showEmptySchedulePrompt(){
+        if(emptyPromptHandled||ScheduleRepository.hasImportedRules())return false;
+        // Mark before showing, so focus changes, rotation and returning from import cannot loop.
+        emptyPromptHandled=true;
+        emptyPrompt=new AlertDialog.Builder(this).setIcon(R.drawable.ic_ui_calendar)
+                .setTitle("先导入你的课表").setMessage("当前还没有可显示的课表。\n可登录学校教务系统自动获取，或导入学校导出的 XLS 文件。导入前会显示预览供你确认。")
+                .setPositiveButton("登录获取",(d,w)->openScheduleImport(false))
+                .setNeutralButton("导入 XLS",(d,w)->openScheduleImport(true))
+                .setNegativeButton("稍后",null).create();
+        emptyPrompt.setOnDismissListener(d->{emptyPrompt=null;content.post(()->{
+            if(!isFinishing()&&!isDestroyed()&&hasWindowFocus()&&canPresentSoftwareUpdate())AppUpdates.presentPending(this);
+        });});
+        emptyPrompt.show();return true;
+    }
+    private void openScheduleImport(boolean manual){
+        openingImport=true;
+        Intent intent=new Intent(this,ScheduleSyncActivity.class);
+        if(manual)intent.putExtra("manual_import",true);
+        startActivity(intent);
+    }
+    boolean canPresentSoftwareUpdate(){return emptyPrompt==null&&!openingImport;}
     private void render(){
         renderedToday=ScheduleRepository.today();content.removeAllViews();
         ((TextView)findViewById(R.id.page_date)).setText(page==2?"我的":selectedDate.toString().replace('-','/')+" 周"+"一二三四五六日".charAt(selectedDate.getDayOfWeek().getValue()-1));
@@ -64,11 +97,14 @@ public class MainActivity extends AppearanceActivity {
         findViewById(R.id.display_mode).setVisibility(page==1?View.VISIBLE:View.GONE);
         ((TextView)findViewById(R.id.display_mode)).setText(AppearanceSettings.grid(this)?"竖条课表 · 切换为列表":"列表课表 · 切换为竖条");
         scroll.setOnWeekSwipe(page==1?this::changeWeek:null);
-        int[] tabs={R.id.tab_agenda,R.id.tab_timetable,R.id.tab_mine};for(int i=0;i<tabs.length;i++){TextView t=findViewById(tabs[i]);t.setTextColor(getColor(i==page?R.color.brand_navy:R.color.text_secondary));t.setTypeface(null,i==page?Typeface.BOLD:Typeface.NORMAL);}
+        int[] tabs={R.id.tab_agenda,R.id.tab_timetable,R.id.tab_mine};for(int i=0;i<tabs.length;i++){TextView t=findViewById(tabs[i]);t.setSelected(i==page);t.setTextColor(getColor(i==page?R.color.brand_navy:R.color.text_secondary));t.setTypeface(null,i==page?Typeface.BOLD:Typeface.NORMAL);}
         if(page==1)renderTimetable(week);else if(page==0)renderAgenda();else renderMine();
     }
     private void renderTimetable(int week){
-        if(!ScheduleRepository.hasImportedRules()){message("课表为空\n请到“我的”登录获取或手动导入 XLS");return;}
+        if(!ScheduleRepository.hasImportedRules()){
+            heading("从这里开始");message("还没有可显示的课表。请选择一种方式导入：");
+            importActions();return;
+        }
         if(!ScheduleRepository.isVisibleWeek(week)){message("该日期不在"+ScheduleRepository.rangeText()+"范围内");return;}
         List<CourseSession> sessions=ScheduleRepository.sessionsInWeek(week);
         if(AppearanceSettings.grid(this)){content.addView(WeekGrid.create(this,selectedDate,sessions));return;}
@@ -102,14 +138,36 @@ public class MainActivity extends AppearanceActivity {
     private java.time.LocalTime itemTime(Object item){return item instanceof CourseSession?((CourseSession)item).getStartTime():((AgendaEvent)item).allDay?java.time.LocalTime.MIN:((AgendaEvent)item).start;}
     private boolean itemDone(Object item){return item instanceof CourseSession?ScheduleRepository.statusAt((CourseSession)item,ScheduleRepository.now())==CourseStatus.ENDED:((AgendaEvent)item).done;}
     private void renderMine(){
-        heading(getString(R.string.app_name));
+        View summary=getLayoutInflater().inflate(R.layout.view_mine_summary,content,false);
+        boolean imported=ScheduleRepository.hasImportedRules();
+        ((TextView)summary.findViewById(R.id.mine_status)).setText(imported?"课表已就绪":"等待导入课表");
         long synced=ScheduleRuleStore.lastSyncTime(this);
-        message(synced>0?"最近导入："+java.text.DateFormat.getDateTimeInstance().format(new java.util.Date(synced)):"尚未导入课表");
-        action("登录教务系统并获取课表",()->startActivity(new Intent(this,ScheduleSyncActivity.class)));
-        action("手动导入学校导出的 XLS",()->startActivity(new Intent(this,ScheduleSyncActivity.class).putExtra("manual_import",true)));
-        action("课表与界面设置",()->startActivity(new Intent(this,SettingsActivity.class)));
-        action("检查软件更新",()->AppUpdates.check(this,true));
-        message("日程、课表和界面偏好均在本机保存。没有会员或广告。只有主动获取课表才打开学校登录页。");
+        ((TextView)summary.findViewById(R.id.mine_status_detail)).setText(imported
+                ?ScheduleRepository.rangeText()+" · "+ScheduleRepository.importedRuleCount()+" 个上课安排"
+                :"同步教务课表，或导入已下载的 XLS 文件");
+        ((TextView)summary.findViewById(R.id.mine_last_import)).setText(synced>0
+                ?"最近导入 "+java.text.DateFormat.getDateTimeInstance(java.text.DateFormat.MEDIUM,java.text.DateFormat.SHORT).format(new java.util.Date(synced))
+                :"数据保存在本机 · 导入前可预览确认");
+        content.addView(summary);
+        heading("课表来源");importActions();
+        heading("偏好与应用");
+        content.addView(MineActionCards.create(this,R.drawable.ic_ui_settings,"课表与界面设置",
+                "开学时间、显示模式、主题、小组件与提醒","个性化",R.color.action_purple,false,
+                ()->startActivity(new Intent(this,SettingsActivity.class))));
+        content.addView(MineActionCards.create(this,R.drawable.ic_ui_update,"检查软件更新",
+                "打开 App 自动检查，也可点此手动检查","应用更新",R.color.action_amber,false,
+                ()->AppUpdates.check(this,true)));
+        String version="";
+        try{version=" · "+getPackageManager().getPackageInfo(getPackageName(),0).versionName;}catch(android.content.pm.PackageManager.NameNotFoundException ignored){}
+        message("南艺电子课表"+version+"\n没有会员或广告。只有主动获取课表才打开学校登录；软件更新仅在打开 App 时检查。");
+    }
+    private void importActions(){
+        content.addView(MineActionCards.create(this,R.drawable.ic_ui_cloud,"登录并获取课表",
+                "打开学校官方登录页，登录后自动获取","教务同步",R.color.brand_navy,true,
+                ()->openScheduleImport(false)));
+        content.addView(MineActionCards.create(this,R.drawable.ic_ui_file,"导入 XLS 课表",
+                "使用学校导出的文件，无需网页登录","本地文件",R.color.action_green,false,
+                ()->openScheduleImport(true)));
     }
     private View courseCard(CourseSession s,boolean completed){
         boolean ended=completed||ScheduleRepository.statusAt(s,ScheduleRepository.now())==CourseStatus.ENDED;
@@ -127,7 +185,7 @@ public class MainActivity extends AppearanceActivity {
         TextView badge=text(type,11,R.color.text_secondary);badge.setPadding(dp(8),dp(4),0,dp(4));row.addView(badge);if(done)row.setAlpha(.55f);row.setContentDescription(title+" "+time+" "+details+(done?" 已完成":""));return row;
     }
     private void agendaChanged(){AgendaReminders.schedule(this);render();}
-    private void action(String value,Runnable run){Button b=new Button(this);b.setText(value);b.setAllCaps(false);b.setOnClickListener(v->run.run());content.addView(b,new LinearLayout.LayoutParams(-1,-2));}
+    private void action(String value,Runnable run){Button b=new Button(this);b.setText(value);b.setAllCaps(false);b.setOnClickListener(v->run.run());LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(-1,-2);p.bottomMargin=dp(10);content.addView(b,p);}
     private TextView heading(String value){TextView t=text(value,20,R.color.text_primary);t.setTypeface(null,Typeface.BOLD);t.setPadding(0,dp(16),0,dp(12));content.addView(t);return t;}
     private void message(String value){TextView t=text(value,14,R.color.text_secondary);t.setPadding(0,dp(12),0,dp(12));content.addView(t);}
     private TextView text(String value,int size,int color){TextView t=new TextView(this);t.setText(value);t.setTextSize(size);t.setTextColor(getColor(color));return t;}

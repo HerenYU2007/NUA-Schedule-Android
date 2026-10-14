@@ -41,6 +41,8 @@
 
         <Button
             android:id="@+id/set_school_start"
+            style="@style/SettingsAction"
+            android:drawableStart="@drawable/ic_ui_calendar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -48,24 +50,33 @@
 
         <Button
             android:id="@+id/manual_import"
+            style="@style/SettingsAction"
+            android:drawableStart="@drawable/ic_ui_file"
+            android:drawableTint="@color/action_green"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="手动导入学校导出的 XLS" />
 
         <Button
             android:id="@+id/theme_settings"
+            style="@style/SettingsAction"
+            android:drawableStart="@drawable/ic_ui_theme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="界面主题：跟随系统" />
 
         <Button
             android:id="@+id/mode_settings"
+            style="@style/SettingsAction"
+            android:drawableStart="@drawable/ic_ui_grid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="课表展示：列表课表" />
 
         <Button
             android:id="@+id/clear_schedule"
+            style="@style/SettingsActionDanger"
+            android:drawableStart="@drawable/ic_ui_trash"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="清空已导入课表" />
@@ -81,6 +92,8 @@
 
         <Button
             android:id="@+id/add_widget"
+            style="@style/SettingsAction"
+            android:drawableStart="@drawable/ic_ui_grid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -88,12 +101,15 @@
 
         <Button
             android:id="@+id/reminder_button"
+            style="@style/SettingsAction"
+            android:drawableStart="@drawable/ic_ui_bell"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="上课提醒设置" />
 
         <Button
             android:id="@+id/back_button"
+            style="@style/ModernButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="26dp"

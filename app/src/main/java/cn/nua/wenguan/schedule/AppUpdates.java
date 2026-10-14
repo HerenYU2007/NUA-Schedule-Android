@@ -164,7 +164,7 @@ public final class AppUpdates {
         if(!a.getPackageManager().canRequestPackageInstalls()){pendingInstall=true;new AlertDialog.Builder(a).setTitle("允许安装本应用的更新").setMessage("需在系统页面允许此 App 安装更新。授权后返回即可弹出系统安装确认。").setNegativeButton("取消",(d,w)->pendingInstall=false).setPositiveButton("去授权",(d,w)->{try{a.startActivity(new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES,Uri.parse("package:"+a.getPackageName())));}catch(RuntimeException noPage){pendingInstall=false;toast(a,"无法打开安装授权页面");}}).show();return;}
         try{Intent intent=new Intent(Intent.ACTION_VIEW).setDataAndType(Uri.parse("content://"+a.getPackageName()+".updates/apk"),"application/vnd.android.package-archive").addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);a.startActivity(intent);}catch(RuntimeException failed){toast(a,"无法打开系统安装器，请稍后重试");}
     }
-    private static boolean visible(Activity a){return !a.isFinishing()&&!a.isDestroyed()&&a.hasWindowFocus();}
+    private static boolean visible(Activity a){return !a.isFinishing()&&!a.isDestroyed()&&a.hasWindowFocus()&&(!(a instanceof MainActivity)||((MainActivity)a).canPresentSoftwareUpdate());}
     private static boolean https(String url){try{java.net.URI u=java.net.URI.create(url);return "https".equalsIgnoreCase(u.getScheme())&&u.getHost()!=null&&u.getUserInfo()==null;}catch(RuntimeException invalid){return false;}}
     private static InputStream open(String url)throws IOException{
         return open(url,false);

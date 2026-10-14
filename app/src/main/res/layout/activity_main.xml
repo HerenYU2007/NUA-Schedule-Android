@@ -8,14 +8,14 @@
             <Button android:id="@+id/select_date" style="@style/NavButtonSecondary" android:text="选择日期" />
             <Button android:id="@+id/next_week" style="@style/NavButtonSecondary" android:text="下一周 ›" />
         </LinearLayout>
-        <Button android:id="@+id/display_mode" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="切换展示模式" />
+        <Button android:id="@+id/display_mode" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:drawableStart="@drawable/ic_ui_grid" android:text="切换展示模式" />
     </LinearLayout>
     <cn.nua.wenguan.schedule.ui.WeekSwipeScrollView android:id="@+id/page_scroll" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:fillViewport="true">
         <LinearLayout android:id="@+id/page_content" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="20dp" />
     </cn.nua.wenguan.schedule.ui.WeekSwipeScrollView>
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:background="@color/surface" android:paddingBottom="6dp">
-        <Button android:id="@+id/tab_agenda" style="@style/NavButton" android:layout_height="54dp" android:text="日程" />
-        <Button android:id="@+id/tab_timetable" style="@style/NavButton" android:layout_height="54dp" android:text="课表" />
-        <Button android:id="@+id/tab_mine" style="@style/NavButton" android:layout_height="54dp" android:text="我的" />
+        <Button android:id="@+id/tab_agenda" style="@style/NavButton" android:text="日程" />
+        <Button android:id="@+id/tab_timetable" style="@style/NavButton" android:text="课表" />
+        <Button android:id="@+id/tab_mine" style="@style/NavButton" android:text="我的" />
     </LinearLayout>
 </LinearLayout>

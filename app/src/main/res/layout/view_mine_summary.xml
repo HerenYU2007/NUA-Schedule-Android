@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:orientation="vertical" android:padding="22dp" android:layout_marginBottom="6dp"
+    android:background="@drawable/bg_mine_summary">
+    <ImageView android:layout_width="32dp" android:layout_height="32dp"
+        android:src="@drawable/ic_ui_calendar" android:tint="@color/brand_navy" android:importantForAccessibility="no"/>
+    <TextView android:id="@+id/mine_status" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginTop="14dp" android:textColor="@color/text_primary" android:textSize="23sp" android:textStyle="bold"/>
+    <TextView android:id="@+id/mine_status_detail" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginTop="8dp" android:textColor="@color/text_secondary" android:textSize="14sp"/>
+    <TextView android:id="@+id/mine_last_import" android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_marginTop="14dp" android:textColor="@color/text_secondary" android:textSize="12sp"/>
+</LinearLayout>

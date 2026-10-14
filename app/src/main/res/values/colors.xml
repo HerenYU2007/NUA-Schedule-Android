@@ -10,6 +10,13 @@
     <color name="card_empty">#F3F6F8</color>
     <color name="card_border">#C6D5DF</color>
     <color name="surface">#FFFFFF</color>
+    <color name="button_primary">#1F4E78</color>
+    <color name="on_button_primary">#FFFFFF</color>
+    <color name="control_ripple">#251F4E78</color>
+    <color name="action_green">#08785B</color>
+    <color name="action_purple">#6B49B9</color>
+    <color name="action_amber">#966300</color>
+    <color name="action_danger">#BC3045</color>
     <color name="header_background">#1F4E78</color>
     <color name="nav_background">#D9EAF7</color>
     <color name="nav_secondary">#EDF2F5</color>

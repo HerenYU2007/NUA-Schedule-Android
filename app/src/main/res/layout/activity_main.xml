@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:background="@color/page_background">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:paddingStart="20dp" android:paddingEnd="20dp" android:paddingTop="16dp">
+        <TextView android:id="@+id/page_date" android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="44dp" android:gravity="center_vertical" android:textSize="25sp" android:textStyle="bold" android:textColor="@color/text_primary" android:clickable="true" android:focusable="true" />
+        <TextView android:id="@+id/page_subtitle" android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="@color/text_secondary" android:textSize="13sp" />
+        <LinearLayout android:id="@+id/week_controls" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="8dp">
+            <Button android:id="@+id/previous_week" style="@style/NavButtonSecondary" android:text="‹ 上一周" />
+            <Button android:id="@+id/select_date" style="@style/NavButtonSecondary" android:text="选择日期" />
+            <Button android:id="@+id/next_week" style="@style/NavButtonSecondary" android:text="下一周 ›" />
+        </LinearLayout>
+        <Button android:id="@+id/display_mode" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="切换展示模式" />
+    </LinearLayout>
+    <cn.nua.wenguan.schedule.ui.WeekSwipeScrollView android:id="@+id/page_scroll" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:fillViewport="true">
+        <LinearLayout android:id="@+id/page_content" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="20dp" />
+    </cn.nua.wenguan.schedule.ui.WeekSwipeScrollView>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:background="@color/surface" android:paddingBottom="6dp">
+        <Button android:id="@+id/tab_agenda" style="@style/NavButton" android:layout_height="54dp" android:text="日程" />
+        <Button android:id="@+id/tab_timetable" style="@style/NavButton" android:layout_height="54dp" android:text="课表" />
+        <Button android:id="@+id/tab_mine" style="@style/NavButton" android:layout_height="54dp" android:text="我的" />
+    </LinearLayout>
+</LinearLayout>

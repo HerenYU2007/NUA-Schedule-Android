@@ -1,0 +1,11 @@
+const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),assert=require('node:assert/strict');
+const folder=process.argv[2];if(!folder||!path.isAbsolute(folder))throw new Error('Supply absolute release output folder');
+const envelope=JSON.parse(fs.readFileSync(path.join(folder,'update.json'))),payload=Buffer.from(envelope.payload,'base64'),signature=Buffer.from(envelope.signature,'base64');
+const pub=fs.readFileSync(path.join(__dirname,'../app/src/main/assets/update-public.pem'));
+assert.equal(envelope.algorithm,'SHA256withRSA');assert(crypto.verify('sha256',payload,pub,signature),'Actual publishing key must match packaged public key');
+const manifest=JSON.parse(payload),file=manifest.apk.url.split('/').pop();assert(/^[A-Za-z0-9._-]+\.apk$/.test(file));
+const apk=fs.readFileSync(path.join(folder,file));assert.equal(apk.length,manifest.apk.size);assert.equal(crypto.createHash('sha256').update(apk).digest('hex'),manifest.apk.sha256);
+const tampered=Buffer.from(payload);tampered[0]^=1;assert(!crypto.verify('sha256',tampered,pub,signature));
+assert.equal(manifest.packageName,'cn.nua.wenguan.schedule');
+assert(!fs.readdirSync(folder).some(file=>/pem|keystore|jks/i.test(file)));
+console.log('Actual local release validated: pinned RSA signature, tamper rejection, APK size/SHA-256 and no key files. No publication or live install tested.');

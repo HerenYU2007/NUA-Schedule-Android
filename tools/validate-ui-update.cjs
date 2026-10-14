@@ -1,0 +1,18 @@
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict'),crypto=require('node:crypto');
+const root=path.resolve(__dirname,'..'),read=p=>fs.readFileSync(path.join(root,p),'utf8');
+const main=read('app/src/main/java/cn/nua/wenguan/schedule/MainActivity.java'),xml=read('app/src/main/res/layout/activity_main.xml');
+for(const id of ['tab_agenda','tab_timetable','tab_mine','previous_week','next_week','select_date'])assert(xml.includes(id));
+assert(!xml.includes('previous_day')&&!xml.includes('next_day'));
+assert(main.includes('setOnWeekSwipe(page==1?this::changeWeek:null)'));
+assert(main.includes('CourseDetailsSheet.show(this,s)'));
+const sheet=read('app/src/main/java/cn/nua/wenguan/schedule/ui/CourseDetailsSheet.java');assert(sheet.includes('Gravity.TOP'));assert(sheet.includes('TopCourseSheetAnimation'));
+const updates=read('app/src/main/java/cn/nua/wenguan/schedule/AppUpdates.java');
+for(const guard of ['verify.verify(signed)','sameSigner(archive,current)','digest.digest()','FLAG_GRANT_READ_URI_PERMISSION','ACTION_MANAGE_UNKNOWN_APP_SOURCES'])assert(updates.includes(guard));
+assert(!updates.includes('CookieManager')&&!updates.includes('JobScheduler'));
+const sync=read('app/src/main/java/cn/nua/wenguan/schedule/ScheduleSyncActivity.java');assert(sync.includes('sessionRecovered = true'));assert(sync.includes('resetBrowser(false,confirmedPortal)'));
+const recovery=sync.slice(sync.indexOf('private boolean recoverSession'),sync.indexOf('private void restartFlow(boolean'));
+assert(!recovery.includes('removeAllCookies'));
+const pub=read('app/src/main/assets/update-public.pem');assert(pub.includes('BEGIN PUBLIC KEY')&&!pub.includes('PRIVATE KEY'));
+const keys=crypto.generateKeyPairSync('rsa',{modulusLength:3072});const body=Buffer.from('{"versionCode":29}'),signature=crypto.sign('sha256',body,keys.privateKey);
+assert(crypto.verify('sha256',body,keys.publicKey,signature));assert(!crypto.verify('sha256',Buffer.from('{"versionCode":30}'),keys.publicKey,signature));
+console.log('UI/update static guards passed: three pages, weekly swipes, shared top sheets, signed manifest, tamper rejection, APK identity, system installation and one same-session recovery.');

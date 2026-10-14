@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/page_background"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/header_background"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="12dp"
+        android:paddingTop="9dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="9dp">
+
+        <TextView
+            android:id="@+id/sync_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="关闭"
+            android:padding="9dp"
+            android:text="关闭"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="登录教务并同步"
+                android:textColor="@android:color/white"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="密码仅输入学校官方页面"
+                android:textColor="#CFE4F2"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/sync_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="9dp"
+            android:text="退出登录"
+            android:textColor="#CFE4F2"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/sync_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:max="100"
+        android:progressTint="@color/brand_navy" />
+
+    <TextView
+        android:id="@+id/sync_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/card_empty"
+        android:paddingStart="14dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="14dp"
+        android:paddingBottom="8dp"
+        android:textColor="@color/text_secondary"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/sync_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="学校入口 · 清空登录并重连" />
+
+    <TextView
+        android:id="@+id/sync_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        android:textColor="@color/text_secondary"
+        android:textSize="11sp" />
+
+    <FrameLayout
+        android:id="@+id/sync_browser_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/sync_browser_problem"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/page_background"
+            android:gravity="center"
+            android:padding="28dp"
+            android:textColor="@color/text_secondary"
+            android:textSize="16sp"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/import_current_page"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/header_background"
+        android:text="重新获取课表（清空登录）"
+        android:textColor="@android:color/white"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/sync_import_xls"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="导入已下载的 XLS（备用）"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/sync_xls_license"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="组件许可"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/sync_diagnostics"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="查看 / 复制同步诊断（不含账号密码）"
+        android:textSize="12sp" />
+</LinearLayout>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="brand_navy">#1F4E78</color>
+    <color name="page_background">#F7F9FB</color>
+    <color name="text_primary">#243746</color>
+    <color name="text_secondary">#5B6B78</color>
+    <color name="text_hint">#7B8790</color>
+    <color name="card_theory">#EAF3F8</color>
+    <color name="card_practice">#FFF1D6</color>
+    <color name="card_empty">#F3F6F8</color>
+    <color name="card_border">#C6D5DF</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="header_background">#1F4E78</color>
+    <color name="nav_background">#D9EAF7</color>
+    <color name="nav_secondary">#EDF2F5</color>
+    <color name="widget_text">#FFFFFF</color>
+    <color name="widget_muted">#C7D6E1</color>
+    <color name="widget_accent">#9ED6FF</color>
+</resources>

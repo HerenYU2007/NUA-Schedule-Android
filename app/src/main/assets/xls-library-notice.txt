@@ -1,0 +1,9 @@
+本应用使用未经修改的 JExcelAPI 2.6.12 读取学校导出的 XLS。
+Copyright (C) 2002 Andrew Khan and JExcelAPI contributors.
+许可：GNU Lesser General Public License version 2.1 or, at your option, any later version.
+该组件不提供任何担保，完整许可见下文。
+
+官方项目：https://sourceforge.net/projects/jexcelapi/
+构件来源：https://repo.maven.apache.org/maven2/net/sourceforge/jexcelapi/jxl/2.6.12/
+
+交付源码中 app/libs/jxl-2.6.12.jar 为运行库，third_party/jxl-2.6.12-sources.jar 为对应的未修改源码，third_party/LGPL-2.1.txt 为许可。可替换此库并按 README 重新构建、链接本应用；未引入该库历史上的可选 Log4J 依赖。

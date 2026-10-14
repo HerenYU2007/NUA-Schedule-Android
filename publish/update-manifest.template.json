@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "packageName": "cn.nua.wenguan.schedule",
+  "versionCode": 28,
+  "versionName": "1.1.26",
+  "notes": "三页界面、日程、周次滑动、课程顶部详情和启动检查更新。此文件是未签名模板，不能直接给客户端使用。",
+  "apk": {
+    "url": "https://github.com/OWNER/REPOSITORY/releases/download/v1.1.26/nua-schedule-1.1.26.apk",
+    "size": 0,
+    "sha256": "由 tools/prepare-github-release.cjs 从实际APK生成"
+  }
+}

@@ -109,7 +109,6 @@ public class MainActivity extends AppearanceActivity {
         action("手动导入学校导出的 XLS",()->startActivity(new Intent(this,ScheduleSyncActivity.class).putExtra("manual_import",true)));
         action("课表与界面设置",()->startActivity(new Intent(this,SettingsActivity.class)));
         action("检查软件更新",()->AppUpdates.check(this,true));
-        action("配置软件更新源",()->AppUpdates.configure(this));
         message("日程、课表和界面偏好均在本机保存。没有会员或广告。只有主动获取课表才打开学校登录页。");
     }
     private View courseCard(CourseSession s,boolean completed){

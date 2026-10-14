@@ -1,37 +1,42 @@
-# GitHub 发布准备（未创建或上传仓库）
+# GitHub发布与内置更新
 
-本次提供源码与脚本。仓库名尚未确定，所以 App 中默认不联网检查更新。创建仓库并上传首个 Release 后，在“我的 → 配置软件更新源”填写：
+仓库：https://github.com/HerenYU2007/NUA-Schedule-Android
 
-`https://github.com/OWNER/REPOSITORY/releases/latest/download/update.json`
+仅打开App时自动检查，也保留手动检查。更新源已经写入源码，不读取旧的自定义URL设置，不需要用户输入。
 
-## 源码上传
+## 清单与下载入口
 
-新建自己的 GitHub 仓库，将本项目根目录的干净源码上传（交付源码 ZIP 不含构建缓存、SDK、APK、私钥、登录 Cookie）。推荐先本地 `git init`，检查 `git status` 中无敏感文件，再添加 remote 和推送。这里不自动创建仓库、不执行 push。
+- 清单原始地址：https://github.com/HerenYU2007/NUA-Schedule-Android/releases/latest/download/update.json 。
+- 目录：https://github.akams.cn/ ，只读取页面及本站 /_next/static/chunks/*.js 中的显式节点记录，不执行JavaScript。
+- 缓存：应用私有目录 updates/akams-nodes.txt。目录失败使用缓存，始终合并文档全部78个内置节点（包含IDN域名），去重后依次尝试，校验成功即停止。
+- 镜像URL格式：https://节点/https://github.com/HerenYU2007/NUA-Schedule-Android/releases/latest/download/update.json 。
+- 官方备用：GitHub直连；https://api.github.com/repos/HerenYU2007/NUA-Schedule-Android/releases/latest 查询update.json附件API，以octet-stream下载；https://raw.githubusercontent.com/HerenYU2007/NUA-Schedule-Android/master/updates/update.json 及对应GitHub raw地址。
+- APK：签名清单指定 https://github.com/HerenYU2007/NUA-Schedule-Android/releases/download/v版本/nua-schedule-版本.apk 。优先 https://gh-proxy.org/原始URL ，随后尝试全部目录/缓存/内置节点、原始URL、对应版本附件API。
+- 普通成功路径不会尝试剩余节点。文件名和版本绑定，不用latest APK链接替换已签名版本；没有第三方节点获得发布权限。
 
-## 两种签名，不可混淆
+## 传输与安装
 
-- APK 安装签名必须保持与已安装1.1.25相同，否则不能覆盖安装。现有调试 keystore 在项目 `.android-user-home` 中，**不要上传到 GitHub**，也不要丢失。以后升级到正式签名需要迁移方案，不能直接换密钥。
-- 软件更新清单用单独的 RSA-3072 私钥签名。私钥位于 `E:\南艺电子课表_发布密钥\release-private.pem`，也不能上传。App 和源码只内置对应公钥 `app/src/main/assets/update-public.pem`。这不是游戏项目的密钥。
-- CI 尚未配置；先在当前本机 E 盘构建与发布，避免 CI 自动生成另一把调试签名导致所有用户无法覆盖。
+12秒连接、20秒读取超时；HTTPS和最多6次请求（包括重定向），拒绝明文、非标准端口、私人网络地址。清单最多128KiB，APK最多200MiB。镜像失败只记录时间、阶段、主机和错误类型到最多64KiB的私有日志，不含参数、返回正文或登录资料。
+
+APK断点用签名摘要和大小绑定，206必须对应正确Content-Range，200表示重新开始，连接失败保留断点，完整数据不匹配则当前节点清空重试一次。每次换节点仍验证最终大小和SHA-256。安装前检查包名、递增versionCode和当前安装签名；只能交给安卓系统确认安装，不复制游戏文件、不卸载、不清空课表和日程。
+
+全部节点失效时安全失败，不做证书绕过、HTTP降级或后台更新。逐节点超时可能耗时较长。手机真实升级、系统授权返回及数据保留仍需真机测试。
+
+## 两种密钥
+
+APK使用现有安装签名；本机项目.android-user-home中的keystore必须安全保管，禁止上传或在另一环境自动生成不同签名。
+
+清单RSA私钥在 E:\南艺电子课表_发布密钥\release-private.pem，禁止上传。源码和APK只含 app/src/main/assets/update-public.pem 公钥。禁止复用游戏项目密钥。
 
 ## 每次发布
 
-1. 提高 `app/build.gradle.kts` 的 versionCode 和 versionName，补充更新日志，版本号不可重复发布不同内容。
-2. 在本机执行 `build-on-e.ps1 --offline --no-daemon :app:lintDebug`，先完成所有测试。
-3. 运行发布脚本（将 owner/repository 换成新仓库）：
+1. 提高versionCode/versionName，补充日志，本机构建并验证。
+2. 执行：
+   node tools/prepare-github-release.cjs HerenYU2007/NUA-Schedule-Android E:/南艺文管课表_交付文件/Release-v版本 E:/南艺电子课表_发布密钥/release-private.pem RELEASE-NOTES-v版本.md
+3. 执行：
+   node tools/validate-release-artifacts.cjs E:/南艺文管课表_交付文件/Release-v版本
+4. 推送干净源码，创建对应tag的正式Release，上传APK、update.json、SHA256SUMS.txt和源码ZIP，设为Latest。不要上传私钥、缓存或Cookie。
+5. 发布成功后，把同一份签名update.json复制到仓库updates/update.json并推送，使raw备用入口同步。备份清单不得提前指向尚未发布的APK；不要手动编辑签名清单。
+6. 不覆盖已经发布的同名APK或清单。本次1.1.26修订版仅单独本地交付，正式新Release使用1.2.0。
 
-```powershell
-node tools/prepare-github-release.cjs owner/repository E:/南艺文管课表_交付文件/Release-v版本号 E:/南艺电子课表_发布密钥/release-private.pem RELEASE-NOTES-v版本号.md
-```
-
-4. 脚本自动从构建元数据读版本与包名、从第四参数文件读取更新说明，生成 APK、带签名的 update.json、SHA256SUMS.txt。说明修改后重新签名生成，不要手工改已签名 JSON。
-5. 在 GitHub 创建正式 Release，标签 `v版本号`，上传以上3个附件，设为 Latest。不要上传源码里以外的本机缓存、账号资料、密钥。
-6. App 配置更新源后，下次打开检测到更高版本，显示预览；用户确认才下载和打开系统安装器。授权“允许此来源安装”后仍需用户在系统确认安装。
-
-## 客户端安全与已知边界
-
-- 仅启动主界面时检查，无后台更新任务。手动检查也是用户主动触发。
-- HTTPS，限制重定向、清单和APK大小，检查 RSA 签名、APK大小/SHA-256、包名、versionCode 和当前APK签名证书；拒绝回退版本。
-- 只把校验后的单个私有APK通过临时只读 content URI 交给系统安装器，安装器最终验证 APK 签名。不会卸载或清空原课表、日程。
-- 没有把游戏的78个镜像或动态网页抓取直接搬进来；当前使用配置的HTTPS更新源及其HTTPS重定向。GitHub连接不通则安全失败，下次打开再检查。可在确认镜像部署后增加经签名保护的镜像传输。
-- 没有在线仓库，所以本次不能验证公网更新闭环；未连接真机，安装授权返回和安装界面仍需真机验证。强制换密钥、降级或发布错误清单不会被自动接受。
+本实现依据用户提供的《最后一班岗-自动更新实现方案.md》的节点、缓存、续传和安全验证要求改写为Android APK流程，不使用游戏目录替换或静默安装。

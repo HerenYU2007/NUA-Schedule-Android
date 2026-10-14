@@ -1,5 +1,6 @@
 import cn.nua.wenguan.schedule.UpdateMirrorPolicy;
 import cn.nua.wenguan.schedule.UpdateDownload;
+import cn.nua.wenguan.schedule.UpdateRouteRanking;
 import java.io.*;
 import java.net.*;
 import java.nio.file.*;
@@ -18,7 +19,9 @@ public class ValidateUpdateMirrors {
     static String hash(byte[] bytes)throws Exception{StringBuilder s=new StringBuilder();for(byte b:MessageDigest.getInstance("SHA-256").digest(bytes))s.append(String.format("%02x",b&255));return s.toString();}
     public static void main(String[] args)throws Exception{
         check(UpdateMirrorPolicy.BUILTIN.length==78,"all 78 snapshot nodes");
-        List<String> nodes=UpdateMirrorPolicy.combine(Collections.emptyList(),Collections.emptyList());check(nodes.size()==78,"normalized unique snapshot");
+        List<String> nodes=UpdateMirrorPolicy.combine(Collections.emptyList(),Collections.emptyList());
+        for(String node:UpdateMirrorPolicy.BUILTIN)check(nodes.contains(UpdateMirrorPolicy.normalize(node)),"all original nodes retained");
+        check(new HashSet<>(nodes).size()==nodes.size(),"normalized unique snapshot and measured nodes");
         check(nodes.stream().anyMatch(n->n.contains("xn--")),"IDN node retained");
         for(String bad:Arrays.asList("http://example.com/","https://a:b@example.com/","https://127.0.0.1/","https://example.local/","https://example.com/path","https://example.com/?token=a","https://example.com:444/"))check(UpdateMirrorPolicy.normalize(bad)==null,"reject unsafe origin "+bad);
         List<String> dynamic=UpdateMirrorPolicy.extract("const nodes=[{label:\"search\",value:\"new.example.com\"},{\"label\":\"contribute\",\"value\":\"https://ghproxy.net/\"}];eval('danger'); https://analytics.example.com");
@@ -27,7 +30,19 @@ public class ValidateUpdateMirrors {
         check(UpdateMirrorPolicy.chunks("<script src='/_next/static/chunks/a.js'></script><script src='https://evil.com/a.js'></script>").equals(Arrays.asList("https://github.akams.cn/_next/static/chunks/a.js")),"own chunks only");
         String url="https://github.com/owner/repo/releases/download/v1.2.0/a.apk";
         List<String> routes=UpdateMirrorPolicy.routes(url,nodes,true);
-        check(routes.get(0).equals("https://gh-proxy.org/"+url)&&routes.get(routes.size()-1).equals(url)&&routes.size()==80,"preferred plus all nodes plus direct");
+        check(routes.contains("https://gh-proxy.org/"+url)&&routes.contains(url),"preferred and direct retained");
+        for(String node:nodes)check(routes.contains(node+url),"all mirror routes retained");
+        List<String> unsorted=Arrays.asList("https://unknown.example.com/"+url,"https://github.com/owner/repo/releases/latest/download/update.json","https://api.github.com/repos/owner/repo/releases/latest");
+        List<String> sorted=UpdateRouteRanking.order(unsorted,false);
+        check(sorted.size()==3&&sorted.containsAll(unsorted),"ranking never drops fallbacks");
+        check(UpdateRouteRanking.order(sorted,false).equals(sorted),"ranking is deterministic and idempotent");
+        check(UpdateRouteRanking.order(Arrays.asList(url,url),true).size()==1,"duplicate routes merged");
+        check(UpdateRouteRanking.order(Collections.emptyList(),true).isEmpty(),"empty candidate list");
+        String failed="https://777.z321.cc.cd/"+url,fast="https://git.yylx.win/"+url,unknown="https://new.example.com/"+url;
+        check(UpdateRouteRanking.order(Arrays.asList(failed,unknown,fast),false).equals(Arrays.asList(fast,unknown,failed)),"verified fast route before unmeasured before all-failure route");
+        String raw="https://raw.githubusercontent.com/owner/repo/master/updates/update.json";
+        check(UpdateRouteRanking.order(Arrays.asList(fast,raw),false).get(0).equals(raw),"fastest verified raw manifest prioritized");
+        check(UpdateRouteRanking.order(routes,true).get(0).equals("https://git.yylx.win/"+url),"independent measured APK priority");
         byte[] body="abcdefgh".getBytes("UTF-8");String digest=hash(body);
         File part=Paths.get(args[0],"mirror-test.part").toFile();UpdateDownload.reset(part);
         try{UpdateDownload.from(url,part,8,digest,(u,o)->{try{return new Response(200,null,body,3);}catch(Exception e){throw new IOException(e);}});throw new AssertionError("expected network failure");}catch(IOException expected){}

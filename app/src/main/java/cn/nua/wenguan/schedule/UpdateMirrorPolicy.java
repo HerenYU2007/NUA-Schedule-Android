@@ -120,7 +120,7 @@ public final class UpdateMirrorPolicy {
     }
     public static List<String> combine(List<String> dynamic,List<String> cached){
         LinkedHashSet<String> nodes=new LinkedHashSet<>();
-        for(List<String> source:Arrays.asList(dynamic,cached,Arrays.asList(BUILTIN)))for(String node:source){
+        for(List<String> source:Arrays.asList(UpdateRouteRanking.mirrors(),dynamic,cached,Arrays.asList(BUILTIN)))for(String node:source){
             String normalized=normalize(node);if(normalized!=null)nodes.add(normalized);
         }
         return new ArrayList<>(nodes);
@@ -130,6 +130,6 @@ public final class UpdateMirrorPolicy {
         if(download)routes.add(PREFERRED+original);
         for(String node:nodes){String base=normalize(node);if(base!=null)routes.add(base+original);}
         routes.add(original);
-        return new ArrayList<>(routes);
+        return UpdateRouteRanking.order(new ArrayList<>(routes),download);
     }
 }

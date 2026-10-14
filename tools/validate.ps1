@@ -5,6 +5,7 @@ $Output = Join-Path $ProjectRoot "tools\out"
 New-Item -ItemType Directory -Force -Path $Output | Out-Null
 
 $Sources = @(
+    (Join-Path $ProjectRoot "app\src\main\java\cn\nua\wenguan\schedule\UpdateRouteRanking.java"),
     (Join-Path $ProjectRoot "app\src\main\java\cn\nua\wenguan\schedule\UpdateMirrorPolicy.java"),
     (Join-Path $ProjectRoot "app\src\main\java\cn\nua\wenguan\schedule\UpdateDownload.java"),
     (Join-Path $ProjectRoot "tools\ValidateUpdateMirrors.java"),

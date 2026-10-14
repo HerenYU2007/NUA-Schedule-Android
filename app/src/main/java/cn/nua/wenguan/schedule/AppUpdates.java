@@ -52,7 +52,7 @@ public final class AppUpdates {
         activeMirrors=loadMirrors(a);
         LinkedHashSet<String> sources=new LinkedHashSet<>(UpdateMirrorPolicy.routes(MANIFEST_SOURCES[0],activeMirrors,false));
         sources.addAll(Arrays.asList(MANIFEST_SOURCES));
-        for(String source:sources){try{
+        for(String source:UpdateRouteRanking.order(new ArrayList<>(sources),false)){try{
             String url=source.equals(API+"latest")?assetUrl(releaseMetadata(source),"update.json",null):source;
             JSONObject outer=new JSONObject(new String(fetchBytes(url,128*1024),java.nio.charset.StandardCharsets.UTF_8));
             if(!"SHA256withRSA".equals(outer.getString("algorithm")))throw new IOException("algorithm");
@@ -126,15 +126,22 @@ public final class AppUpdates {
             UpdateDownload.reset(part);
             if(!prefs.edit().putString("download_identity",identity).commit())throw new IOException("Download identity");
         }
-        for(String route:UpdateMirrorPolicy.routes(url,activeMirrors,true)){
-            try{UpdateDownload.from(route,part,size,hash,(target,offset)->connect(target,false,offset));return;}
-            catch(IOException failed){recordFailure(a,"apk",route,failed);}
-        }
-        // GitHub API is a final independent route, bound to the signed tag and filename.
+        // Include API in the measured order; always resolve the exact signed tag and asset.
         String tail=url.substring((RELEASES+"download/").length());String tag=tail.substring(0,tail.indexOf('/')),filename=tail.substring(tail.indexOf('/')+1);
-        JSONObject release=releaseMetadata(API+"tags/"+tag);
-        if(!tag.equals(release.getString("tag_name")))throw new IOException("Release version");
-        UpdateDownload.from(assetUrl(release,filename,url),part,size,hash,(target,offset)->connect(target,false,offset));
+        List<String> routes=UpdateMirrorPolicy.routes(url,activeMirrors,true);
+        routes.add(API+"tags/"+tag);
+        for(String route:UpdateRouteRanking.order(routes,true)){
+            try{
+                String target=route;
+                if(route.equals(API+"tags/"+tag)){
+                    JSONObject release=releaseMetadata(route);
+                    if(!tag.equals(release.getString("tag_name")))throw new IOException("Release version");
+                    target=assetUrl(release,filename,url);
+                }
+                UpdateDownload.from(target,part,size,hash,(address,offset)->connect(address,false,offset));return;
+            }catch(Exception failed){recordFailure(a,"apk",route,failed);}
+        }
+        throw new IOException("No verified update download");
     }
     private static void download(Activity a,String url,long size,String hash,long version){
         if(busy)return;busy=true;toast(a,"正在下载软件更新，请稍后");

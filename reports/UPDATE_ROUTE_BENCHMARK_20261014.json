@@ -1,0 +1,5592 @@
+{
+  "startedAt": "2026-10-14T14:21:38.806Z",
+  "measuredAt": "2026-10-14T14:27:30.206Z",
+  "baseline": {
+    "versionName": "1.2.1",
+    "versionCode": 30,
+    "sha256": "4b12f979838339c7b590ccd808fb190b8b40d3fe3f0ddc1b293924e3d69646fe",
+    "size": 541644
+  },
+  "builtinCount": 78,
+  "dynamicCount": 81,
+  "routeCount": 86,
+  "rounds": 3,
+  "directory": [
+    {
+      "kind": "page",
+      "ok": true,
+      "totalMs": 163,
+      "headersMs": 125
+    },
+    {
+      "kind": "/_next/static/chunks/1570bc024e57dd81.js",
+      "ok": true,
+      "totalMs": 153,
+      "headersMs": 152
+    },
+    {
+      "kind": "/_next/static/chunks/f3c1304f15e21378.js",
+      "ok": true,
+      "totalMs": 264,
+      "headersMs": 153
+    },
+    {
+      "kind": "/_next/static/chunks/c94886839a754ecb.js",
+      "ok": true,
+      "totalMs": 143,
+      "headersMs": 101
+    },
+    {
+      "kind": "/_next/static/chunks/turbopack-23ee38bbef37ea15.js",
+      "ok": true,
+      "totalMs": 103,
+      "headersMs": 102
+    },
+    {
+      "kind": "/_next/static/chunks/42879de7b8087bc9.js",
+      "ok": true,
+      "totalMs": 128,
+      "headersMs": 100
+    },
+    {
+      "kind": "/_next/static/chunks/0a47290756c091a0.js",
+      "ok": true,
+      "totalMs": 110,
+      "headersMs": 110
+    },
+    {
+      "kind": "/_next/static/chunks/4b935edd0cea1ee3.js",
+      "ok": true,
+      "totalMs": 109,
+      "headersMs": 109
+    },
+    {
+      "kind": "/_next/static/chunks/096f2b9eccbdd6b4.js",
+      "ok": true,
+      "totalMs": 221,
+      "headersMs": 106
+    },
+    {
+      "kind": "/_next/static/chunks/4ed424c366f600d8.js",
+      "ok": true,
+      "totalMs": 110,
+      "headersMs": 80
+    },
+    {
+      "kind": "/_next/static/chunks/a6dad97d9634a72d.js",
+      "ok": true,
+      "totalMs": 137,
+      "headersMs": 102
+    }
+  ],
+  "results": [
+    {
+      "key": "https://gh-proxy.org/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": true,
+      "headersMs": 1887,
+      "totalMs": 1887,
+      "bytes": 3806
+    },
+    {
+      "key": "https://gh-proxy.org/",
+      "kind": "apk",
+      "round": 1,
+      "ok": true,
+      "headersMs": 1446,
+      "totalMs": 3968,
+      "bytes": 541644
+    },
+    {
+      "key": "https://ghfile.geekertao.top/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": true,
+      "headersMs": 2922,
+      "totalMs": 4049,
+      "bytes": 3806
+    },
+    {
+      "key": "https://ghproxy.net/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": true,
+      "headersMs": 3175,
+      "totalMs": 3508,
+      "bytes": 3806
+    },
+    {
+      "key": "https://gh-proxy.com/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": true,
+      "headersMs": 1978,
+      "totalMs": 1978,
+      "bytes": 3806
+    },
+    {
+      "key": "https://cdn.gh-proxy.com/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": true,
+      "headersMs": 505,
+      "totalMs": 762,
+      "bytes": 3806
+    },
+    {
+      "key": "https://github.tbap.top/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "http-500",
+      "elapsedMs": 7142
+    },
+    {
+      "key": "https://gh.dpik.top/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "http-500",
+      "elapsedMs": 7185
+    },
+    {
+      "key": "https://github.tbap.top/",
+      "kind": "apk",
+      "round": 1,
+      "ok": true,
+      "headersMs": 2547,
+      "totalMs": 8109,
+      "bytes": 541644
+    },
+    {
+      "key": "https://github.dpik.top/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 1155
+    },
+    {
+      "key": "https://j.1lin.dpdns.org/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 595
+    },
+    {
+      "key": "https://j.1lin.dpdns.org/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 363
+    },
+    {
+      "key": "https://github.dpik.top/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 1696
+    },
+    {
+      "key": "https://cdn.gh-proxy.com/",
+      "kind": "apk",
+      "round": 1,
+      "ok": true,
+      "headersMs": 1579,
+      "totalMs": 2295,
+      "bytes": 541644
+    },
+    {
+      "key": "https://github.starrlzy.cn/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 445
+    },
+    {
+      "key": "https://github.starrlzy.cn/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 445
+    },
+    {
+      "key": "https://github-proxy.memory-echoes.cn/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 1075
+    },
+    {
+      "key": "https://git.yylx.win/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": true,
+      "headersMs": 962,
+      "totalMs": 964,
+      "bytes": 3806
+    },
+    {
+      "key": "https://github-proxy.memory-echoes.cn/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 1095
+    },
+    {
+      "key": "https://git.yylx.win/",
+      "kind": "apk",
+      "round": 1,
+      "ok": true,
+      "headersMs": 470,
+      "totalMs": 1048,
+      "bytes": 541644
+    },
+    {
+      "key": "https://gh.dpik.top/",
+      "kind": "apk",
+      "round": 1,
+      "ok": true,
+      "headersMs": 3238,
+      "totalMs": 10447,
+      "bytes": 541644
+    },
+    {
+      "key": "https://gh.927223.xyz/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "http-403",
+      "elapsedMs": 2008
+    },
+    {
+      "key": "https://gh-proxy.com/",
+      "kind": "apk",
+      "round": 1,
+      "ok": true,
+      "headersMs": 1800,
+      "totalMs": 7102,
+      "bytes": 541644
+    },
+    {
+      "key": "https://ghm.078465.xyz/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": true,
+      "headersMs": 1814,
+      "totalMs": 3031,
+      "bytes": 3806
+    },
+    {
+      "key": "https://gh.felicity.ac.cn/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 2143
+    },
+    {
+      "key": "https://gh.bugdey.us.kg/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 345
+    },
+    {
+      "key": "https://gh.bugdey.us.kg/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": null
+    },
+    {
+      "key": "https://gh.felicity.ac.cn/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 2067
+    },
+    {
+      "key": "https://ghf.xn--eqrr82bzpe.top/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": true,
+      "headersMs": 2237,
+      "totalMs": 6238,
+      "bytes": 3806
+    },
+    {
+      "key": "https://ghm.078465.xyz/",
+      "kind": "apk",
+      "round": 1,
+      "ok": true,
+      "headersMs": 2245,
+      "totalMs": 7754,
+      "bytes": 541644
+    },
+    {
+      "key": "https://cdn.akaere.online/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": true,
+      "headersMs": 2993,
+      "totalMs": 2993,
+      "bytes": 3806
+    },
+    {
+      "key": "https://jiashu.1win.eu.org/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "http-403",
+      "elapsedMs": 2461
+    },
+    {
+      "key": "https://tvv.tw/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "http-502",
+      "elapsedMs": 1794
+    },
+    {
+      "key": "https://ghfile.geekertao.top/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20012
+    },
+    {
+      "key": "https://cdn.akaere.online/",
+      "kind": "apk",
+      "round": 1,
+      "ok": true,
+      "headersMs": 1880,
+      "totalMs": 5058,
+      "bytes": 541644
+    },
+    {
+      "key": "https://j.1win.ggff.net/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 437
+    },
+    {
+      "key": "https://j.1win.ggff.net/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 198
+    },
+    {
+      "key": "https://gitproxy.127731.xyz/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "http-526",
+      "elapsedMs": 721
+    },
+    {
+      "key": "https://gitproxy.127731.xyz/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "http-526",
+      "elapsedMs": 986
+    },
+    {
+      "key": "https://jiashu.1win.eu.org/",
+      "kind": "apk",
+      "round": 1,
+      "ok": true,
+      "headersMs": 1778,
+      "totalMs": 4343,
+      "bytes": 541644
+    },
+    {
+      "key": "https://gh.inkchills.cn/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": true,
+      "headersMs": 2081,
+      "totalMs": 2081,
+      "bytes": 3806
+    },
+    {
+      "key": "https://gh.catmak.name/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "stale-or-metadata",
+      "elapsedMs": null
+    },
+    {
+      "key": "https://tvv.tw/",
+      "kind": "apk",
+      "round": 1,
+      "ok": true,
+      "headersMs": 1172,
+      "totalMs": 4062,
+      "bytes": 541644
+    },
+    {
+      "key": "https://ghproxy.net/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20009
+    },
+    {
+      "key": "https://gh.b52m.cn/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "http-404",
+      "elapsedMs": 1658
+    },
+    {
+      "key": "https://gh.b52m.cn/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "http-404",
+      "elapsedMs": 2047
+    },
+    {
+      "key": "https://down.mxw.qzz.io/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "http-403",
+      "elapsedMs": 579
+    },
+    {
+      "key": "https://down.mxw.qzz.io/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "http-403",
+      "elapsedMs": 459
+    },
+    {
+      "key": "https://down.mxw.xx.kg/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": true,
+      "headersMs": 718,
+      "totalMs": 1619,
+      "bytes": 3806
+    },
+    {
+      "key": "https://gh.catmak.name/",
+      "kind": "apk",
+      "round": 1,
+      "ok": true,
+      "headersMs": 972,
+      "totalMs": 3740,
+      "bytes": 541644
+    },
+    {
+      "key": "https://gh.acmsz.top/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": true,
+      "headersMs": 873,
+      "totalMs": 1754,
+      "bytes": 3806
+    },
+    {
+      "key": "https://gh.inkchills.cn/",
+      "kind": "apk",
+      "round": 1,
+      "ok": true,
+      "headersMs": 1808,
+      "totalMs": 5992,
+      "bytes": 541644
+    },
+    {
+      "key": "https://gh.acmsz.top/",
+      "kind": "apk",
+      "round": 1,
+      "ok": true,
+      "headersMs": 312,
+      "totalMs": 1206,
+      "bytes": 541644
+    },
+    {
+      "key": "https://gh.jjj.gv.uy/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": true,
+      "headersMs": 1688,
+      "totalMs": 1689,
+      "bytes": 3806
+    },
+    {
+      "key": "https://down.mxw.xx.kg/",
+      "kind": "apk",
+      "round": 1,
+      "ok": true,
+      "headersMs": 902,
+      "totalMs": 4426,
+      "bytes": 541644
+    },
+    {
+      "key": "https://github.mxw.qzz.io/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": true,
+      "headersMs": 1367,
+      "totalMs": 3869,
+      "bytes": 3806
+    },
+    {
+      "key": "https://slink.ltd/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "apk-hash-size",
+      "elapsedMs": null
+    },
+    {
+      "key": "https://github.tmby.shop/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "SyntaxError",
+      "elapsedMs": null
+    },
+    {
+      "key": "https://slink.ltd/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "http-404",
+      "elapsedMs": 1907
+    },
+    {
+      "key": "https://gh.jjj.gv.uy/",
+      "kind": "apk",
+      "round": 1,
+      "ok": true,
+      "headersMs": 624,
+      "totalMs": 2303,
+      "bytes": 541644
+    },
+    {
+      "key": "https://gh.tryxd.cn/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "apk-hash-size",
+      "elapsedMs": null
+    },
+    {
+      "key": "https://ghpr.cc/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "http-404",
+      "elapsedMs": 472
+    },
+    {
+      "key": "https://github.mxw.qzz.io/",
+      "kind": "apk",
+      "round": 1,
+      "ok": true,
+      "headersMs": 1407,
+      "totalMs": 4769,
+      "bytes": 541644
+    },
+    {
+      "key": "https://gh.tryxd.cn/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "SyntaxError",
+      "elapsedMs": null
+    },
+    {
+      "key": "https://github.chenc.dev/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": true,
+      "headersMs": 91,
+      "totalMs": 211,
+      "bytes": 3806
+    },
+    {
+      "key": "https://gitproxy.click/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "SyntaxError",
+      "elapsedMs": null
+    },
+    {
+      "key": "https://github.chenc.dev/",
+      "kind": "apk",
+      "round": 1,
+      "ok": true,
+      "headersMs": 91,
+      "totalMs": 405,
+      "bytes": 541644
+    },
+    {
+      "key": "https://ghpr.cc/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "apk-hash-size",
+      "elapsedMs": null
+    },
+    {
+      "key": "https://gitproxy.click/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "apk-hash-size",
+      "elapsedMs": null
+    },
+    {
+      "key": "https://gh.927223.xyz/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20008
+    },
+    {
+      "key": "https://gh.ddlc.top/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 490
+    },
+    {
+      "key": "https://github.tmby.shop/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "apk-hash-size",
+      "elapsedMs": null
+    },
+    {
+      "key": "https://gh.ddlc.top/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 578
+    },
+    {
+      "key": "https://gitproxy.mrhjx.cn/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 941
+    },
+    {
+      "key": "https://gitproxy.mrhjx.cn/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 1186
+    },
+    {
+      "key": "https://ghf.xn--eqrr82bzpe.top/",
+      "kind": "apk",
+      "round": 1,
+      "ok": true,
+      "headersMs": 2260,
+      "totalMs": 19771,
+      "bytes": 541644
+    },
+    {
+      "key": "https://gh.sixyin.com/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": true,
+      "headersMs": 2466,
+      "totalMs": 2466,
+      "bytes": 3806
+    },
+    {
+      "key": "https://ghpxy.hwinzniej.top/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": true,
+      "headersMs": 951,
+      "totalMs": 3296,
+      "bytes": 3806
+    },
+    {
+      "key": "https://gh.monlor.com/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": true,
+      "headersMs": 2003,
+      "totalMs": 4049,
+      "bytes": 3806
+    },
+    {
+      "key": "https://gh.jasonzeng.dev/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 183
+    },
+    {
+      "key": "https://gh.jasonzeng.dev/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": null
+    },
+    {
+      "key": "https://gh.monlor.com/",
+      "kind": "apk",
+      "round": 1,
+      "ok": true,
+      "headersMs": 1656,
+      "totalMs": 4218,
+      "bytes": 541644
+    },
+    {
+      "key": "https://ghpxy.hwinzniej.top/",
+      "kind": "apk",
+      "round": 1,
+      "ok": true,
+      "headersMs": 818,
+      "totalMs": 4280,
+      "bytes": 541644
+    },
+    {
+      "key": "https://github.geekery.cn/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "http-404",
+      "elapsedMs": 841
+    },
+    {
+      "key": "https://ghfast.top/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": true,
+      "headersMs": 2405,
+      "totalMs": 2848,
+      "bytes": 3806
+    },
+    {
+      "key": "https://gh.sixyin.com/",
+      "kind": "apk",
+      "round": 1,
+      "ok": true,
+      "headersMs": 1348,
+      "totalMs": 5372,
+      "bytes": 541644
+    },
+    {
+      "key": "https://gp.zkitefly.eu.org/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 368
+    },
+    {
+      "key": "https://gp.zkitefly.eu.org/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 241
+    },
+    {
+      "key": "https://github.geekery.cn/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "http-404",
+      "elapsedMs": 1237
+    },
+    {
+      "key": "https://ghp.arslantu.xyz/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "http-525",
+      "elapsedMs": 1184
+    },
+    {
+      "key": "https://fastgit.cc/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": true,
+      "headersMs": 1962,
+      "totalMs": 1962,
+      "bytes": 3806
+    },
+    {
+      "key": "https://ghfast.top/",
+      "kind": "apk",
+      "round": 1,
+      "ok": true,
+      "headersMs": 1214,
+      "totalMs": 3860,
+      "bytes": 541644
+    },
+    {
+      "key": "https://git.669966.xyz/",
+      "kind": "apk",
+      "round": 1,
+      "ok": true,
+      "headersMs": 2329,
+      "totalMs": 5846,
+      "bytes": 541644
+    },
+    {
+      "key": "https://ghp.arslantu.xyz/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "http-525",
+      "elapsedMs": 848
+    },
+    {
+      "key": "https://ghproxy.imciel.com/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 624
+    },
+    {
+      "key": "https://ghproxy.imciel.com/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 1701
+    },
+    {
+      "key": "https://ghproxy.cxkpro.top/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 1563
+    },
+    {
+      "key": "https://github.xxlab.tech/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "http-502",
+      "elapsedMs": 253
+    },
+    {
+      "key": "https://fastgit.cc/",
+      "kind": "apk",
+      "round": 1,
+      "ok": true,
+      "headersMs": 1485,
+      "totalMs": 5554,
+      "bytes": 541644
+    },
+    {
+      "key": "https://gh.idayer.com/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 1453
+    },
+    {
+      "key": "https://github.ednovas.xyz/",
+      "kind": "apk",
+      "round": 1,
+      "ok": true,
+      "headersMs": 1825,
+      "totalMs": 5004,
+      "bytes": 541644
+    },
+    {
+      "key": "https://ghproxy.cxkpro.top/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 3255
+    },
+    {
+      "key": "https://gh.idayer.com/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 1057
+    },
+    {
+      "key": "https://free.cn.eu.org/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": true,
+      "headersMs": 890,
+      "totalMs": 1802,
+      "bytes": 3806
+    },
+    {
+      "key": "https://free.cn.eu.org/",
+      "kind": "apk",
+      "round": 1,
+      "ok": true,
+      "headersMs": 1014,
+      "totalMs": 3717,
+      "bytes": 541644
+    },
+    {
+      "key": "https://gh.chjina.com/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": true,
+      "headersMs": 2498,
+      "totalMs": 3137,
+      "bytes": 3806
+    },
+    {
+      "key": "https://ghp.keleyaa.com/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 1164
+    },
+    {
+      "key": "https://ghp.keleyaa.com/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 1369
+    },
+    {
+      "key": "https://gh.chjina.com/",
+      "kind": "apk",
+      "round": 1,
+      "ok": true,
+      "headersMs": 851,
+      "totalMs": 6573,
+      "bytes": 541644
+    },
+    {
+      "key": "https://git.669966.xyz/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20013
+    },
+    {
+      "key": "https://ghproxy.monkeyray.net/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "http-404",
+      "elapsedMs": 1600
+    },
+    {
+      "key": "https://github.xxlab.tech/",
+      "kind": "apk",
+      "round": 1,
+      "ok": true,
+      "headersMs": 4244,
+      "totalMs": 12925,
+      "bytes": 541644
+    },
+    {
+      "key": "https://ghproxy.monkeyray.net/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "http-404",
+      "elapsedMs": 2113
+    },
+    {
+      "key": "https://ghproxy.1888866.xyz/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20007
+    },
+    {
+      "key": "https://ghproxy.1888866.xyz/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20007
+    },
+    {
+      "key": "https://githubdog.com/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 368
+    },
+    {
+      "key": "https://githubdog.com/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": null
+    },
+    {
+      "key": "https://g.blfrp.cn/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": true,
+      "headersMs": 2959,
+      "totalMs": 2959,
+      "bytes": 3806
+    },
+    {
+      "key": "https://gh.noki.icu/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": true,
+      "headersMs": 2153,
+      "totalMs": 3985,
+      "bytes": 3806
+    },
+    {
+      "key": "https://github.ednovas.xyz/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20012
+    },
+    {
+      "key": "https://gh.meali.top/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": true,
+      "headersMs": 929,
+      "totalMs": 1700,
+      "bytes": 3806
+    },
+    {
+      "key": "https://777.z321.cc.cd/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 1161
+    },
+    {
+      "key": "https://777.z321.cc.cd/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 1138
+    },
+    {
+      "key": "https://gg.z321.cc.cd/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 591
+    },
+    {
+      "key": "https://gg.z321.cc.cd/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 1177
+    },
+    {
+      "key": "https://g.z321.cc.cd/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 1471
+    },
+    {
+      "key": "https://gh.meali.top/",
+      "kind": "apk",
+      "round": 1,
+      "ok": true,
+      "headersMs": 938,
+      "totalMs": 5762,
+      "bytes": 541644
+    },
+    {
+      "key": "https://gap.andyjin.website/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 659
+    },
+    {
+      "key": "https://gap.andyjin.website/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 1
+    },
+    {
+      "key": "https://g.z321.cc.cd/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 4176
+    },
+    {
+      "key": "https://gh.my-website.ccwu.cc/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": true,
+      "headersMs": 2842,
+      "totalMs": 2842,
+      "bytes": 3806
+    },
+    {
+      "key": "https://proxy.yaoyaoling.net/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20005
+    },
+    {
+      "key": "https://gh.my-website.ccwu.cc/",
+      "kind": "apk",
+      "round": 1,
+      "ok": true,
+      "headersMs": 1783,
+      "totalMs": 5040,
+      "bytes": 541644
+    },
+    {
+      "key": "https://github.ikgy.top/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": true,
+      "headersMs": 2389,
+      "totalMs": 2396,
+      "bytes": 3806
+    },
+    {
+      "key": "https://proxy.yaoyaoling.net/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20010
+    },
+    {
+      "key": "https://js.jiangss.shop/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "TypeError",
+      "elapsedMs": 10750
+    },
+    {
+      "key": "https://js.jiangss.shop/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "TypeError",
+      "elapsedMs": 10604
+    },
+    {
+      "key": "https://gh.07150721.xyz/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": true,
+      "headersMs": 1725,
+      "totalMs": 3867,
+      "bytes": 3806
+    },
+    {
+      "key": "https://cfgh.ikgy.top/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": true,
+      "headersMs": 1446,
+      "totalMs": 3620,
+      "bytes": 3806
+    },
+    {
+      "key": "https://github.ikgy.top/",
+      "kind": "apk",
+      "round": 1,
+      "ok": true,
+      "headersMs": 1694,
+      "totalMs": 4338,
+      "bytes": 541644
+    },
+    {
+      "key": "https://gh.noki.icu/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20001
+    },
+    {
+      "key": "https://xsadwsd.kdns.fr/",
+      "kind": "apk",
+      "round": 1,
+      "ok": true,
+      "headersMs": 700,
+      "totalMs": 2583,
+      "bytes": 541644
+    },
+    {
+      "key": "https://xsadwsd.kdns.fr/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": true,
+      "headersMs": 2820,
+      "totalMs": 4012,
+      "bytes": 3806
+    },
+    {
+      "key": "https://gh.07150721.xyz/",
+      "kind": "apk",
+      "round": 1,
+      "ok": true,
+      "headersMs": 2289,
+      "totalMs": 7584,
+      "bytes": 541644
+    },
+    {
+      "key": "https://g.blfrp.cn/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20010
+    },
+    {
+      "key": "https://ghproxy.felicity.land/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": true,
+      "headersMs": 2558,
+      "totalMs": 4155,
+      "bytes": 3806
+    },
+    {
+      "key": "https://cfgh.ikgy.top/",
+      "kind": "apk",
+      "round": 1,
+      "ok": true,
+      "headersMs": 2405,
+      "totalMs": 8872,
+      "bytes": 541644
+    },
+    {
+      "key": "https://ghproxy.felicity.land/",
+      "kind": "apk",
+      "round": 1,
+      "ok": true,
+      "headersMs": 1476,
+      "totalMs": 5175,
+      "bytes": 541644
+    },
+    {
+      "key": "https://gh.qfmc0721.cc.cd/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "stale-or-metadata",
+      "elapsedMs": null
+    },
+    {
+      "key": "https://gh.qfmc0721.cc.cd/",
+      "kind": "apk",
+      "round": 1,
+      "ok": true,
+      "headersMs": 884,
+      "totalMs": 3352,
+      "bytes": 541644
+    },
+    {
+      "key": "https://github.nswrz.cn/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "TypeError",
+      "elapsedMs": 10720
+    },
+    {
+      "key": "https://github.nswrz.cn/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "TypeError",
+      "elapsedMs": 10459
+    },
+    {
+      "key": "https://gh.zhai.edu.pl/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "TypeError",
+      "elapsedMs": 10750
+    },
+    {
+      "key": "https://github.gohj99.site/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "http-404",
+      "elapsedMs": 1683
+    },
+    {
+      "key": "https://github.gohj99.site/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "http-404",
+      "elapsedMs": 1223
+    },
+    {
+      "key": "https://gh.zhai.edu.pl/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "TypeError",
+      "elapsedMs": 10535
+    },
+    {
+      "key": "https://ghproxy.icu/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": true,
+      "headersMs": 1687,
+      "totalMs": 1690,
+      "bytes": 3806
+    },
+    {
+      "key": "direct",
+      "kind": "manifest",
+      "round": 1,
+      "ok": true,
+      "headersMs": 1127,
+      "totalMs": 2544,
+      "bytes": 3806
+    },
+    {
+      "key": "https://gh.ruan.dpdns.org/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20002
+    },
+    {
+      "key": "https://gh.ruan.dpdns.org/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20003
+    },
+    {
+      "key": "https://ghproxy.icu/",
+      "kind": "apk",
+      "round": 1,
+      "ok": true,
+      "headersMs": 763,
+      "totalMs": 4837,
+      "bytes": 541644
+    },
+    {
+      "key": "api",
+      "kind": "manifest",
+      "round": 1,
+      "ok": true,
+      "headersMs": 912,
+      "totalMs": 1797,
+      "bytes": 3806
+    },
+    {
+      "key": "raw",
+      "kind": "manifest",
+      "round": 1,
+      "ok": true,
+      "headersMs": 1115,
+      "totalMs": 1115,
+      "bytes": 3807
+    },
+    {
+      "key": "github-raw",
+      "kind": "manifest",
+      "round": 1,
+      "ok": true,
+      "headersMs": 518,
+      "totalMs": 827,
+      "bytes": 3807
+    },
+    {
+      "key": "https://githubproxy.gohj99.site/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": true,
+      "headersMs": 3485,
+      "totalMs": 9998,
+      "bytes": 3806
+    },
+    {
+      "key": "https://github-cf.947563.xyz/",
+      "kind": "manifest",
+      "round": 1,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20016
+    },
+    {
+      "key": "https://githubproxy.gohj99.site/",
+      "kind": "apk",
+      "round": 1,
+      "ok": true,
+      "headersMs": 695,
+      "totalMs": 13349,
+      "bytes": 541644
+    },
+    {
+      "key": "api",
+      "kind": "apk",
+      "round": 1,
+      "ok": true,
+      "headersMs": 601,
+      "totalMs": 9323,
+      "bytes": 541644
+    },
+    {
+      "key": "https://github-cf.947563.xyz/",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "http-522",
+      "elapsedMs": 19990
+    },
+    {
+      "key": "direct",
+      "kind": "apk",
+      "round": 1,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20007
+    },
+    {
+      "key": "https://j.1win.ggff.net/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 196
+    },
+    {
+      "key": "https://j.1win.ggff.net/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 196
+    },
+    {
+      "key": "https://gitproxy.127731.xyz/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "http-526",
+      "elapsedMs": 835
+    },
+    {
+      "key": "https://tvv.tw/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "http-502",
+      "elapsedMs": 1008
+    },
+    {
+      "key": "https://gh.catmak.name/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "stale-or-metadata",
+      "elapsedMs": null
+    },
+    {
+      "key": "https://gitproxy.127731.xyz/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "http-526",
+      "elapsedMs": 1680
+    },
+    {
+      "key": "https://gh.inkchills.cn/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": true,
+      "headersMs": 1947,
+      "totalMs": 2146,
+      "bytes": 3806
+    },
+    {
+      "key": "https://gh.b52m.cn/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "http-404",
+      "elapsedMs": 1428
+    },
+    {
+      "key": "https://down.mxw.qzz.io/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "http-403",
+      "elapsedMs": 985
+    },
+    {
+      "key": "https://jiashu.1win.eu.org/",
+      "kind": "apk",
+      "round": 2,
+      "ok": true,
+      "headersMs": 1028,
+      "totalMs": 3816,
+      "bytes": 541644
+    },
+    {
+      "key": "https://down.mxw.qzz.io/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "http-403",
+      "elapsedMs": 409
+    },
+    {
+      "key": "https://down.mxw.xx.kg/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": true,
+      "headersMs": 1276,
+      "totalMs": 2580,
+      "bytes": 3806
+    },
+    {
+      "key": "https://gh.b52m.cn/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "http-404",
+      "elapsedMs": 3531
+    },
+    {
+      "key": "https://gh.acmsz.top/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": true,
+      "headersMs": 993,
+      "totalMs": 1846,
+      "bytes": 3806
+    },
+    {
+      "key": "https://tvv.tw/",
+      "kind": "apk",
+      "round": 2,
+      "ok": true,
+      "headersMs": 1434,
+      "totalMs": 6228,
+      "bytes": 541644
+    },
+    {
+      "key": "https://down.mxw.xx.kg/",
+      "kind": "apk",
+      "round": 2,
+      "ok": true,
+      "headersMs": 844,
+      "totalMs": 4544,
+      "bytes": 541644
+    },
+    {
+      "key": "https://github.mxw.qzz.io/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": true,
+      "headersMs": 1076,
+      "totalMs": 3281,
+      "bytes": 3806
+    },
+    {
+      "key": "https://gh.jjj.gv.uy/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": true,
+      "headersMs": 993,
+      "totalMs": 993,
+      "bytes": 3806
+    },
+    {
+      "key": "https://slink.ltd/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "http-404",
+      "elapsedMs": 575
+    },
+    {
+      "key": "https://gh.acmsz.top/",
+      "kind": "apk",
+      "round": 2,
+      "ok": true,
+      "headersMs": 653,
+      "totalMs": 2776,
+      "bytes": 541644
+    },
+    {
+      "key": "https://github.tmby.shop/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "SyntaxError",
+      "elapsedMs": null
+    },
+    {
+      "key": "https://github.tmby.shop/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "apk-hash-size",
+      "elapsedMs": null
+    },
+    {
+      "key": "https://ghpr.cc/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "http-404",
+      "elapsedMs": 627
+    },
+    {
+      "key": "https://gh.tryxd.cn/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "SyntaxError",
+      "elapsedMs": null
+    },
+    {
+      "key": "https://gh.tryxd.cn/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "apk-hash-size",
+      "elapsedMs": null
+    },
+    {
+      "key": "https://gh.jjj.gv.uy/",
+      "kind": "apk",
+      "round": 2,
+      "ok": true,
+      "headersMs": 616,
+      "totalMs": 2563,
+      "bytes": 541644
+    },
+    {
+      "key": "https://github.mxw.qzz.io/",
+      "kind": "apk",
+      "round": 2,
+      "ok": true,
+      "headersMs": 3092,
+      "totalMs": 4804,
+      "bytes": 541644
+    },
+    {
+      "key": "https://ghpr.cc/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "apk-hash-size",
+      "elapsedMs": null
+    },
+    {
+      "key": "https://github.chenc.dev/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": true,
+      "headersMs": 281,
+      "totalMs": 401,
+      "bytes": 3806
+    },
+    {
+      "key": "https://gh.catmak.name/",
+      "kind": "apk",
+      "round": 2,
+      "ok": true,
+      "headersMs": 2343,
+      "totalMs": 8475,
+      "bytes": 541644
+    },
+    {
+      "key": "https://github.chenc.dev/",
+      "kind": "apk",
+      "round": 2,
+      "ok": true,
+      "headersMs": 233,
+      "totalMs": 588,
+      "bytes": 541644
+    },
+    {
+      "key": "https://gitproxy.mrhjx.cn/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 769
+    },
+    {
+      "key": "https://slink.ltd/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "apk-hash-size",
+      "elapsedMs": null
+    },
+    {
+      "key": "https://gh.ddlc.top/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 1197
+    },
+    {
+      "key": "https://gitproxy.mrhjx.cn/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 1213
+    },
+    {
+      "key": "https://gh.ddlc.top/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 1571
+    },
+    {
+      "key": "https://gitproxy.click/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "apk-hash-size",
+      "elapsedMs": null
+    },
+    {
+      "key": "https://gh.sixyin.com/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": true,
+      "headersMs": 2059,
+      "totalMs": 2059,
+      "bytes": 3806
+    },
+    {
+      "key": "https://gh.monlor.com/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": true,
+      "headersMs": 1805,
+      "totalMs": 2484,
+      "bytes": 3806
+    },
+    {
+      "key": "https://gh.inkchills.cn/",
+      "kind": "apk",
+      "round": 2,
+      "ok": true,
+      "headersMs": 3222,
+      "totalMs": 12979,
+      "bytes": 541644
+    },
+    {
+      "key": "https://ghpxy.hwinzniej.top/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": true,
+      "headersMs": 748,
+      "totalMs": 2811,
+      "bytes": 3806
+    },
+    {
+      "key": "https://gitproxy.click/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "SyntaxError",
+      "elapsedMs": null
+    },
+    {
+      "key": "https://gh.monlor.com/",
+      "kind": "apk",
+      "round": 2,
+      "ok": true,
+      "headersMs": 984,
+      "totalMs": 3085,
+      "bytes": 541644
+    },
+    {
+      "key": "https://gh.jasonzeng.dev/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 191
+    },
+    {
+      "key": "https://gh.jasonzeng.dev/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 279
+    },
+    {
+      "key": "https://github.geekery.cn/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "http-404",
+      "elapsedMs": 728
+    },
+    {
+      "key": "https://github.geekery.cn/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "http-404",
+      "elapsedMs": 1059
+    },
+    {
+      "key": "https://gp.zkitefly.eu.org/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 400
+    },
+    {
+      "key": "https://gp.zkitefly.eu.org/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 185
+    },
+    {
+      "key": "https://ghpxy.hwinzniej.top/",
+      "kind": "apk",
+      "round": 2,
+      "ok": true,
+      "headersMs": 1077,
+      "totalMs": 4750,
+      "bytes": 541644
+    },
+    {
+      "key": "https://gh.sixyin.com/",
+      "kind": "apk",
+      "round": 2,
+      "ok": true,
+      "headersMs": 2801,
+      "totalMs": 5694,
+      "bytes": 541644
+    },
+    {
+      "key": "https://fastgit.cc/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": true,
+      "headersMs": 2189,
+      "totalMs": 2189,
+      "bytes": 3806
+    },
+    {
+      "key": "https://git.669966.xyz/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": true,
+      "headersMs": 2510,
+      "totalMs": 4913,
+      "bytes": 3806
+    },
+    {
+      "key": "https://ghfast.top/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": true,
+      "headersMs": 3202,
+      "totalMs": 4314,
+      "bytes": 3806
+    },
+    {
+      "key": "https://fastgit.cc/",
+      "kind": "apk",
+      "round": 2,
+      "ok": true,
+      "headersMs": 936,
+      "totalMs": 2885,
+      "bytes": 541644
+    },
+    {
+      "key": "https://ghp.arslantu.xyz/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "http-525",
+      "elapsedMs": 891
+    },
+    {
+      "key": "https://ghfast.top/",
+      "kind": "apk",
+      "round": 2,
+      "ok": true,
+      "headersMs": 1906,
+      "totalMs": 4607,
+      "bytes": 541644
+    },
+    {
+      "key": "https://ghp.arslantu.xyz/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "http-525",
+      "elapsedMs": 1185
+    },
+    {
+      "key": "https://ghproxy.cxkpro.top/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 598
+    },
+    {
+      "key": "https://ghproxy.imciel.com/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 879
+    },
+    {
+      "key": "https://ghproxy.imciel.com/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 1279
+    },
+    {
+      "key": "https://ghproxy.cxkpro.top/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 796
+    },
+    {
+      "key": "https://github.ednovas.xyz/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": true,
+      "headersMs": 3038,
+      "totalMs": 3038,
+      "bytes": 3806
+    },
+    {
+      "key": "https://gh.idayer.com/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 2336
+    },
+    {
+      "key": "https://git.669966.xyz/",
+      "kind": "apk",
+      "round": 2,
+      "ok": true,
+      "headersMs": 1879,
+      "totalMs": 10062,
+      "bytes": 541644
+    },
+    {
+      "key": "https://github.ednovas.xyz/",
+      "kind": "apk",
+      "round": 2,
+      "ok": true,
+      "headersMs": 2213,
+      "totalMs": 7018,
+      "bytes": 541644
+    },
+    {
+      "key": "https://free.cn.eu.org/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": true,
+      "headersMs": 1871,
+      "totalMs": 2672,
+      "bytes": 3806
+    },
+    {
+      "key": "https://free.cn.eu.org/",
+      "kind": "apk",
+      "round": 2,
+      "ok": true,
+      "headersMs": 1285,
+      "totalMs": 3710,
+      "bytes": 541644
+    },
+    {
+      "key": "https://gh.idayer.com/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 7033
+    },
+    {
+      "key": "https://gh.chjina.com/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": true,
+      "headersMs": 1355,
+      "totalMs": 2033,
+      "bytes": 3806
+    },
+    {
+      "key": "https://github.xxlab.tech/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "http-502",
+      "elapsedMs": 8266
+    },
+    {
+      "key": "https://ghp.keleyaa.com/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 627
+    },
+    {
+      "key": "https://ghp.keleyaa.com/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 945
+    },
+    {
+      "key": "https://ghproxy.monkeyray.net/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "http-404",
+      "elapsedMs": 1392
+    },
+    {
+      "key": "https://ghproxy.monkeyray.net/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "http-404",
+      "elapsedMs": 2591
+    },
+    {
+      "key": "https://gh.chjina.com/",
+      "kind": "apk",
+      "round": 2,
+      "ok": true,
+      "headersMs": 1323,
+      "totalMs": 4482,
+      "bytes": 541644
+    },
+    {
+      "key": "https://gh.noki.icu/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": true,
+      "headersMs": 2116,
+      "totalMs": 2522,
+      "bytes": 3806
+    },
+    {
+      "key": "https://ghproxy.1888866.xyz/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20002
+    },
+    {
+      "key": "https://ghproxy.1888866.xyz/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20004
+    },
+    {
+      "key": "https://githubdog.com/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 380
+    },
+    {
+      "key": "https://githubdog.com/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 318
+    },
+    {
+      "key": "https://g.blfrp.cn/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": true,
+      "headersMs": 6556,
+      "totalMs": 6557,
+      "bytes": 3806
+    },
+    {
+      "key": "https://777.z321.cc.cd/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 654
+    },
+    {
+      "key": "https://777.z321.cc.cd/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 991
+    },
+    {
+      "key": "https://gg.z321.cc.cd/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 523
+    },
+    {
+      "key": "https://gh.meali.top/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": true,
+      "headersMs": 1183,
+      "totalMs": 2568,
+      "bytes": 3806
+    },
+    {
+      "key": "https://github.xxlab.tech/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20001
+    },
+    {
+      "key": "https://gg.z321.cc.cd/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 990
+    },
+    {
+      "key": "https://g.z321.cc.cd/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 938
+    },
+    {
+      "key": "https://g.z321.cc.cd/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 1125
+    },
+    {
+      "key": "https://gh.meali.top/",
+      "kind": "apk",
+      "round": 2,
+      "ok": true,
+      "headersMs": 1289,
+      "totalMs": 4396,
+      "bytes": 541644
+    },
+    {
+      "key": "https://gap.andyjin.website/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 378
+    },
+    {
+      "key": "https://gap.andyjin.website/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 184
+    },
+    {
+      "key": "https://gh.my-website.ccwu.cc/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": true,
+      "headersMs": 2493,
+      "totalMs": 2496,
+      "bytes": 3806
+    },
+    {
+      "key": "https://github.ikgy.top/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": true,
+      "headersMs": 2118,
+      "totalMs": 2118,
+      "bytes": 3806
+    },
+    {
+      "key": "https://g.blfrp.cn/",
+      "kind": "apk",
+      "round": 2,
+      "ok": true,
+      "headersMs": 5045,
+      "totalMs": 14803,
+      "bytes": 541644
+    },
+    {
+      "key": "https://proxy.yaoyaoling.net/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20010
+    },
+    {
+      "key": "https://proxy.yaoyaoling.net/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20014
+    },
+    {
+      "key": "https://gh.noki.icu/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20006
+    },
+    {
+      "key": "https://js.jiangss.shop/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "TypeError",
+      "elapsedMs": 10532
+    },
+    {
+      "key": "https://js.jiangss.shop/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "TypeError",
+      "elapsedMs": 10625
+    },
+    {
+      "key": "https://github.ikgy.top/",
+      "kind": "apk",
+      "round": 2,
+      "ok": true,
+      "headersMs": 1173,
+      "totalMs": 5046,
+      "bytes": 541644
+    },
+    {
+      "key": "https://gh.07150721.xyz/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": true,
+      "headersMs": 2728,
+      "totalMs": 5108,
+      "bytes": 3806
+    },
+    {
+      "key": "https://cfgh.ikgy.top/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": true,
+      "headersMs": 1891,
+      "totalMs": 4847,
+      "bytes": 3806
+    },
+    {
+      "key": "https://xsadwsd.kdns.fr/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": true,
+      "headersMs": 2640,
+      "totalMs": 3304,
+      "bytes": 3806
+    },
+    {
+      "key": "https://xsadwsd.kdns.fr/",
+      "kind": "apk",
+      "round": 2,
+      "ok": true,
+      "headersMs": 608,
+      "totalMs": 4087,
+      "bytes": 541644
+    },
+    {
+      "key": "https://gh.my-website.ccwu.cc/",
+      "kind": "apk",
+      "round": 2,
+      "ok": true,
+      "headersMs": 1539,
+      "totalMs": 14171,
+      "bytes": 541644
+    },
+    {
+      "key": "https://ghproxy.felicity.land/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": true,
+      "headersMs": 4012,
+      "totalMs": 6449,
+      "bytes": 3806
+    },
+    {
+      "key": "https://gh.07150721.xyz/",
+      "kind": "apk",
+      "round": 2,
+      "ok": true,
+      "headersMs": 3053,
+      "totalMs": 15897,
+      "bytes": 541644
+    },
+    {
+      "key": "https://cfgh.ikgy.top/",
+      "kind": "apk",
+      "round": 2,
+      "ok": true,
+      "headersMs": 1609,
+      "totalMs": 13935,
+      "bytes": 541644
+    },
+    {
+      "key": "https://github.nswrz.cn/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "TypeError",
+      "elapsedMs": 10545
+    },
+    {
+      "key": "https://gh.qfmc0721.cc.cd/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "stale-or-metadata",
+      "elapsedMs": null
+    },
+    {
+      "key": "https://github.nswrz.cn/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "TypeError",
+      "elapsedMs": 10421
+    },
+    {
+      "key": "https://ghproxy.felicity.land/",
+      "kind": "apk",
+      "round": 2,
+      "ok": true,
+      "headersMs": 3052,
+      "totalMs": 13897,
+      "bytes": 541644
+    },
+    {
+      "key": "https://gh.qfmc0721.cc.cd/",
+      "kind": "apk",
+      "round": 2,
+      "ok": true,
+      "headersMs": 1013,
+      "totalMs": 2632,
+      "bytes": 541644
+    },
+    {
+      "key": "https://github.gohj99.site/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "http-404",
+      "elapsedMs": 1444
+    },
+    {
+      "key": "https://gh.zhai.edu.pl/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "TypeError",
+      "elapsedMs": 10477
+    },
+    {
+      "key": "https://gh.ruan.dpdns.org/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20003
+    },
+    {
+      "key": "https://github.gohj99.site/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "http-404",
+      "elapsedMs": 3015
+    },
+    {
+      "key": "https://gh.ruan.dpdns.org/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20012
+    },
+    {
+      "key": "https://ghproxy.icu/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": true,
+      "headersMs": 990,
+      "totalMs": 990,
+      "bytes": 3806
+    },
+    {
+      "key": "direct",
+      "kind": "manifest",
+      "round": 2,
+      "ok": true,
+      "headersMs": 541,
+      "totalMs": 1343,
+      "bytes": 3806
+    },
+    {
+      "key": "https://gh.zhai.edu.pl/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "TypeError",
+      "elapsedMs": 10144
+    },
+    {
+      "key": "api",
+      "kind": "manifest",
+      "round": 2,
+      "ok": true,
+      "headersMs": 865,
+      "totalMs": 1507,
+      "bytes": 3806
+    },
+    {
+      "key": "https://ghproxy.icu/",
+      "kind": "apk",
+      "round": 2,
+      "ok": true,
+      "headersMs": 583,
+      "totalMs": 3859,
+      "bytes": 541644
+    },
+    {
+      "key": "raw",
+      "kind": "manifest",
+      "round": 2,
+      "ok": true,
+      "headersMs": 259,
+      "totalMs": 259,
+      "bytes": 3807
+    },
+    {
+      "key": "github-raw",
+      "kind": "manifest",
+      "round": 2,
+      "ok": true,
+      "headersMs": 107,
+      "totalMs": 180,
+      "bytes": 3807
+    },
+    {
+      "key": "https://gh-proxy.org/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": true,
+      "headersMs": 1453,
+      "totalMs": 1453,
+      "bytes": 3806
+    },
+    {
+      "key": "https://githubproxy.gohj99.site/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": true,
+      "headersMs": 991,
+      "totalMs": 7024,
+      "bytes": 3806
+    },
+    {
+      "key": "https://gh-proxy.org/",
+      "kind": "apk",
+      "round": 2,
+      "ok": true,
+      "headersMs": 692,
+      "totalMs": 4302,
+      "bytes": 541644
+    },
+    {
+      "key": "https://github-cf.947563.xyz/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20003
+    },
+    {
+      "key": "https://github-cf.947563.xyz/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20009
+    },
+    {
+      "key": "https://githubproxy.gohj99.site/",
+      "kind": "apk",
+      "round": 2,
+      "ok": true,
+      "headersMs": 685,
+      "totalMs": 18225,
+      "bytes": 541644
+    },
+    {
+      "key": "direct",
+      "kind": "apk",
+      "round": 2,
+      "ok": true,
+      "headersMs": 577,
+      "totalMs": 18184,
+      "bytes": 541644
+    },
+    {
+      "key": "api",
+      "kind": "apk",
+      "round": 2,
+      "ok": true,
+      "headersMs": 1072,
+      "totalMs": 18575,
+      "bytes": 541644
+    },
+    {
+      "key": "https://ghproxy.net/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": true,
+      "headersMs": 2138,
+      "totalMs": 2438,
+      "bytes": 3806
+    },
+    {
+      "key": "https://gh-proxy.com/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": true,
+      "headersMs": 3399,
+      "totalMs": 3400,
+      "bytes": 3806
+    },
+    {
+      "key": "https://gh.dpik.top/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20011
+    },
+    {
+      "key": "https://gh.dpik.top/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20007
+    },
+    {
+      "key": "https://cdn.gh-proxy.com/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": true,
+      "headersMs": 743,
+      "totalMs": 1936,
+      "bytes": 3806
+    },
+    {
+      "key": "https://cdn.gh-proxy.com/",
+      "kind": "apk",
+      "round": 2,
+      "ok": true,
+      "headersMs": 980,
+      "totalMs": 2209,
+      "bytes": 541644
+    },
+    {
+      "key": "https://github.tbap.top/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20009
+    },
+    {
+      "key": "https://github.dpik.top/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 821
+    },
+    {
+      "key": "https://j.1lin.dpdns.org/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 185
+    },
+    {
+      "key": "https://j.1lin.dpdns.org/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 109
+    },
+    {
+      "key": "https://github.tbap.top/",
+      "kind": "apk",
+      "round": 2,
+      "ok": true,
+      "headersMs": 1908,
+      "totalMs": 14084,
+      "bytes": 541644
+    },
+    {
+      "key": "https://github.starrlzy.cn/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 189
+    },
+    {
+      "key": "https://github.starrlzy.cn/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 189
+    },
+    {
+      "key": "https://github.dpik.top/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 1964
+    },
+    {
+      "key": "https://github-proxy.memory-echoes.cn/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 760
+    },
+    {
+      "key": "https://git.yylx.win/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": true,
+      "headersMs": 927,
+      "totalMs": 927,
+      "bytes": 3806
+    },
+    {
+      "key": "https://github-proxy.memory-echoes.cn/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 1183
+    },
+    {
+      "key": "https://gh-proxy.com/",
+      "kind": "apk",
+      "round": 2,
+      "ok": true,
+      "headersMs": 606,
+      "totalMs": 5091,
+      "bytes": 541644
+    },
+    {
+      "key": "https://git.yylx.win/",
+      "kind": "apk",
+      "round": 2,
+      "ok": true,
+      "headersMs": 594,
+      "totalMs": 2981,
+      "bytes": 541644
+    },
+    {
+      "key": "https://gh.927223.xyz/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "http-403",
+      "elapsedMs": 2772
+    },
+    {
+      "key": "https://ghfile.geekertao.top/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20002
+    },
+    {
+      "key": "https://ghfile.geekertao.top/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20010
+    },
+    {
+      "key": "https://ghf.xn--eqrr82bzpe.top/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": true,
+      "headersMs": 6169,
+      "totalMs": 7434,
+      "bytes": 3806
+    },
+    {
+      "key": "https://ghm.078465.xyz/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "TypeError",
+      "elapsedMs": 10299
+    },
+    {
+      "key": "https://gh.felicity.ac.cn/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 4983
+    },
+    {
+      "key": "https://gh.felicity.ac.cn/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 3258
+    },
+    {
+      "key": "https://gh.bugdey.us.kg/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 193
+    },
+    {
+      "key": "https://gh.bugdey.us.kg/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 92
+    },
+    {
+      "key": "https://jiashu.1win.eu.org/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": false,
+      "error": "http-403",
+      "elapsedMs": 911
+    },
+    {
+      "key": "https://ghproxy.net/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20014
+    },
+    {
+      "key": "https://cdn.akaere.online/",
+      "kind": "manifest",
+      "round": 2,
+      "ok": true,
+      "headersMs": 1077,
+      "totalMs": 1531,
+      "bytes": 3806
+    },
+    {
+      "key": "https://ghm.078465.xyz/",
+      "kind": "apk",
+      "round": 2,
+      "ok": true,
+      "headersMs": 1305,
+      "totalMs": 12235,
+      "bytes": 541644
+    },
+    {
+      "key": "https://cdn.akaere.online/",
+      "kind": "apk",
+      "round": 2,
+      "ok": true,
+      "headersMs": 2643,
+      "totalMs": 4973,
+      "bytes": 541644
+    },
+    {
+      "key": "https://gh.927223.xyz/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20011
+    },
+    {
+      "key": "https://ghf.xn--eqrr82bzpe.top/",
+      "kind": "apk",
+      "round": 2,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20001
+    },
+    {
+      "key": "https://gitproxy.mrhjx.cn/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 745
+    },
+    {
+      "key": "https://gitproxy.mrhjx.cn/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 994
+    },
+    {
+      "key": "https://gh.monlor.com/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": true,
+      "headersMs": 1668,
+      "totalMs": 2589,
+      "bytes": 3806
+    },
+    {
+      "key": "https://gh.sixyin.com/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": true,
+      "headersMs": 2463,
+      "totalMs": 2673,
+      "bytes": 3806
+    },
+    {
+      "key": "https://ghfast.top/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": true,
+      "headersMs": 1110,
+      "totalMs": 1502,
+      "bytes": 3806
+    },
+    {
+      "key": "https://ghpxy.hwinzniej.top/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": true,
+      "headersMs": 1396,
+      "totalMs": 4267,
+      "bytes": 3806
+    },
+    {
+      "key": "https://gh.jasonzeng.dev/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 456
+    },
+    {
+      "key": "https://gh.jasonzeng.dev/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 281
+    },
+    {
+      "key": "https://gh.monlor.com/",
+      "kind": "apk",
+      "round": 3,
+      "ok": true,
+      "headersMs": 2516,
+      "totalMs": 5325,
+      "bytes": 541644
+    },
+    {
+      "key": "https://ghpxy.hwinzniej.top/",
+      "kind": "apk",
+      "round": 3,
+      "ok": true,
+      "headersMs": 845,
+      "totalMs": 5580,
+      "bytes": 541644
+    },
+    {
+      "key": "https://gp.zkitefly.eu.org/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 414
+    },
+    {
+      "key": "https://gp.zkitefly.eu.org/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 194
+    },
+    {
+      "key": "https://git.669966.xyz/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": true,
+      "headersMs": 3423,
+      "totalMs": 5252,
+      "bytes": 3806
+    },
+    {
+      "key": "https://github.geekery.cn/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "http-404",
+      "elapsedMs": 1544
+    },
+    {
+      "key": "https://github.geekery.cn/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "http-404",
+      "elapsedMs": 1682
+    },
+    {
+      "key": "https://gh.sixyin.com/",
+      "kind": "apk",
+      "round": 3,
+      "ok": true,
+      "headersMs": 3270,
+      "totalMs": 6272,
+      "bytes": 541644
+    },
+    {
+      "key": "https://ghfast.top/",
+      "kind": "apk",
+      "round": 3,
+      "ok": true,
+      "headersMs": 1026,
+      "totalMs": 4076,
+      "bytes": 541644
+    },
+    {
+      "key": "https://ghp.arslantu.xyz/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "http-525",
+      "elapsedMs": 840
+    },
+    {
+      "key": "https://ghp.arslantu.xyz/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "http-525",
+      "elapsedMs": 915
+    },
+    {
+      "key": "https://fastgit.cc/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": true,
+      "headersMs": 1523,
+      "totalMs": 1523,
+      "bytes": 3806
+    },
+    {
+      "key": "https://git.669966.xyz/",
+      "kind": "apk",
+      "round": 3,
+      "ok": true,
+      "headersMs": 2125,
+      "totalMs": 6379,
+      "bytes": 541644
+    },
+    {
+      "key": "https://ghproxy.imciel.com/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 707
+    },
+    {
+      "key": "https://ghproxy.imciel.com/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 985
+    },
+    {
+      "key": "https://ghproxy.cxkpro.top/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 814
+    },
+    {
+      "key": "https://github.ednovas.xyz/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": true,
+      "headersMs": 1548,
+      "totalMs": 1548,
+      "bytes": 3806
+    },
+    {
+      "key": "https://ghproxy.cxkpro.top/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 808
+    },
+    {
+      "key": "https://github.xxlab.tech/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "http-502",
+      "elapsedMs": 792
+    },
+    {
+      "key": "https://gh.idayer.com/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 1040
+    },
+    {
+      "key": "https://gh.idayer.com/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 911
+    },
+    {
+      "key": "https://fastgit.cc/",
+      "kind": "apk",
+      "round": 3,
+      "ok": true,
+      "headersMs": 1050,
+      "totalMs": 5096,
+      "bytes": 541644
+    },
+    {
+      "key": "https://gh.chjina.com/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": true,
+      "headersMs": 1557,
+      "totalMs": 2665,
+      "bytes": 3806
+    },
+    {
+      "key": "https://free.cn.eu.org/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": true,
+      "headersMs": 1432,
+      "totalMs": 3588,
+      "bytes": 3806
+    },
+    {
+      "key": "https://ghp.keleyaa.com/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 752
+    },
+    {
+      "key": "https://github.ednovas.xyz/",
+      "kind": "apk",
+      "round": 3,
+      "ok": true,
+      "headersMs": 1398,
+      "totalMs": 6364,
+      "bytes": 541644
+    },
+    {
+      "key": "https://free.cn.eu.org/",
+      "kind": "apk",
+      "round": 3,
+      "ok": true,
+      "headersMs": 1426,
+      "totalMs": 4583,
+      "bytes": 541644
+    },
+    {
+      "key": "https://ghp.keleyaa.com/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 1522
+    },
+    {
+      "key": "https://gh.chjina.com/",
+      "kind": "apk",
+      "round": 3,
+      "ok": true,
+      "headersMs": 1677,
+      "totalMs": 4003,
+      "bytes": 541644
+    },
+    {
+      "key": "https://ghproxy.monkeyray.net/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "http-404",
+      "elapsedMs": 2529
+    },
+    {
+      "key": "https://ghproxy.monkeyray.net/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "http-404",
+      "elapsedMs": 3508
+    },
+    {
+      "key": "https://gh.noki.icu/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": true,
+      "headersMs": 4999,
+      "totalMs": 5426,
+      "bytes": 3806
+    },
+    {
+      "key": "https://ghproxy.1888866.xyz/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20001
+    },
+    {
+      "key": "https://ghproxy.1888866.xyz/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20015
+    },
+    {
+      "key": "https://githubdog.com/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 396
+    },
+    {
+      "key": "https://githubdog.com/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 288
+    },
+    {
+      "key": "https://g.blfrp.cn/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "TypeError",
+      "elapsedMs": 10466
+    },
+    {
+      "key": "https://github.xxlab.tech/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20001
+    },
+    {
+      "key": "https://gh.meali.top/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": true,
+      "headersMs": 1382,
+      "totalMs": 2286,
+      "bytes": 3806
+    },
+    {
+      "key": "https://777.z321.cc.cd/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 1006
+    },
+    {
+      "key": "https://gg.z321.cc.cd/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 766
+    },
+    {
+      "key": "https://gg.z321.cc.cd/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 939
+    },
+    {
+      "key": "https://g.z321.cc.cd/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 800
+    },
+    {
+      "key": "https://gh.meali.top/",
+      "kind": "apk",
+      "round": 3,
+      "ok": true,
+      "headersMs": 1168,
+      "totalMs": 4152,
+      "bytes": 541644
+    },
+    {
+      "key": "https://777.z321.cc.cd/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 2975
+    },
+    {
+      "key": "https://gap.andyjin.website/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 402
+    },
+    {
+      "key": "https://gap.andyjin.website/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 1
+    },
+    {
+      "key": "https://g.z321.cc.cd/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 1348
+    },
+    {
+      "key": "https://proxy.yaoyaoling.net/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": true,
+      "headersMs": 7870,
+      "totalMs": 19376,
+      "bytes": 3806
+    },
+    {
+      "key": "https://proxy.yaoyaoling.net/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20009
+    },
+    {
+      "key": "https://github.ikgy.top/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": true,
+      "headersMs": 2557,
+      "totalMs": 2558,
+      "bytes": 3806
+    },
+    {
+      "key": "https://gh.my-website.ccwu.cc/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": true,
+      "headersMs": 3685,
+      "totalMs": 3685,
+      "bytes": 3806
+    },
+    {
+      "key": "https://gh.noki.icu/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20015
+    },
+    {
+      "key": "https://github.ikgy.top/",
+      "kind": "apk",
+      "round": 3,
+      "ok": true,
+      "headersMs": 966,
+      "totalMs": 5110,
+      "bytes": 541644
+    },
+    {
+      "key": "https://gh.07150721.xyz/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": true,
+      "headersMs": 3100,
+      "totalMs": 5018,
+      "bytes": 3806
+    },
+    {
+      "key": "https://g.blfrp.cn/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20008
+    },
+    {
+      "key": "https://cfgh.ikgy.top/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": true,
+      "headersMs": 2597,
+      "totalMs": 4394,
+      "bytes": 3806
+    },
+    {
+      "key": "https://js.jiangss.shop/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "TypeError",
+      "elapsedMs": 10619
+    },
+    {
+      "key": "https://js.jiangss.shop/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "TypeError",
+      "elapsedMs": 10919
+    },
+    {
+      "key": "https://gh.my-website.ccwu.cc/",
+      "kind": "apk",
+      "round": 3,
+      "ok": true,
+      "headersMs": 6468,
+      "totalMs": 9901,
+      "bytes": 541644
+    },
+    {
+      "key": "https://xsadwsd.kdns.fr/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": true,
+      "headersMs": 838,
+      "totalMs": 2741,
+      "bytes": 3806
+    },
+    {
+      "key": "https://xsadwsd.kdns.fr/",
+      "kind": "apk",
+      "round": 3,
+      "ok": true,
+      "headersMs": 742,
+      "totalMs": 3375,
+      "bytes": 541644
+    },
+    {
+      "key": "https://cfgh.ikgy.top/",
+      "kind": "apk",
+      "round": 3,
+      "ok": true,
+      "headersMs": 1780,
+      "totalMs": 6952,
+      "bytes": 541644
+    },
+    {
+      "key": "https://ghproxy.felicity.land/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": true,
+      "headersMs": 2901,
+      "totalMs": 4987,
+      "bytes": 3806
+    },
+    {
+      "key": "https://gh.07150721.xyz/",
+      "kind": "apk",
+      "round": 3,
+      "ok": true,
+      "headersMs": 2450,
+      "totalMs": 11414,
+      "bytes": 541644
+    },
+    {
+      "key": "https://gh.qfmc0721.cc.cd/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "stale-or-metadata",
+      "elapsedMs": null
+    },
+    {
+      "key": "https://ghproxy.felicity.land/",
+      "kind": "apk",
+      "round": 3,
+      "ok": true,
+      "headersMs": 3019,
+      "totalMs": 7022,
+      "bytes": 541644
+    },
+    {
+      "key": "https://gh.qfmc0721.cc.cd/",
+      "kind": "apk",
+      "round": 3,
+      "ok": true,
+      "headersMs": 251,
+      "totalMs": 3861,
+      "bytes": 541644
+    },
+    {
+      "key": "https://github.nswrz.cn/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "TypeError",
+      "elapsedMs": 10521
+    },
+    {
+      "key": "https://github.nswrz.cn/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "TypeError",
+      "elapsedMs": 10145
+    },
+    {
+      "key": "https://github.gohj99.site/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "http-404",
+      "elapsedMs": 1610
+    },
+    {
+      "key": "https://gh.zhai.edu.pl/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "TypeError",
+      "elapsedMs": 10210
+    },
+    {
+      "key": "https://gh.zhai.edu.pl/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "TypeError",
+      "elapsedMs": 10815
+    },
+    {
+      "key": "https://github.gohj99.site/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "http-404",
+      "elapsedMs": 3639
+    },
+    {
+      "key": "https://ghproxy.icu/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": true,
+      "headersMs": 1080,
+      "totalMs": 1080,
+      "bytes": 3806
+    },
+    {
+      "key": "direct",
+      "kind": "manifest",
+      "round": 3,
+      "ok": true,
+      "headersMs": 1878,
+      "totalMs": 3081,
+      "bytes": 3806
+    },
+    {
+      "key": "https://gh.ruan.dpdns.org/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20006
+    },
+    {
+      "key": "https://gh.ruan.dpdns.org/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20012
+    },
+    {
+      "key": "https://githubproxy.gohj99.site/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": true,
+      "headersMs": 820,
+      "totalMs": 6582,
+      "bytes": 3806
+    },
+    {
+      "key": "raw",
+      "kind": "manifest",
+      "round": 3,
+      "ok": true,
+      "headersMs": 163,
+      "totalMs": 268,
+      "bytes": 3807
+    },
+    {
+      "key": "https://ghproxy.icu/",
+      "kind": "apk",
+      "round": 3,
+      "ok": true,
+      "headersMs": 2240,
+      "totalMs": 5647,
+      "bytes": 541644
+    },
+    {
+      "key": "https://gh-proxy.org/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": true,
+      "headersMs": 841,
+      "totalMs": 841,
+      "bytes": 3806
+    },
+    {
+      "key": "api",
+      "kind": "manifest",
+      "round": 3,
+      "ok": true,
+      "headersMs": 2115,
+      "totalMs": 2920,
+      "bytes": 3806
+    },
+    {
+      "key": "https://gh-proxy.org/",
+      "kind": "apk",
+      "round": 3,
+      "ok": true,
+      "headersMs": 336,
+      "totalMs": 2690,
+      "bytes": 541644
+    },
+    {
+      "key": "https://gh.dpik.top/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "http-500",
+      "elapsedMs": 4455
+    },
+    {
+      "key": "https://github-cf.947563.xyz/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20015
+    },
+    {
+      "key": "https://github-cf.947563.xyz/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20010
+    },
+    {
+      "key": "https://github.tbap.top/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": true,
+      "headersMs": 4555,
+      "totalMs": 4556,
+      "bytes": 3806
+    },
+    {
+      "key": "https://githubproxy.gohj99.site/",
+      "kind": "apk",
+      "round": 3,
+      "ok": true,
+      "headersMs": 610,
+      "totalMs": 18300,
+      "bytes": 541644
+    },
+    {
+      "key": "https://ghproxy.net/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": true,
+      "headersMs": 1245,
+      "totalMs": 1755,
+      "bytes": 3806
+    },
+    {
+      "key": "https://ghfile.geekertao.top/",
+      "kind": "apk",
+      "round": 3,
+      "ok": true,
+      "headersMs": 1936,
+      "totalMs": 7630,
+      "bytes": 541644
+    },
+    {
+      "key": "direct",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20010
+    },
+    {
+      "key": "https://github.tbap.top/",
+      "kind": "apk",
+      "round": 3,
+      "ok": true,
+      "headersMs": 1583,
+      "totalMs": 12426,
+      "bytes": 541644
+    },
+    {
+      "key": "https://gh-proxy.com/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": true,
+      "headersMs": 1628,
+      "totalMs": 1628,
+      "bytes": 3806
+    },
+    {
+      "key": "github-raw",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20004
+    },
+    {
+      "key": "api",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20001
+    },
+    {
+      "key": "https://cdn.gh-proxy.com/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": true,
+      "headersMs": 1196,
+      "totalMs": 1615,
+      "bytes": 3806
+    },
+    {
+      "key": "https://j.1lin.dpdns.org/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 225
+    },
+    {
+      "key": "https://j.1lin.dpdns.org/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": null
+    },
+    {
+      "key": "https://github.starrlzy.cn/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 194
+    },
+    {
+      "key": "https://github.starrlzy.cn/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 1
+    },
+    {
+      "key": "https://gh.dpik.top/",
+      "kind": "apk",
+      "round": 3,
+      "ok": true,
+      "headersMs": 8152,
+      "totalMs": 16754,
+      "bytes": 541644
+    },
+    {
+      "key": "https://github.dpik.top/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 1502
+    },
+    {
+      "key": "https://gh-proxy.com/",
+      "kind": "apk",
+      "round": 3,
+      "ok": true,
+      "headersMs": 1468,
+      "totalMs": 3592,
+      "bytes": 541644
+    },
+    {
+      "key": "https://github-proxy.memory-echoes.cn/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 1240
+    },
+    {
+      "key": "https://github.dpik.top/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 1827
+    },
+    {
+      "key": "https://cdn.gh-proxy.com/",
+      "kind": "apk",
+      "round": 3,
+      "ok": true,
+      "headersMs": 1028,
+      "totalMs": 2216,
+      "bytes": 541644
+    },
+    {
+      "key": "https://ghfile.geekertao.top/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": true,
+      "headersMs": 1900,
+      "totalMs": 12430,
+      "bytes": 3806
+    },
+    {
+      "key": "https://git.yylx.win/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": true,
+      "headersMs": 1025,
+      "totalMs": 1025,
+      "bytes": 3806
+    },
+    {
+      "key": "https://git.yylx.win/",
+      "kind": "apk",
+      "round": 3,
+      "ok": true,
+      "headersMs": 544,
+      "totalMs": 1146,
+      "bytes": 541644
+    },
+    {
+      "key": "https://github-proxy.memory-echoes.cn/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 2886
+    },
+    {
+      "key": "https://gh.927223.xyz/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "http-403",
+      "elapsedMs": 2587
+    },
+    {
+      "key": "https://gh.927223.xyz/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "http-403",
+      "elapsedMs": 2927
+    },
+    {
+      "key": "https://gh.felicity.ac.cn/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 1585
+    },
+    {
+      "key": "https://gh.bugdey.us.kg/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 528
+    },
+    {
+      "key": "https://gh.bugdey.us.kg/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 374
+    },
+    {
+      "key": "https://cdn.akaere.online/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": true,
+      "headersMs": 753,
+      "totalMs": 753,
+      "bytes": 3806
+    },
+    {
+      "key": "https://gh.felicity.ac.cn/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 1685
+    },
+    {
+      "key": "https://ghf.xn--eqrr82bzpe.top/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": true,
+      "headersMs": 2074,
+      "totalMs": 4228,
+      "bytes": 3806
+    },
+    {
+      "key": "https://ghf.xn--eqrr82bzpe.top/",
+      "kind": "apk",
+      "round": 3,
+      "ok": true,
+      "headersMs": 1770,
+      "totalMs": 4453,
+      "bytes": 541644
+    },
+    {
+      "key": "https://jiashu.1win.eu.org/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "http-403",
+      "elapsedMs": 2126
+    },
+    {
+      "key": "https://j.1win.ggff.net/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 205
+    },
+    {
+      "key": "https://j.1win.ggff.net/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 1
+    },
+    {
+      "key": "https://tvv.tw/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "http-502",
+      "elapsedMs": 1979
+    },
+    {
+      "key": "https://ghm.078465.xyz/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": true,
+      "headersMs": 5383,
+      "totalMs": 6966,
+      "bytes": 3806
+    },
+    {
+      "key": "https://gitproxy.127731.xyz/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "http-526",
+      "elapsedMs": 647
+    },
+    {
+      "key": "https://gitproxy.127731.xyz/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "http-526",
+      "elapsedMs": 1602
+    },
+    {
+      "key": "https://cdn.akaere.online/",
+      "kind": "apk",
+      "round": 3,
+      "ok": true,
+      "headersMs": 1232,
+      "totalMs": 6088,
+      "bytes": 541644
+    },
+    {
+      "key": "https://tvv.tw/",
+      "kind": "apk",
+      "round": 3,
+      "ok": true,
+      "headersMs": 955,
+      "totalMs": 4226,
+      "bytes": 541644
+    },
+    {
+      "key": "https://gh.inkchills.cn/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": true,
+      "headersMs": 3033,
+      "totalMs": 3033,
+      "bytes": 3806
+    },
+    {
+      "key": "https://jiashu.1win.eu.org/",
+      "kind": "apk",
+      "round": 3,
+      "ok": true,
+      "headersMs": 1333,
+      "totalMs": 6710,
+      "bytes": 541644
+    },
+    {
+      "key": "https://gh.catmak.name/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "stale-or-metadata",
+      "elapsedMs": null
+    },
+    {
+      "key": "https://gh.b52m.cn/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "http-404",
+      "elapsedMs": 1989
+    },
+    {
+      "key": "https://ghproxy.net/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20000
+    },
+    {
+      "key": "https://gh.inkchills.cn/",
+      "kind": "apk",
+      "round": 3,
+      "ok": true,
+      "headersMs": 2663,
+      "totalMs": 4813,
+      "bytes": 541644
+    },
+    {
+      "key": "https://down.mxw.qzz.io/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "http-403",
+      "elapsedMs": 914
+    },
+    {
+      "key": "https://down.mxw.qzz.io/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "http-403",
+      "elapsedMs": 703
+    },
+    {
+      "key": "https://gh.b52m.cn/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "http-404",
+      "elapsedMs": 3590
+    },
+    {
+      "key": "https://down.mxw.xx.kg/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": true,
+      "headersMs": 3276,
+      "totalMs": 4257,
+      "bytes": 3806
+    },
+    {
+      "key": "https://down.mxw.xx.kg/",
+      "kind": "apk",
+      "round": 3,
+      "ok": true,
+      "headersMs": 987,
+      "totalMs": 4430,
+      "bytes": 541644
+    },
+    {
+      "key": "https://github.mxw.qzz.io/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": true,
+      "headersMs": 1368,
+      "totalMs": 3519,
+      "bytes": 3806
+    },
+    {
+      "key": "https://slink.ltd/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "http-404",
+      "elapsedMs": 509
+    },
+    {
+      "key": "https://gh.jjj.gv.uy/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": true,
+      "headersMs": 993,
+      "totalMs": 993,
+      "bytes": 3806
+    },
+    {
+      "key": "https://gh.acmsz.top/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": true,
+      "headersMs": 703,
+      "totalMs": 3526,
+      "bytes": 3806
+    },
+    {
+      "key": "https://gh.catmak.name/",
+      "kind": "apk",
+      "round": 3,
+      "ok": true,
+      "headersMs": 1682,
+      "totalMs": 6913,
+      "bytes": 541644
+    },
+    {
+      "key": "https://slink.ltd/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "apk-hash-size",
+      "elapsedMs": null
+    },
+    {
+      "key": "https://github.mxw.qzz.io/",
+      "kind": "apk",
+      "round": 3,
+      "ok": true,
+      "headersMs": 1057,
+      "totalMs": 4337,
+      "bytes": 541644
+    },
+    {
+      "key": "https://gh.tryxd.cn/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "SyntaxError",
+      "elapsedMs": null
+    },
+    {
+      "key": "https://ghpr.cc/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "apk-hash-size",
+      "elapsedMs": null
+    },
+    {
+      "key": "https://gh.tryxd.cn/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "apk-hash-size",
+      "elapsedMs": null
+    },
+    {
+      "key": "https://github.tmby.shop/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "apk-hash-size",
+      "elapsedMs": null
+    },
+    {
+      "key": "https://gh.jjj.gv.uy/",
+      "kind": "apk",
+      "round": 3,
+      "ok": true,
+      "headersMs": 1950,
+      "totalMs": 2613,
+      "bytes": 541644
+    },
+    {
+      "key": "https://ghpr.cc/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "http-404",
+      "elapsedMs": 1878
+    },
+    {
+      "key": "https://ghm.078465.xyz/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "AbortError",
+      "elapsedMs": 20009
+    },
+    {
+      "key": "https://github.tmby.shop/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "SyntaxError",
+      "elapsedMs": null
+    },
+    {
+      "key": "https://gh.acmsz.top/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "TypeError",
+      "elapsedMs": 7450
+    },
+    {
+      "key": "https://gitproxy.click/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "TypeError",
+      "elapsedMs": 10814
+    },
+    {
+      "key": "https://github.chenc.dev/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 11431
+    },
+    {
+      "key": "https://github.chenc.dev/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "ENOTFOUND",
+      "elapsedMs": 11203
+    },
+    {
+      "key": "https://gh.ddlc.top/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 12787
+    },
+    {
+      "key": "https://gitproxy.click/",
+      "kind": "manifest",
+      "round": 3,
+      "ok": false,
+      "error": "SyntaxError",
+      "elapsedMs": null
+    },
+    {
+      "key": "https://gh.ddlc.top/",
+      "kind": "apk",
+      "round": 3,
+      "ok": false,
+      "error": "http-429",
+      "elapsedMs": 12673
+    }
+  ],
+  "ranking": {
+    "manifest": [
+      {
+        "key": "raw",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 259,
+        "totalMs": 268
+      },
+      {
+        "key": "https://git.yylx.win/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 962,
+        "totalMs": 964
+      },
+      {
+        "key": "https://gh.jjj.gv.uy/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 993,
+        "totalMs": 993
+      },
+      {
+        "key": "https://ghproxy.icu/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 1080,
+        "totalMs": 1080
+      },
+      {
+        "key": "https://gh-proxy.org/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 1453,
+        "totalMs": 1453
+      },
+      {
+        "key": "https://cdn.akaere.online/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 1077,
+        "totalMs": 1531
+      },
+      {
+        "key": "https://cdn.gh-proxy.com/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 743,
+        "totalMs": 1615
+      },
+      {
+        "key": "api",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 912,
+        "totalMs": 1797
+      },
+      {
+        "key": "https://gh.acmsz.top/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 873,
+        "totalMs": 1846
+      },
+      {
+        "key": "https://fastgit.cc/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 1962,
+        "totalMs": 1962
+      },
+      {
+        "key": "https://gh-proxy.com/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 1978,
+        "totalMs": 1978
+      },
+      {
+        "key": "https://gh.inkchills.cn/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 2081,
+        "totalMs": 2146
+      },
+      {
+        "key": "https://gh.meali.top/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 1183,
+        "totalMs": 2286
+      },
+      {
+        "key": "https://github.ikgy.top/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 2389,
+        "totalMs": 2396
+      },
+      {
+        "key": "https://ghproxy.net/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 2138,
+        "totalMs": 2438
+      },
+      {
+        "key": "https://gh.sixyin.com/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 2463,
+        "totalMs": 2466
+      },
+      {
+        "key": "direct",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 1127,
+        "totalMs": 2544
+      },
+      {
+        "key": "https://down.mxw.xx.kg/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 1276,
+        "totalMs": 2580
+      },
+      {
+        "key": "https://gh.monlor.com/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 1805,
+        "totalMs": 2589
+      },
+      {
+        "key": "https://gh.chjina.com/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 1557,
+        "totalMs": 2665
+      },
+      {
+        "key": "https://free.cn.eu.org/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 1432,
+        "totalMs": 2672
+      },
+      {
+        "key": "https://gh.my-website.ccwu.cc/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 2842,
+        "totalMs": 2842
+      },
+      {
+        "key": "https://ghfast.top/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 2405,
+        "totalMs": 2848
+      },
+      {
+        "key": "https://ghpxy.hwinzniej.top/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 951,
+        "totalMs": 3296
+      },
+      {
+        "key": "https://xsadwsd.kdns.fr/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 2640,
+        "totalMs": 3304
+      },
+      {
+        "key": "https://github.mxw.qzz.io/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 1367,
+        "totalMs": 3519
+      },
+      {
+        "key": "https://gh.noki.icu/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 2153,
+        "totalMs": 3985
+      },
+      {
+        "key": "https://cfgh.ikgy.top/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 1891,
+        "totalMs": 4394
+      },
+      {
+        "key": "https://ghproxy.felicity.land/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 2901,
+        "totalMs": 4987
+      },
+      {
+        "key": "https://gh.07150721.xyz/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 2728,
+        "totalMs": 5018
+      },
+      {
+        "key": "https://ghf.xn--eqrr82bzpe.top/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 2237,
+        "totalMs": 6238
+      },
+      {
+        "key": "https://githubproxy.gohj99.site/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 991,
+        "totalMs": 7024
+      },
+      {
+        "key": "https://github.chenc.dev/",
+        "successes": 2,
+        "attempts": 3,
+        "headersMs": 186,
+        "totalMs": 306
+      },
+      {
+        "key": "github-raw",
+        "successes": 2,
+        "attempts": 3,
+        "headersMs": 313,
+        "totalMs": 504
+      },
+      {
+        "key": "https://github.ednovas.xyz/",
+        "successes": 2,
+        "attempts": 3,
+        "headersMs": 2293,
+        "totalMs": 2293
+      },
+      {
+        "key": "https://g.blfrp.cn/",
+        "successes": 2,
+        "attempts": 3,
+        "headersMs": 4758,
+        "totalMs": 4758
+      },
+      {
+        "key": "https://ghm.078465.xyz/",
+        "successes": 2,
+        "attempts": 3,
+        "headersMs": 3599,
+        "totalMs": 4999
+      },
+      {
+        "key": "https://git.669966.xyz/",
+        "successes": 2,
+        "attempts": 3,
+        "headersMs": 2967,
+        "totalMs": 5083
+      },
+      {
+        "key": "https://ghfile.geekertao.top/",
+        "successes": 2,
+        "attempts": 3,
+        "headersMs": 2411,
+        "totalMs": 8240
+      },
+      {
+        "key": "https://github.tbap.top/",
+        "successes": 1,
+        "attempts": 3,
+        "headersMs": 4555,
+        "totalMs": 4556
+      },
+      {
+        "key": "https://proxy.yaoyaoling.net/",
+        "successes": 1,
+        "attempts": 3,
+        "headersMs": 7870,
+        "totalMs": 19376
+      },
+      {
+        "key": "https://777.z321.cc.cd/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://down.mxw.qzz.io/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://g.z321.cc.cd/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://gap.andyjin.website/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://gg.z321.cc.cd/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://gh.927223.xyz/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://gh.b52m.cn/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://gh.bugdey.us.kg/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://gh.catmak.name/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://gh.ddlc.top/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://gh.dpik.top/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://gh.felicity.ac.cn/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://gh.idayer.com/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://gh.jasonzeng.dev/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://gh.qfmc0721.cc.cd/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://gh.ruan.dpdns.org/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://gh.tryxd.cn/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://gh.zhai.edu.pl/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://ghp.arslantu.xyz/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://ghp.keleyaa.com/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://ghpr.cc/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://ghproxy.1888866.xyz/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://ghproxy.cxkpro.top/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://ghproxy.imciel.com/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://ghproxy.monkeyray.net/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://github-cf.947563.xyz/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://github-proxy.memory-echoes.cn/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://github.dpik.top/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://github.geekery.cn/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://github.gohj99.site/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://github.nswrz.cn/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://github.starrlzy.cn/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://github.tmby.shop/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://github.xxlab.tech/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://githubdog.com/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://gitproxy.127731.xyz/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://gitproxy.click/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://gitproxy.mrhjx.cn/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://gp.zkitefly.eu.org/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://j.1lin.dpdns.org/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://j.1win.ggff.net/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://jiashu.1win.eu.org/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://js.jiangss.shop/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://slink.ltd/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://tvv.tw/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      }
+    ],
+    "apk": [
+      {
+        "key": "https://git.yylx.win/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 544,
+        "totalMs": 1146
+      },
+      {
+        "key": "https://cdn.gh-proxy.com/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 1028,
+        "totalMs": 2216
+      },
+      {
+        "key": "https://gh.jjj.gv.uy/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 624,
+        "totalMs": 2563
+      },
+      {
+        "key": "https://gh.qfmc0721.cc.cd/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 884,
+        "totalMs": 3352
+      },
+      {
+        "key": "https://xsadwsd.kdns.fr/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 700,
+        "totalMs": 3375
+      },
+      {
+        "key": "https://free.cn.eu.org/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 1285,
+        "totalMs": 3717
+      },
+      {
+        "key": "https://gh-proxy.org/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 692,
+        "totalMs": 3968
+      },
+      {
+        "key": "https://ghfast.top/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 1214,
+        "totalMs": 4076
+      },
+      {
+        "key": "https://gh.monlor.com/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 1656,
+        "totalMs": 4218
+      },
+      {
+        "key": "https://tvv.tw/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 1172,
+        "totalMs": 4226
+      },
+      {
+        "key": "https://jiashu.1win.eu.org/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 1333,
+        "totalMs": 4343
+      },
+      {
+        "key": "https://gh.meali.top/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 1168,
+        "totalMs": 4396
+      },
+      {
+        "key": "https://down.mxw.xx.kg/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 902,
+        "totalMs": 4430
+      },
+      {
+        "key": "https://gh.chjina.com/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 1323,
+        "totalMs": 4482
+      },
+      {
+        "key": "https://ghpxy.hwinzniej.top/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 845,
+        "totalMs": 4750
+      },
+      {
+        "key": "https://github.mxw.qzz.io/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 1407,
+        "totalMs": 4769
+      },
+      {
+        "key": "https://ghproxy.icu/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 763,
+        "totalMs": 4837
+      },
+      {
+        "key": "https://github.ikgy.top/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 1173,
+        "totalMs": 5046
+      },
+      {
+        "key": "https://cdn.akaere.online/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 1880,
+        "totalMs": 5058
+      },
+      {
+        "key": "https://gh-proxy.com/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 1468,
+        "totalMs": 5091
+      },
+      {
+        "key": "https://fastgit.cc/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 1050,
+        "totalMs": 5096
+      },
+      {
+        "key": "https://gh.sixyin.com/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 2801,
+        "totalMs": 5694
+      },
+      {
+        "key": "https://gh.inkchills.cn/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 2663,
+        "totalMs": 5992
+      },
+      {
+        "key": "https://github.ednovas.xyz/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 1825,
+        "totalMs": 6364
+      },
+      {
+        "key": "https://git.669966.xyz/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 2125,
+        "totalMs": 6379
+      },
+      {
+        "key": "https://gh.catmak.name/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 1682,
+        "totalMs": 6913
+      },
+      {
+        "key": "https://ghproxy.felicity.land/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 3019,
+        "totalMs": 7022
+      },
+      {
+        "key": "https://cfgh.ikgy.top/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 1780,
+        "totalMs": 8872
+      },
+      {
+        "key": "https://gh.my-website.ccwu.cc/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 1783,
+        "totalMs": 9901
+      },
+      {
+        "key": "https://gh.07150721.xyz/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 2450,
+        "totalMs": 11414
+      },
+      {
+        "key": "https://github.tbap.top/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 1908,
+        "totalMs": 12426
+      },
+      {
+        "key": "https://githubproxy.gohj99.site/",
+        "successes": 3,
+        "attempts": 3,
+        "headersMs": 685,
+        "totalMs": 18225
+      },
+      {
+        "key": "https://github.chenc.dev/",
+        "successes": 2,
+        "attempts": 3,
+        "headersMs": 162,
+        "totalMs": 497
+      },
+      {
+        "key": "https://gh.acmsz.top/",
+        "successes": 2,
+        "attempts": 3,
+        "headersMs": 483,
+        "totalMs": 1991
+      },
+      {
+        "key": "https://ghm.078465.xyz/",
+        "successes": 2,
+        "attempts": 3,
+        "headersMs": 1775,
+        "totalMs": 9995
+      },
+      {
+        "key": "https://ghf.xn--eqrr82bzpe.top/",
+        "successes": 2,
+        "attempts": 3,
+        "headersMs": 2015,
+        "totalMs": 12112
+      },
+      {
+        "key": "https://gh.dpik.top/",
+        "successes": 2,
+        "attempts": 3,
+        "headersMs": 5695,
+        "totalMs": 13601
+      },
+      {
+        "key": "api",
+        "successes": 2,
+        "attempts": 3,
+        "headersMs": 837,
+        "totalMs": 13949
+      },
+      {
+        "key": "https://ghfile.geekertao.top/",
+        "successes": 1,
+        "attempts": 3,
+        "headersMs": 1936,
+        "totalMs": 7630
+      },
+      {
+        "key": "https://github.xxlab.tech/",
+        "successes": 1,
+        "attempts": 3,
+        "headersMs": 4244,
+        "totalMs": 12925
+      },
+      {
+        "key": "https://g.blfrp.cn/",
+        "successes": 1,
+        "attempts": 3,
+        "headersMs": 5045,
+        "totalMs": 14803
+      },
+      {
+        "key": "direct",
+        "successes": 1,
+        "attempts": 3,
+        "headersMs": 577,
+        "totalMs": 18184
+      },
+      {
+        "key": "https://777.z321.cc.cd/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://down.mxw.qzz.io/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://g.z321.cc.cd/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://gap.andyjin.website/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://gg.z321.cc.cd/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://gh.927223.xyz/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://gh.b52m.cn/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://gh.bugdey.us.kg/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://gh.ddlc.top/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://gh.felicity.ac.cn/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://gh.idayer.com/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://gh.jasonzeng.dev/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://gh.noki.icu/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://gh.ruan.dpdns.org/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://gh.tryxd.cn/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://gh.zhai.edu.pl/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://ghp.arslantu.xyz/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://ghp.keleyaa.com/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://ghpr.cc/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://ghproxy.1888866.xyz/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://ghproxy.cxkpro.top/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://ghproxy.imciel.com/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://ghproxy.monkeyray.net/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://ghproxy.net/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://github-cf.947563.xyz/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://github-proxy.memory-echoes.cn/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://github.dpik.top/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://github.geekery.cn/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://github.gohj99.site/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://github.nswrz.cn/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://github.starrlzy.cn/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://github.tmby.shop/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://githubdog.com/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://gitproxy.127731.xyz/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://gitproxy.click/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://gitproxy.mrhjx.cn/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://gp.zkitefly.eu.org/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://j.1lin.dpdns.org/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://j.1win.ggff.net/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://js.jiangss.shop/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://proxy.yaoyaoling.net/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      },
+      {
+        "key": "https://slink.ltd/",
+        "successes": 0,
+        "attempts": 3,
+        "headersMs": null,
+        "totalMs": null
+      }
+    ]
+  },
+  "methodology": {
+    "timezone": "Asia/Shanghai",
+    "network": "Publisher computer current network; not a phone or campus measurement",
+    "concurrency": 8,
+    "timeoutMs": 20000,
+    "notes": "End-to-end HTTP transfer including DNS/TLS/redirects; API includes metadata lookup; native DNS lookup may outlast abort timer. Three passes reuse the HTTP client connection pool; files validated against pinned RSA public key and signed baseline SHA256/size.",
+    "ordering": "Verified successes descending, then median complete verified transfer milliseconds ascending; unmeasured nodes before all-failure fallback."
+  }
+}

@@ -10,8 +10,8 @@ android {
         applicationId = "cn.nua.wenguan.schedule"
         minSdk = 26
         targetSdk = 35
-        versionCode = 30
-        versionName = "1.2.1"
+        versionCode = 31
+        versionName = "1.2.2"
         testInstrumentationRunner = "cn.nua.wenguan.schedule.test.SyncFailureInstrumentation"
     }
 

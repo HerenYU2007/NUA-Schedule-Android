@@ -4,6 +4,8 @@
 
 仅打开App时自动检查，也保留手动检查。更新源已经写入源码，不读取旧的自定义URL设置，不需要用户输入。
 
+1.2.2起，清单与APK传输入口分别按三轮实测成功次数和完整响应耗时中位数排序；包括GitHub官方备用。新动态节点及失败节点仍保留，优先序不是安全信任列表，不削弱校验。原gh-proxy.org仍保留，但不再无条件排第一。测速是本机网络快照，不会每次打开App遍历测速；报告见reports/UPDATE_ROUTE_BENCHMARK_20261014.md。
+
 ## 清单与下载入口
 
 - 清单原始地址：https://github.com/HerenYU2007/NUA-Schedule-Android/releases/latest/download/update.json 。

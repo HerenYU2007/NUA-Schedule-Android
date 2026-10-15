@@ -17,7 +17,7 @@ function method(source,name){const start=source.search(new RegExp('\\n    privat
 if(fs.existsSync(original+'AppUpdates.java')){
  const before=fs.readFileSync(original+'AppUpdates.java','utf8').replace(/\r/g,'');
  for(const name of ['fetchApk','download','sameSigner','install','assetUrl','releaseMetadata'])assert.equal(method(app,name),method(before,name),'unchanged APK/install safety: '+name);
- for(const name of ['UpdateDownload.java','ScheduleSyncActivity.java','MainActivity.java','widget/TodayScheduleWidgetProvider.java','widget/WeekScheduleWidgetProvider.java'])assert.equal(read(base+name),fs.readFileSync(original+name,'utf8').replace(/\r/g,''),'unrelated feature unchanged: '+name);
+ for(const name of ['UpdateDownload.java','ScheduleSyncActivity.java','widget/TodayScheduleWidgetProvider.java','widget/WeekScheduleWidgetProvider.java'])assert.equal(read(base+name),fs.readFileSync(original+name,'utf8').replace(/\r/g,''),'download/sync/widget safety unchanged: '+name);
 }
-assert(read('app/build.gradle.kts').includes('versionCode = 33')&&read('app/build.gradle.kts').includes('versionName = "1.2.4"'));
+assert(read('app/build.gradle.kts').includes('versionCode = 34')&&read('app/build.gradle.kts').includes('versionName = "1.2.5"'));
 console.log('Parallel 1.2.4 integration/security guards passed. Manifest scheduling changed; APK validation, installation, sync, UI and widgets preserved.');

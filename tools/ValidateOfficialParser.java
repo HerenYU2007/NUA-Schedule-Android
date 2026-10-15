@@ -25,7 +25,7 @@ public final class ValidateOfficialParser {
         require(parity.getRules().get(7).getToWeek() == 15, "末次单周为15周");
         var even = parse("2,4,6周双，周3，第5至7节", "实703");
         require(even.getRules().size() == 3, "周次列表、数字星期识别");
-        require(even.getRules().get(0).getEndTime().toString().equals("16:50"), "跨三节时间须与内置推算一致");
+        require(even.getRules().get(0).getEndTime().toString().equals("16:45"), "跨三节时间须与内置推算一致");
         var rooms = parse("1-3周,周一,第1-2节", "A\nB\nC");
         require(rooms.getRules().get(1).getRoom().equals("B"), "按周教室逐项对应");
         var mismatch = parse("1-4周,周一,第1-2节", "A;B");

@@ -31,6 +31,13 @@ public class SettingsActivity extends AppearanceActivity {
         clearSchedule = findViewById(R.id.clear_schedule);
 
         findViewById(R.id.set_school_start).setOnClickListener(v -> showSchoolStartPicker());
+        // Programmatic button avoids changing any existing widget resource IDs.
+        android.widget.Button clockButton=new android.widget.Button(this,null,0,R.style.SettingsAction);
+        clockButton.setText("全局节次时间 · 调整第1—12节");
+        clockButton.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_ui_calendar,0,0,0);
+        android.view.ViewGroup clockParent=(android.view.ViewGroup)findViewById(R.id.set_school_start).getParent();
+        clockParent.addView(clockButton,clockParent.indexOfChild(findViewById(R.id.set_school_start))+1,new android.view.ViewGroup.LayoutParams(-1,-2));
+        clockButton.setOnClickListener(v->PeriodTimeSettings.show(this));
         findViewById(R.id.widget_diagnostics).setOnClickListener(v->showWidgetDiagnostics());
         findViewById(R.id.add_widget).setOnClickListener(v -> addDesktopWidget());
         findViewById(R.id.reminder_button).setOnClickListener(v -> ReminderSettings.show(this));

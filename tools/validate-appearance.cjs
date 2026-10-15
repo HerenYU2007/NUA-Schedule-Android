@@ -27,6 +27,6 @@ for (const name of ['start','end']) {
     'Grid and import must use one shared school clock: '+name);
 }
 const times = key => [...clock.match(new RegExp('String\\[\\] '+key+'\\s*=\\s*\\{([^}]+)\\}'))[1].matchAll(/"([^"]*)"/g)].map(m=>m[1]);
-assert.deepEqual(times('START'),['','08:00','08:55','10:00','10:55','14:00','14:50','16:00','16:50','18:30','19:20','20:30','21:15']);
-assert.deepEqual(times('END'),['','08:45','09:40','10:45','11:40','14:50','15:40','16:50','17:40','19:20','20:10','21:15','22:00']);
+assert.deepEqual(times('START'),['','08:00','08:55','10:00','10:55','14:00','14:55','16:00','16:50','18:30','19:20','20:30','21:15']);
+assert.deepEqual(times('END'),['','08:45','09:40','10:45','11:40','14:45','15:40','16:45','17:40','19:20','20:10','21:15','22:00']);
 console.log('Appearance/manual-import guards passed: theme choices, persistence, screen contexts, schedule isolation and school times.');

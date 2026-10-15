@@ -5,6 +5,7 @@ $Output = Join-Path $ProjectRoot "tools\out"
 New-Item -ItemType Directory -Force -Path $Output | Out-Null
 
 $Sources = @(
+    (Join-Path $ProjectRoot "tools\ValidateGlobalClock.java"),
     (Join-Path $ProjectRoot "app\src\main\java\cn\nua\wenguan\schedule\ParallelUpdateCheck.java"),
     (Join-Path $ProjectRoot "app\src\main\java\cn\nua\wenguan\schedule\UpdateCheckConnections.java"),
     (Join-Path $ProjectRoot "tools\ValidateParallelUpdates.java"),
@@ -85,6 +86,8 @@ if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 & java -cp $Output ValidateUpgradeUi
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 & java -cp $Output ValidateLocal123
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+& java -cp $Output ValidateGlobalClock
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 & java -cp $Output ValidateGridInteractions
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

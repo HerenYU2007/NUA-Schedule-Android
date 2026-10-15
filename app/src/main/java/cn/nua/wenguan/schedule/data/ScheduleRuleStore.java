@@ -28,13 +28,15 @@ public final class ScheduleRuleStore {
     private static String cachedRaw,appliedRaw;
     private static List<ScheduleRule> cachedRules;
     private static LocalDate appliedStart;
+    private static String cachedClock,appliedClock;
     private ScheduleRuleStore() { }
 
     public static synchronized void applySaved(Context context) {
+        PeriodTimeStore.load(context);
         String raw=preferences(context).getString(KEY_RULES,"");LocalDate start=savedStartDate(context);
-        if(java.util.Objects.equals(raw,appliedRaw)&&start.equals(appliedStart))return;
+        if(java.util.Objects.equals(raw,appliedRaw)&&start.equals(appliedStart)&&SchoolPeriodTimes.revision().equals(appliedClock))return;
         List<ScheduleRule> rules = readRules(context);if(rules==null)return;
-        ScheduleRepository.setImportedRules(rules,start);appliedRaw=raw;appliedStart=start;
+        ScheduleRepository.setImportedRules(rules,start);appliedRaw=raw;appliedStart=start;appliedClock=SchoolPeriodTimes.revision();
     }
 
     public static void save(Context context, List<ScheduleRule> rules, String source, LocalDate startDate) throws JSONException {
@@ -61,6 +63,7 @@ public final class ScheduleRuleStore {
             item.put("start", TIME.format(rule.getStartTime()));
             item.put("end", TIME.format(rule.getEndTime()));
             item.put("periods", rule.getPeriods());
+            item.put("clockBound",rule.followsPeriodClock());
             item.put("course", rule.getCourse());
             item.put("room", rule.getRoom());
             item.put("type", rule.getType());
@@ -157,9 +160,10 @@ public final class ScheduleRuleStore {
     }
 
     public static synchronized List<ScheduleRule> readRules(Context context) {
+        PeriodTimeStore.load(context);
         List<ScheduleRule> result = new ArrayList<>();
         String raw = preferences(context).getString(KEY_RULES, "");
-        if(java.util.Objects.equals(raw,cachedRaw)&&cachedRules!=null)return new ArrayList<>(cachedRules);
+        if(java.util.Objects.equals(raw,cachedRaw)&&cachedRules!=null&&SchoolPeriodTimes.revision().equals(cachedClock))return new ArrayList<>(cachedRules);
         if (raw == null || raw.isEmpty()) {
             return result;
         }
@@ -183,12 +187,12 @@ public final class ScheduleRuleStore {
                 result.add(SchoolPeriodTimes.normalize(new ScheduleRule(legacy.getFromWeek(), legacy.getToWeek(), legacy.getDayOfWeek(),
                         legacy.getStartTime().toString(), legacy.getEndTime().toString(), legacy.getPeriods(), legacy.getCourse(),
                         legacy.getRoom(), legacy.getType(), legacy.getTeacher(), item.optString("id", legacy.getId()),
-                        item.optInt("color", 0), item.optString("credits", ""), item.optString("note", ""))));
+                        item.optInt("color", 0), item.optString("credits", ""), item.optString("note", ""),item.optBoolean("clockBound",legacy.followsPeriodClock()))));
             }
         } catch (JSONException | RuntimeException ignored) {
             return null;
         }
-        cachedRaw=raw;cachedRules=java.util.Collections.unmodifiableList(new ArrayList<>(result));
+        cachedRaw=raw;cachedClock=SchoolPeriodTimes.revision();cachedRules=java.util.Collections.unmodifiableList(new ArrayList<>(result));
         return result;
     }
 

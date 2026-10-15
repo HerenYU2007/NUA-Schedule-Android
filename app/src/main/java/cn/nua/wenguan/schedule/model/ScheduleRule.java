@@ -17,6 +17,8 @@ public final class ScheduleRule {
     private final String teacher;
     private final String id, credits, note;
     private final int color;
+    private final boolean followsPeriodClock;
+    public boolean followsPeriodClock(){return followsPeriodClock;}
 
     public ScheduleRule(
             int fromWeek,
@@ -36,6 +38,11 @@ public final class ScheduleRule {
 
     public ScheduleRule(int fromWeek, int toWeek, DayOfWeek dayOfWeek, String startTime, String endTime,
             String periods, String course, String room, String type, String teacher, String id, int color, String credits, String note) {
+        this(fromWeek,toWeek,dayOfWeek,startTime,endTime,periods,course,room,type,teacher,id,color,credits,note,
+            cn.nua.wenguan.schedule.data.SchoolPeriodTimes.matchesClock(periods,startTime,endTime));
+    }
+    public ScheduleRule(int fromWeek, int toWeek, DayOfWeek dayOfWeek, String startTime, String endTime,
+            String periods, String course, String room, String type, String teacher, String id, int color, String credits, String note, boolean followsPeriodClock) {
         if (fromWeek < 1 || toWeek > 53 || fromWeek > toWeek || dayOfWeek == null || course == null || course.trim().isEmpty()
                 || course.length() > 100 || room == null || room.length() > 200 || teacher == null || teacher.length() > 100
                 || periods == null || type == null || id == null || !id.matches("[A-Za-z0-9_-]{1,100}")
@@ -53,6 +60,7 @@ public final class ScheduleRule {
         this.teacher = teacher;
         if (!this.endTime.isAfter(this.startTime)) throw new IllegalArgumentException("结束时间必须晚于开始时间");
         this.id = id; this.color = color == 0 ? 0 : color | 0xff000000; this.credits = credits; this.note = note;
+        this.followsPeriodClock=followsPeriodClock;
     }
 
     public boolean appliesTo(LocalDate date, int week) {

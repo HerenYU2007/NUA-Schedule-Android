@@ -10,6 +10,8 @@ public abstract class AppearanceActivity extends Activity {
     @Override protected void onCreate(Bundle state) {
         appliedTheme = AppearanceSettings.theme(this);
         super.onCreate(state);
+        try { cn.nua.wenguan.schedule.data.PeriodTimeStore.load(this); }
+        catch(RuntimeException unavailable) { android.widget.Toast.makeText(this,"节次时间设置读取失败，请在设置中检查",android.widget.Toast.LENGTH_LONG).show(); }
         cn.nua.wenguan.schedule.ui.UiPerformance.configure(getWindow());
         if (android.os.Build.VERSION.SDK_INT >= 27) {
             android.view.View decor = getWindow().getDecorView();

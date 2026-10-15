@@ -40,7 +40,7 @@ public class MainActivity extends AppearanceActivity {
     private WeekPagerHost viewport;
     private Pane weekPane,beforePane,afterPane,agendaPane,minePane;
     private android.animation.ValueAnimator pagerAnimation;
-    private String knownRules,knownAgenda;private LocalDate knownStart;private boolean knownDark;
+    private String knownRules,knownAgenda,knownClock;private LocalDate knownStart;private boolean knownDark;
     private final OutsideTapPolicy outsideTap=new OutsideTapPolicy();
     private InteractiveWeekGrid touchedDraft;
     private float dragOrigin;
@@ -215,6 +215,7 @@ public class MainActivity extends AppearanceActivity {
         if(beforePane!=null){beforePane.date=null;afterPane.date=null;weekPane.date=null;}
     }
     private boolean dataChanged(){
+        if(!java.util.Objects.equals(knownClock,SchoolPeriodTimes.revision()))return true;
         return !java.util.Objects.equals(knownRules,getSharedPreferences("official_schedule",0).getString("rules",""))
                 ||!java.util.Objects.equals(knownAgenda,AgendaStore.revision(this))
                 ||!java.util.Objects.equals(knownStart,ScheduleRepository.schoolStartDate())
@@ -223,7 +224,7 @@ public class MainActivity extends AppearanceActivity {
     }
     private void rememberData(){
         knownRules=getSharedPreferences("official_schedule",0).getString("rules","");knownAgenda=AgendaStore.revision(this);
-        knownStart=ScheduleRepository.schoolStartDate();knownDark=AppearanceSettings.dark(this);
+        knownClock=SchoolPeriodTimes.revision();knownStart=ScheduleRepository.schoolStartDate();knownDark=AppearanceSettings.dark(this);
     }
     private LocalDate safeDate(long epoch){try{LocalDate value=LocalDate.ofEpochDay(epoch);return value.getYear()>=1900&&value.getYear()<=2200?value:ScheduleRepository.today();}catch(RuntimeException invalid){return ScheduleRepository.today();}}
     @Override protected void onNewIntent(Intent intent){super.onNewIntent(intent);setIntent(intent);clearDraft();resetWeekAnimation();if(intent.hasExtra("selected_date")){selectedDate=safeDate(intent.getLongExtra("selected_date",ScheduleRepository.today().toEpochDay()));page=1;if(intent.getBooleanExtra("show_grid",false))AppearanceSettings.saveGrid(this,true);}else if(intent.getBooleanExtra("open_agenda",false))page=0;render();}

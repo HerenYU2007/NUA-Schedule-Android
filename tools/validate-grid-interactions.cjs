@@ -15,5 +15,5 @@ assert(java('data/AgendaStore').includes('raw.equals(cachedRaw)')&&java('data/Ag
 const swipe=java('ui/WeekSwipeScrollView');
 assert(swipe.includes('getRawX()')&&swipe.includes('raw.offsetLocation')&&swipe.includes('onDrag.accept'));
 assert(main.includes('scroll.setTranslationX')&&main.includes('to=-direction*pagerWidth()')&&main.includes('DecelerateInterpolator'));
-assert(read('app/build.gradle.kts').includes('versionName = "1.2.3"')&&read('app/build.gradle.kts').includes('versionCode = 32'));
+assert(read('app/build.gradle.kts').includes('versionName = "1.2.4"')&&read('app/build.gradle.kts').includes('versionCode = 33'));
 console.log('Grid/agenda/page-cache and finger-follow guards passed; draft has no persistence side effects. No live FPS/storage claim.');

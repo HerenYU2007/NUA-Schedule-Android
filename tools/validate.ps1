@@ -5,6 +5,9 @@ $Output = Join-Path $ProjectRoot "tools\out"
 New-Item -ItemType Directory -Force -Path $Output | Out-Null
 
 $Sources = @(
+    (Join-Path $ProjectRoot "app\src\main\java\cn\nua\wenguan\schedule\ParallelUpdateCheck.java"),
+    (Join-Path $ProjectRoot "app\src\main\java\cn\nua\wenguan\schedule\UpdateCheckConnections.java"),
+    (Join-Path $ProjectRoot "tools\ValidateParallelUpdates.java"),
     (Join-Path $ProjectRoot "app\src\main\java\cn\nua\wenguan\schedule\ui\WeekPrefetchPolicy.java"),
     (Join-Path $ProjectRoot "tools\ValidateFastPaging.java"),
     (Join-Path $ProjectRoot "app\src\main\java\cn\nua\wenguan\schedule\ui\GridOccupancyPolicy.java"),
@@ -72,6 +75,8 @@ if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 & java -cp $Output ValidateSchedule
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 & java -cp $Output ValidateUiPolicy
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+& java -cp $Output ValidateParallelUpdates
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 & java -cp $Output ValidateFastPaging
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

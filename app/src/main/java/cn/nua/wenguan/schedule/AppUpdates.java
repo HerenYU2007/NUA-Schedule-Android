@@ -2,6 +2,7 @@ package cn.nua.wenguan.schedule;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
@@ -26,7 +27,7 @@ public final class AppUpdates {
     private static final String REPOSITORY="HerenYU2007/NUA-Schedule-Android";
     private static final String RELEASES="https://github.com/"+REPOSITORY+"/releases/";
     private static final String API="https://api.github.com/repos/"+REPOSITORY+"/releases/";
-    // GitHub fallbacks after mirror transport; all routes share the same trust checks.
+    // Official routes race mirrors; no route bypasses the pinned manifest signature.
     private static final String[] MANIFEST_SOURCES={
         RELEASES+"latest/download/update.json",
         API+"latest",
@@ -38,15 +39,16 @@ public final class AppUpdates {
     private static long lastCheck; private static volatile boolean busy; private static boolean pendingInstall;
     private static volatile JSONObject pendingRelease;
     private static volatile boolean downloadedReady;
-    private static List<String> activeMirrors=Collections.emptyList();
+    private static volatile List<String> activeMirrors=Collections.emptyList();
     private AppUpdates() { }
     public static void checkOnOpen(Activity a){if(System.currentTimeMillis()-lastCheck>60000)check(a,false);}
     public static synchronized void check(Activity a,boolean manual){
         if(busy){if(manual){if(checking)manualObserver=new java.lang.ref.WeakReference<>(a);toast(a,checking?"正在检查更新":"正在下载更新");}return;}
         busy=true;checking=true;manualObserver=manual?new java.lang.ref.WeakReference<>(a):null;lastCheck=System.currentTimeMillis();
         WORK.execute(()->{try{
-            JSONObject release=fetchRelease(a);
-            long installed=code(a.getPackageManager().getPackageInfo(a.getPackageName(),0));long version=release.getLong("versionCode");
+            long installed=code(a.getPackageManager().getPackageInfo(a.getPackageName(),0));
+            JSONObject release=fetchRelease(a.getApplicationContext(),installed);
+            long version=release.getLong("versionCode");
             if(!UpdateCheckPolicy.hasUpdate(installed,version)){pendingRelease=null;Activity observer=finishCheck();if(observer!=null)observer.runOnUiThread(()->{if(visible(observer))toast(observer,"暂无更新");});return;}
             pendingRelease=release;Activity observer=finishCheck();Activity target=observer==null?a:observer;target.runOnUiThread(()->presentPending(target));
         }catch(Exception error){Activity observer=finishCheck();if(observer!=null)observer.runOnUiThread(()->{if(visible(observer))toast(observer,"更新检查失败，请稍后重试（未更改应用或课表）");});}});
@@ -54,49 +56,67 @@ public final class AppUpdates {
     private static synchronized Activity finishCheck(){
         Activity observer=manualObserver==null?null:manualObserver.get();manualObserver=null;checking=false;busy=false;return observer;
     }
-    private static JSONObject fetchRelease(Activity a)throws Exception{
-        activeMirrors=loadMirrors(a);
+    private static JSONObject fetchRelease(Context a,long installed)throws Exception{
+        // Cache and builtins are available immediately: directory slowness cannot delay first probes.
+        activeMirrors=UpdateMirrorPolicy.combine(Collections.emptyList(),cachedMirrors(a));
         LinkedHashSet<String> sources=new LinkedHashSet<>(UpdateMirrorPolicy.routes(MANIFEST_SOURCES[0],activeMirrors,false));
         sources.addAll(Arrays.asList(MANIFEST_SOURCES));
-        for(String source:UpdateRouteRanking.order(new ArrayList<>(sources),false)){try{
+        List<String> ranked=UpdateRouteRanking.order(new ArrayList<>(sources),false);
+        List<String> ordered=ParallelUpdateCheck.prioritize(ranked,Arrays.asList(MANIFEST_SOURCES));
+        String pem;try(InputStream in=a.getAssets().open("update-public.pem")){pem=new String(read(in,16384),java.nio.charset.StandardCharsets.US_ASCII);}
+        byte[] key=Base64.getMimeDecoder().decode(pem.replace("-----BEGIN PUBLIC KEY-----","").replace("-----END PUBLIC KEY-----",""));
+        PublicKey publicKey=KeyFactory.getInstance("RSA").generatePublic(new X509EncodedKeySpec(key));
+        UpdateCheckConnections requests=new UpdateCheckConnections();
+        return ParallelUpdateCheck.fetch(ordered,installed,source->requests.call(()->{try{
             String url=source.equals(API+"latest")?assetUrl(releaseMetadata(source),"update.json",null):source;
-            JSONObject outer=new JSONObject(new String(fetchBytes(url,128*1024),java.nio.charset.StandardCharsets.UTF_8));
+            return verifyManifest(fetchBytes(url,128*1024),publicKey,a.getPackageName());
+        }catch(Exception unavailable){if(!requests.isCancelled())recordFailure(a,"manifest",source,unavailable);throw unavailable;}}),
+                release->release.optLong("versionCode",0),()->requests.call(()->{
+                    List<String> mirrors=loadMirrors(a);
+                    UpdateCheckConnections.ensureOpen();activeMirrors=mirrors;
+                    return UpdateMirrorPolicy.routes(MANIFEST_SOURCES[0],mirrors,false);
+                }),requests::cancel,ParallelUpdateCheck.TIMEOUT_MS);
+    }
+    static JSONObject verifyManifest(byte[] bytes,PublicKey publicKey,String packageName)throws Exception{
+            JSONObject outer=new JSONObject(new String(bytes,java.nio.charset.StandardCharsets.UTF_8));
             if(!"SHA256withRSA".equals(outer.getString("algorithm")))throw new IOException("algorithm");
             byte[] payload=Base64.getDecoder().decode(outer.getString("payload"));byte[] signed=Base64.getDecoder().decode(outer.getString("signature"));
-            String pem;try(InputStream in=a.getAssets().open("update-public.pem")){pem=new String(read(in,16384),java.nio.charset.StandardCharsets.US_ASCII);}
-            byte[] key=Base64.getMimeDecoder().decode(pem.replace("-----BEGIN PUBLIC KEY-----","").replace("-----END PUBLIC KEY-----",""));
-            java.security.Signature verify=java.security.Signature.getInstance("SHA256withRSA");verify.initVerify(KeyFactory.getInstance("RSA").generatePublic(new X509EncodedKeySpec(key)));verify.update(payload);if(!verify.verify(signed))throw new IOException("signature");
+            java.security.Signature verify=java.security.Signature.getInstance("SHA256withRSA");verify.initVerify(publicKey);verify.update(payload);if(!verify.verify(signed))throw new IOException("signature");
             JSONObject release=new JSONObject(new String(payload,java.nio.charset.StandardCharsets.UTF_8));
-            if(release.getInt("schemaVersion")!=1||!a.getPackageName().equals(release.getString("packageName")))throw new IOException("package");
+            if(release.getInt("schemaVersion")!=1||!packageName.equals(release.getString("packageName")))throw new IOException("package");
             if(release.getLong("versionCode")<=0)throw new IOException("version");
             String name=release.getString("versionName");
             if(!name.matches("[0-9]+\\.[0-9]+\\.[0-9]+"))throw new IOException("version");
             JSONObject apk=release.getJSONObject("apk");long size=apk.getLong("size");String hash=apk.getString("sha256"),download=apk.getString("url");
             if(size<=0||size>200L*1024*1024||!hash.matches("(?i)[a-f0-9]{64}")||!download.equals(RELEASES+"download/v"+name+"/nua-schedule-"+name+".apk"))throw new IOException("metadata");
             return release;
-        }catch(Exception unavailable){recordFailure(a,"manifest",source,unavailable);}}
-        throw new IOException("No verified update manifest");
     }
-    private static List<String> loadMirrors(Activity a){
+    private static List<String> cachedMirrors(Context a){
+        List<String> cached=new ArrayList<>();
+        try(InputStream in=new FileInputStream(new File(a.getFilesDir(),"updates/akams-nodes.txt"))){cached.addAll(Arrays.asList(new String(read(in,65536),java.nio.charset.StandardCharsets.UTF_8).split("\n")));}catch(IOException absent){/* Builtins remain available. */}
+        return cached;
+    }
+    private static List<String> loadMirrors(Context a){
         File cache=new File(a.getFilesDir(),"updates/akams-nodes.txt");
-        List<String> cached=new ArrayList<>(),dynamic=new ArrayList<>();
-        try(InputStream in=new FileInputStream(cache)){cached.addAll(Arrays.asList(new String(read(in,65536),java.nio.charset.StandardCharsets.UTF_8).split("\n")));}catch(IOException absent){/* Builtins remain available. */}
+        List<String> cached=cachedMirrors(a),dynamic=new ArrayList<>();
         try{
             String page=new String(fetchBytes(UpdateMirrorPolicy.DIRECTORY,1024*1024),java.nio.charset.StandardCharsets.UTF_8);
             dynamic.addAll(UpdateMirrorPolicy.extract(page));
             for(String chunk:UpdateMirrorPolicy.chunks(page)){
+                UpdateCheckConnections.ensureOpen();
                 try{dynamic.addAll(UpdateMirrorPolicy.extract(new String(fetchBytes(chunk,1024*1024),java.nio.charset.StandardCharsets.UTF_8)));}
-                catch(IOException unavailable){recordFailure(a,"directory",chunk,unavailable);}
+                catch(IOException unavailable){UpdateCheckConnections.ensureOpen();recordFailure(a,"directory",chunk,unavailable);}
             }
             if(!dynamic.isEmpty()){
+                UpdateCheckConnections.ensureOpen();
                 LinkedHashSet<String> unique=new LinkedHashSet<>(dynamic);
                 if(!cache.getParentFile().isDirectory()&&!cache.getParentFile().mkdirs())throw new IOException("directory");
                 try(OutputStream out=new FileOutputStream(cache)){out.write(String.join("\n",unique).getBytes(java.nio.charset.StandardCharsets.UTF_8));}
             }
-        }catch(Exception unavailable){recordFailure(a,"directory",UpdateMirrorPolicy.DIRECTORY,unavailable);}
+        }catch(Exception unavailable){try{UpdateCheckConnections.ensureOpen();recordFailure(a,"directory",UpdateMirrorPolicy.DIRECTORY,unavailable);}catch(InterruptedIOException cancelled){/* Stop discovery without logging cancellation as a network failure. */}}
         return UpdateMirrorPolicy.combine(dynamic,cached);
     }
-    private static void recordFailure(Activity a,String stage,String url,Exception error){
+    private static synchronized void recordFailure(Context a,String stage,String url,Exception error){
         // Bounded local status log: no query strings, response body, credentials or school data.
         try{
             File file=new File(a.getFilesDir(),"updates/mirror-attempts.log");
@@ -183,11 +203,12 @@ public final class AppUpdates {
     }
     private static InputStream open(String url,boolean json)throws IOException{
         HttpURLConnection c=connect(url,json,0);
-        if(c.getResponseCode()!=200){c.disconnect();throw new IOException("HTTP");}
-        try{return new FilterInputStream(c.getInputStream()){@Override public void close()throws IOException{try{super.close();}finally{c.disconnect();}}};}catch(IOException failed){c.disconnect();throw failed;}
+        if(c.getResponseCode()!=200){UpdateCheckConnections.disconnect(c);throw new IOException("HTTP");}
+        try{return new FilterInputStream(c.getInputStream()){@Override public void close()throws IOException{try{super.close();}finally{UpdateCheckConnections.disconnect(c);}}};}catch(IOException failed){UpdateCheckConnections.disconnect(c);throw failed;}
     }
     private static HttpURLConnection connect(String url,boolean json,long offset)throws IOException{
         for(int i=0;i<6;i++){
+            UpdateCheckConnections.ensureOpen();
             if(!https(url))throw new IOException("HTTPS only");
             URL target=new URL(url);
             if(target.getPort()!=-1&&target.getPort()!=443)throw new IOException("HTTPS port");
@@ -196,22 +217,23 @@ public final class AppUpdates {
                 if(address.isAnyLocalAddress()||address.isLoopbackAddress()||address.isLinkLocalAddress()||address.isSiteLocalAddress()||address.isMulticastAddress()||(bytes.length==16&&(bytes[0]&0xfe)==0xfc))throw new IOException("Public host only");
             }
             HttpURLConnection c=(HttpURLConnection)target.openConnection();
+            UpdateCheckConnections.register(c);
             c.setInstanceFollowRedirects(false);c.setConnectTimeout(12000);c.setReadTimeout(20000);c.setUseCaches(false);
             c.setRequestProperty("Accept-Encoding","identity");c.setRequestProperty("User-Agent","NUA-Schedule-Android");
             c.setRequestProperty("Cache-Control","no-cache");
             c.setRequestProperty("Accept",json?"application/vnd.github+json":"application/octet-stream");
             if(offset>0)c.setRequestProperty("Range","bytes="+offset+"-");
             if("api.github.com".equalsIgnoreCase(target.getHost()))c.setRequestProperty("X-GitHub-Api-Version","2022-11-28");
-            int status;try{status=c.getResponseCode();}catch(IOException unavailable){c.disconnect();throw unavailable;}
+            int status;try{status=c.getResponseCode();}catch(IOException unavailable){UpdateCheckConnections.disconnect(c);throw unavailable;}
             if(status==301||status==302||status==303||status==307||status==308){
-                String location=c.getHeaderField("Location");String next=location==null?"":new URL(target,location).toString();c.disconnect();url=next;continue;
+                String location=c.getHeaderField("Location");String next=location==null?"":new URL(target,location).toString();UpdateCheckConnections.disconnect(c);url=next;continue;
             }
             return c;
         }
         throw new IOException("redirects");
     }
     private static byte[] fetchBytes(String url,int limit)throws IOException{try(InputStream in=open(url)){return read(in,limit);}}
-    private static byte[] read(InputStream in,int limit)throws IOException{ByteArrayOutputStream out=new ByteArrayOutputStream();byte[] b=new byte[8192];int n;while((n=in.read(b))!=-1){if(out.size()+n>limit)throw new IOException("limit");out.write(b,0,n);}return out.toByteArray();}
+    private static byte[] read(InputStream in,int limit)throws IOException{UpdateCheckConnections.ensureOpen();ByteArrayOutputStream out=new ByteArrayOutputStream();byte[] b=new byte[8192];int n;while((n=in.read(b))!=-1){UpdateCheckConnections.ensureOpen();if(out.size()+n>limit)throw new IOException("limit");out.write(b,0,n);}return out.toByteArray();}
     private static String hex(byte[] bytes){StringBuilder s=new StringBuilder();for(byte b:bytes)s.append(String.format("%02x",b&255));return s.toString();}
     private static void toast(Activity a,String text){Toast.makeText(a,text,Toast.LENGTH_LONG).show();}
 }

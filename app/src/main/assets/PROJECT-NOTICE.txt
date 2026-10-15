@@ -1,0 +1,18 @@
+Required Notice: Copyright (c) 2026 HerenYU2007 (https://github.com/HerenYU2007)
+
+Project: NUA-Schedule-Android / 南艺电子课表
+License: PolyForm-Noncommercial-1.0.0 (see LICENSE)
+
+The root LICENSE applies to original project material for which the
+maintainer has licensing rights. It does not replace third-party licenses.
+
+JExcelAPI 2.6.12 remains licensed under LGPL-2.1-or-later. Its license,
+source archive and build information are preserved in third_party/;
+the application also includes its license in app/src/main/assets/.
+
+Names, trademarks and third-party materials remain subject to their
+respective rights. No school or OpenAI endorsement is implied.
+
+本项目原创内容采用 PolyForm Noncommercial 1.0.0 非商用源码许可。
+允许的使用、修改及分享须遵守 LICENSE；商业授权请联系仓库维护者。
+第三方库、名称和标识不因本项目的许可而被重新授权。

@@ -22,8 +22,8 @@ assert(!draw.includes('StaticLayout.Builder')&&!draw.includes('new TextView'),'c
 assert(grid.includes('CourseDetailsSheet.show')&&grid.includes('AgendaEditor.show')&&grid.includes('grid.reserveSpan'),'native click/edit and occupancy preserved');
 assert(java('ui/GridOccupancyPolicy').includes('SchoolPeriodTimes.endTime(p)')&&java('ui/GridPlacementPolicy').includes('SchoolPeriodTimes.startTime(p)'));
 const original='E:/南艺文管课表_备份/20261015_连续切周优化前/src/main/';
-for(const file of ['java/cn/nua/wenguan/schedule/AppUpdates.java','java/cn/nua/wenguan/schedule/ScheduleSyncActivity.java','java/cn/nua/wenguan/schedule/widget/WidgetRecovery.java','java/cn/nua/wenguan/schedule/widget/TodayScheduleWidgetProvider.java','java/cn/nua/wenguan/schedule/widget/WeekScheduleWidgetProvider.java']){
+for(const file of ['java/cn/nua/wenguan/schedule/ScheduleSyncActivity.java','java/cn/nua/wenguan/schedule/widget/WidgetRecovery.java','java/cn/nua/wenguan/schedule/widget/TodayScheduleWidgetProvider.java','java/cn/nua/wenguan/schedule/widget/WeekScheduleWidgetProvider.java']){
     if(fs.existsSync(original+file)){const hash=p=>crypto.createHash('sha256').update(fs.readFileSync(p,'utf8').replace(/\r/g,'')).digest('hex');assert.equal(hash(path.join(root,'app/src/main',file)),hash(original+file),'unchanged stable feature: '+file);}
 }
-assert(read('app/build.gradle.kts').includes('versionCode = 32')&&read('app/build.gradle.kts').includes('versionName = "1.2.3"'));
+assert(read('app/build.gradle.kts').includes('versionCode = 33')&&read('app/build.gradle.kts').includes('versionName = "1.2.4"'));
 console.log('Fast paging hot-path, continuous touch, bounded measured lookahead, lightweight grid and unchanged sync/widget guards passed. Device FPS pending.');

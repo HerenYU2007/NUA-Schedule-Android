@@ -24,7 +24,7 @@
 <!-- APK-DOWNLOAD-STATS:START -->
 ## APK 下载趋势
 
-![所有版本 APK 按日累计下载量](docs/downloads/apk-downloads.svg?v=1792055604578)
+![所有版本 APK 按日累计下载量](docs/downloads/apk-downloads.svg?v=1792059247265)
 
 所有版本合并，按北京时间每天记录一个**累计总下载量**；约每5分钟检查，数值或日期变化时更新。只统计 APK，不计 ZIP、HAP 和更新清单。历史从首次采样开始记录，镜像缓存下载可能不完整。
 

@@ -2,7 +2,7 @@
 
 面向南京艺术学院学生的 Android 课表工具，支持 Android 8.0 及以上。个人开发项目，非学校官方应用。
 
-**[下载最新 APK](https://github.com/HerenYU2007/NUA-Schedule-Android/releases/latest)** · [1.2.5 更新说明](RELEASE-NOTES-v1.2.5.md)
+**[下载最新 APK](https://github.com/HerenYU2007/NUA-Schedule-Android/releases/latest)** · [1.2.6 更新说明](RELEASE-NOTES-v1.2.6.md)
 
 ## 主要功能
 

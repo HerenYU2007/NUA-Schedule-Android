@@ -27,5 +27,5 @@ assert(java('ui/UiPerformance').includes('VERSION.SDK_INT>=35')&&!java('ui/UiPer
 assert(read('app/src/main/res/layout/widget_week.xml').includes('scaleType="fitCenter"'));
 const widget=java('widget/WeekScheduleWidgetProvider');
 assert(widget.includes('ARGB_8888')&&widget.includes('WeekBitmapPolicy.pixels')&&!widget.includes('512f/width'));
-assert(read('app/build.gradle.kts').includes('versionName = "1.2.5"'));
+assert(read('app/build.gradle.kts').includes('versionName = "1.2.6"'));
 console.log('Local 1.2.3 UI/security guards passed. UI visibility, touch/fling and rendered widget quality still require device verification.');

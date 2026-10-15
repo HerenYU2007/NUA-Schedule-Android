@@ -21,8 +21,12 @@ assert(sync.includes('setPositiveButton("手动导入 XLS"'));
 assert(!prefs.includes('Cookie') && !prefs.includes('official_schedule'));
 const parser = java('data/OfficialScheduleParser.java');
 const placement = java('ui/PeriodGrid.java');
-for (const key of ['START','END']) {
-  const times = text => [...text.match(new RegExp('String\\[\\] ' + key + ' = \\{([^}]+)\\}'))[1].matchAll(/"([^"]*)"/g)].map(m => m[1]);
-  assert.deepEqual(times(placement), times(parser), 'Grid and import must use the identical school clock times');
+const clock = java('data/SchoolPeriodTimes.java');
+for (const name of ['start','end']) {
+  assert(placement.includes('SchoolPeriodTimes.'+name+'(')&&parser.includes('SchoolPeriodTimes.'+name+'('),
+    'Grid and import must use one shared school clock: '+name);
 }
+const times = key => [...clock.match(new RegExp('String\\[\\] '+key+'\\s*=\\s*\\{([^}]+)\\}'))[1].matchAll(/"([^"]*)"/g)].map(m=>m[1]);
+assert.deepEqual(times('START'),['','08:00','08:55','10:00','10:55','14:00','14:50','16:00','16:50','18:30','19:20','20:30','21:15']);
+assert.deepEqual(times('END'),['','08:45','09:40','10:45','11:40','14:50','15:40','16:50','17:40','19:20','20:10','21:15','22:00']);
 console.log('Appearance/manual-import guards passed: theme choices, persistence, screen contexts, schedule isolation and school times.');

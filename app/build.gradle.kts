@@ -10,8 +10,8 @@ android {
         applicationId = "cn.nua.wenguan.schedule"
         minSdk = 26
         targetSdk = 35
-        versionCode = 31
-        versionName = "1.2.2"
+        versionCode = 32
+        versionName = "1.2.3"
         testInstrumentationRunner = "cn.nua.wenguan.schedule.test.SyncFailureInstrumentation"
     }
 
@@ -20,6 +20,10 @@ android {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
+    }
+
+    androidResources {
+        additionalParameters += listOf("--stable-ids", file("stable-resource-ids.txt").absolutePath)
     }
 
     compileOptions {
@@ -31,4 +35,9 @@ android {
 dependencies {
     // Local JExcelAPI only; do not pull its obsolete optional Log4J dependency.
     implementation(files("libs/jxl-2.6.12.jar"))
+}
+
+// Track the contents, not just the AAPT command-line path.
+tasks.matching { it.name.startsWith("process") && it.name.endsWith("Resources") }.configureEach {
+    inputs.file(file("stable-resource-ids.txt"))
 }

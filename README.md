@@ -10,6 +10,16 @@
 [查看统计说明与历史数据](docs/downloads/README.md) · [查看最近检查记录](https://github.com/HerenYU2007/NUA-Schedule-Android/actions/workflows/apk-download-stats.yml)
 <!-- APK-DOWNLOAD-STATS:END -->
 
+## 当前版本 1.2.3（2026-10-15）
+
+优化连续滑动切周，动画中也能继续拖动；支持编辑课程、在竖条课表空白处拖动新增，以及在周课表中查看自定义日程和时间冲突。提供今日／周课表的深色、白色四种小组件，改进清晰度与升级后的显示恢复。上午节次时间已调整，手动检查没有新版时提示“暂无更新”。
+
+[下载与更新日志](https://github.com/HerenYU2007/NUA-Schedule-Android/releases/tag/v1.2.3) · [完整更新说明](RELEASE-NOTES-v1.2.3.md) · [连续切周开发与验证记录](DEVELOPMENT-1.2.3-FAST-PAGING.md)
+
+本地构建、lint 与逻辑回归已通过；本轮连续切周的实际帧率仍待真机验证。包名与安装证书不变，可覆盖安装，不清空已有课表和日程。
+
+以下为历史版本说明。
+
 ## 当前版本 1.2.2（2026-10-14）
 
 按本机网络三轮实测，为更新清单和APK下载分别内置优先顺序：校验成功率优先，完整响应耗时中位数次之；失败自动换下一条，原78个节点和动态/缓存回退保留。不在每次启动进行全节点测速，不改变仅打开App检查更新的规则。数据与完整排名见 [测速报告](reports/UPDATE_ROUTE_BENCHMARK_20261014.md)，日志见 [RELEASE-NOTES-v1.2.2.md](RELEASE-NOTES-v1.2.2.md)。这是当前电脑网络快照，不保证手机网络同速。

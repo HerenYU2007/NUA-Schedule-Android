@@ -82,7 +82,11 @@ public final class ScheduleRepository {
         if (!isVisibleWeek(week)) return Collections.emptyList();
         List<CourseSession> result = new ArrayList<>();
         LocalDate monday = mondayOfWeek(week);
-        for (int day = 0; day < 7; day++) result.addAll(sessionsOn(monday.plusDays(day)));
+        // Scan rules once rather than repeating all filters and sorts for seven days.
+        for(ScheduleRule rule:importedRules){
+            LocalDate date=monday.plusDays(rule.getDayOfWeek().getValue()-1L);
+            if(rule.appliesTo(date,week))result.add(rule.toSession(date));
+        }
         Collections.sort(result);
         return result;
     }
@@ -99,7 +103,9 @@ public final class ScheduleRepository {
         if (rules == null || rules.isEmpty()) {
             importedRules = Collections.emptyList();
         } else {
-            importedRules = Collections.unmodifiableList(new ArrayList<>(rules));
+            List<ScheduleRule> normalized=new ArrayList<>();
+            for(ScheduleRule rule:rules)normalized.add(SchoolPeriodTimes.normalize(rule));
+            importedRules = Collections.unmodifiableList(normalized);
         }
     }
     public static synchronized void setSchoolStartDate(LocalDate startDate) { importedStartDate = startDate; }
@@ -119,4 +125,5 @@ public final class ScheduleRepository {
     }
     public static boolean hasImportedRules() { return !importedRules.isEmpty(); }
     public static int importedRuleCount() { return importedRules.size(); }
+    public static List<ScheduleRule> rules() { return new ArrayList<>(importedRules); }
 }

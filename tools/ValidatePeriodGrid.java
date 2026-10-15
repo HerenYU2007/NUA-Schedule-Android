@@ -10,7 +10,7 @@ public final class ValidatePeriodGrid {
     }
     private static void check(boolean result, String message) { if (!result) throw new AssertionError(message); }
     public static void main(String[] args) {
-        check(Arrays.equals(PeriodGrid.span(session("第2—4节", "08:50", "11:40")), new int[]{2,4}), "2-4 aligns with rows, not duplicated across rows");
+        check(Arrays.equals(PeriodGrid.span(session("第2—4节", "08:55", "11:40")), new int[]{2,4}), "2-4 aligns with rows, not duplicated across rows");
         check(Arrays.equals(PeriodGrid.span(session("第1-2节", "08:00", "09:40")), new int[]{1,2}), "morning span");
         check(Arrays.equals(PeriodGrid.span(session("第11-12节", "20:30", "22:00")), new int[]{11,12}), "late-night courses retained");
         check(Arrays.equals(PeriodGrid.span(session("未标注", "14:00", "15:40")), new int[]{5,6}), "exact clock-time fallback");

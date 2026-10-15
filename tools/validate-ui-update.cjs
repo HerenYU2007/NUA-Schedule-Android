@@ -1,9 +1,10 @@
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict'),crypto=require('node:crypto');
 const root=path.resolve(__dirname,'..'),read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const main=read('app/src/main/java/cn/nua/wenguan/schedule/MainActivity.java'),xml=read('app/src/main/res/layout/activity_main.xml');
-for(const id of ['tab_agenda','tab_timetable','tab_mine','previous_week','next_week','select_date'])assert(xml.includes(id));
+for(const id of ['tab_agenda','tab_timetable','tab_mine','select_date','add_course'])assert(xml.includes(id));
+assert(!xml.includes('previous_week')&&!xml.includes('next_week'));
 assert(!xml.includes('previous_day')&&!xml.includes('next_day'));
-assert(main.includes('setOnWeekSwipe(page==1?this::changeWeek:null)'));
+assert(main.includes('viewport.setPagingEnabled(page==1)'));
 assert(main.includes('CourseDetailsSheet.show(this,s)'));
 const sheet=read('app/src/main/java/cn/nua/wenguan/schedule/ui/CourseDetailsSheet.java');assert(sheet.includes('Gravity.TOP'));assert(sheet.includes('TopCourseSheetAnimation'));
 const updates=read('app/src/main/java/cn/nua/wenguan/schedule/AppUpdates.java');

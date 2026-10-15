@@ -33,20 +33,26 @@ public final class AppUpdates {
         "https://raw.githubusercontent.com/"+REPOSITORY+"/master/updates/update.json",
         "https://github.com/"+REPOSITORY+"/raw/refs/heads/master/updates/update.json"
     };
+    private static boolean checking;
+    private static java.lang.ref.WeakReference<Activity> manualObserver;
     private static long lastCheck; private static volatile boolean busy; private static boolean pendingInstall;
     private static volatile JSONObject pendingRelease;
     private static volatile boolean downloadedReady;
     private static List<String> activeMirrors=Collections.emptyList();
     private AppUpdates() { }
     public static void checkOnOpen(Activity a){if(System.currentTimeMillis()-lastCheck>60000)check(a,false);}
-    public static void check(Activity a,boolean manual){
-        if(busy){if(manual)toast(a,"正在检查或下载更新");return;}busy=true;lastCheck=System.currentTimeMillis();
+    public static synchronized void check(Activity a,boolean manual){
+        if(busy){if(manual){if(checking)manualObserver=new java.lang.ref.WeakReference<>(a);toast(a,checking?"正在检查更新":"正在下载更新");}return;}
+        busy=true;checking=true;manualObserver=manual?new java.lang.ref.WeakReference<>(a):null;lastCheck=System.currentTimeMillis();
         WORK.execute(()->{try{
             JSONObject release=fetchRelease(a);
             long installed=code(a.getPackageManager().getPackageInfo(a.getPackageName(),0));long version=release.getLong("versionCode");
-            if(version<=installed){busy=false;if(manual)a.runOnUiThread(()->{if(visible(a))toast(a,"当前已是最新版本");});return;}
-            pendingRelease=release;busy=false;a.runOnUiThread(()->presentPending(a));
-        }catch(Exception error){busy=false;if(manual)a.runOnUiThread(()->{if(visible(a))toast(a,"更新检查失败，请稍后重试（未更改应用或课表）");});}});
+            if(!UpdateCheckPolicy.hasUpdate(installed,version)){pendingRelease=null;Activity observer=finishCheck();if(observer!=null)observer.runOnUiThread(()->{if(visible(observer))toast(observer,"暂无更新");});return;}
+            pendingRelease=release;Activity observer=finishCheck();Activity target=observer==null?a:observer;target.runOnUiThread(()->presentPending(target));
+        }catch(Exception error){Activity observer=finishCheck();if(observer!=null)observer.runOnUiThread(()->{if(visible(observer))toast(observer,"更新检查失败，请稍后重试（未更改应用或课表）");});}});
+    }
+    private static synchronized Activity finishCheck(){
+        Activity observer=manualObserver==null?null:manualObserver.get();manualObserver=null;checking=false;busy=false;return observer;
     }
     private static JSONObject fetchRelease(Activity a)throws Exception{
         activeMirrors=loadMirrors(a);
@@ -63,7 +69,6 @@ public final class AppUpdates {
             JSONObject release=new JSONObject(new String(payload,java.nio.charset.StandardCharsets.UTF_8));
             if(release.getInt("schemaVersion")!=1||!a.getPackageName().equals(release.getString("packageName")))throw new IOException("package");
             if(release.getLong("versionCode")<=0)throw new IOException("version");
-            if(release.getLong("versionCode")<code(a.getPackageManager().getPackageInfo(a.getPackageName(),0)))throw new IOException("Stale manifest");
             String name=release.getString("versionName");
             if(!name.matches("[0-9]+\\.[0-9]+\\.[0-9]+"))throw new IOException("version");
             JSONObject apk=release.getJSONObject("apk");long size=apk.getLong("size");String hash=apk.getString("sha256"),download=apk.getString("url");

@@ -25,7 +25,7 @@ for(const dir of ['values','values-night'])assert(read('app/src/main/res/'+dir+'
 const styles=read('app/src/main/res/values/styles.xml');
 for(const value of ['@drawable/bg_button_secondary','@drawable/bg_button_primary','@drawable/bg_button_danger','@drawable/bg_nav_tab','<item name="android:textAllCaps">false</item>'])assert(styles.includes(value));
 const settings=read('app/src/main/res/layout/activity_settings.xml');
-assert.equal((settings.match(/style="@style\/SettingsAction(?:Danger)?"/g)||[]).length,7);
+assert.equal((settings.match(/style="@style\/SettingsAction(?:Danger)?"/g)||[]).length,11);
 function colors(dir){return Object.fromEntries([...read('app/src/main/res/'+dir+'/colors.xml').matchAll(/name="([^"]+)">#([0-9A-Fa-f]{6})</g)].map(m=>[m[1],m[2]]));}
 function lum(hex){return [0,2,4].map(i=>parseInt(hex.slice(i,i+2),16)/255).map(n=>n<=.04045?n/12.92:((n+.055)/1.055)**2.4).reduce((a,n,i)=>a+n*[.2126,.7152,.0722][i],0);}
 function contrast(a,b){let x=lum(a),y=lum(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);}

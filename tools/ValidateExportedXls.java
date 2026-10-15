@@ -17,7 +17,7 @@ public class ValidateExportedXls {
                 List.of("课程名称", "实际上课时间", "实际上课教室", "授课教师"), rows);
         if (fixture.getCourseCount() != 1 || fixture.getRules().size() != 4)
             throw new AssertionError("Grid must read multiple blocks and remove class annotations");
-        if (!fixture.getRules().get(0).getStartTime().equals(java.time.LocalTime.of(8, 50)))
+        if (!fixture.getRules().get(0).getStartTime().equals(java.time.LocalTime.of(8, 55)))
             throw new AssertionError("Use explicit period 2, not the enclosing row's period 1");
         if (!fixture.getRules().get(3).getRoom().equals("校外课堂"))
             throw new AssertionError("Segmented room must be preserved");

@@ -37,6 +37,11 @@ public class TodayScheduleWidgetProvider extends AppWidgetProvider {
     public static final String ACTION_RESET_TODAY = "cn.nua.wenguan.schedule.widget.RESET_TODAY";
     private static final String PREFERENCES = "widget_preferences";
     private static final String KEY_DAY_OFFSET = "day_offset";
+    private static final String KEY_SELECTED_ON = "selected_on";
+    protected boolean white(){return false;}
+    protected String preferencesName(){return PREFERENCES;}
+    protected Class<? extends TodayScheduleWidgetProvider> providerClass(){return getClass();}
+    public static void refreshAll(Context c){new TodayScheduleWidgetProvider().updateAll(c);}
 
     private static final int[] COURSE_ROWS = {
             R.id.widget_course_row_1,
@@ -72,22 +77,24 @@ public class TodayScheduleWidgetProvider extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager manager, int[] appWidgetIds) {
-        ensureInitialDay(context);
-        for (int appWidgetId : appWidgetIds) {
-            manager.updateAppWidget(appWidgetId, buildSizedViews(context, manager.getAppWidgetOptions(appWidgetId)));
-        }
-        scheduleNextRefresh(context);
+        updateAll(context); // Query every live ID so merged system updates cannot lose an instance.
     }
 
     @Override
     public void onAppWidgetOptionsChanged(Context context, AppWidgetManager manager, int id, Bundle options) {
+        ScheduleRuleStore.applySaved(context);
         ensureInitialDay(context);
-        manager.updateAppWidget(id, buildSizedViews(context, options));
+        updateOne(context, manager, id, options);
         scheduleNextRefresh(context);
     }
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        PendingResult pending=goAsync();Context app=context.getApplicationContext();Intent event=new Intent(intent);
+        if(WidgetWork.sharedRefresh(event)){WidgetWork.enqueue(app,"all-widgets",()->WidgetRecovery.refreshNow(app),pending::finish);return;}
+        WidgetWork.enqueue(app,WidgetWork.eventKey(providerClass(),event),()->receiveOnWorker(app,event),pending::finish);
+    }
+    private void receiveOnWorker(Context context,Intent intent){
         super.onReceive(context, intent);
         String action = intent.getAction();
         if (ACTION_SHOW_TODAY.equals(action)) {
@@ -101,40 +108,73 @@ public class TodayScheduleWidgetProvider extends AppWidgetProvider {
             updateAll(context);
         } else if (Intent.ACTION_TIMEZONE_CHANGED.equals(action)
                 || Intent.ACTION_BOOT_COMPLETED.equals(action)
-                || Intent.ACTION_TIME_CHANGED.equals(action)
-                || Intent.ACTION_MY_PACKAGE_REPLACED.equals(action)) {
+                || Intent.ACTION_TIME_CHANGED.equals(action)) {
             setDayOffset(context, ScheduleRepository.now().getHour() >= 22 ? 1 : 0);
+            updateAll(context);
+        } else if (Intent.ACTION_MY_PACKAGE_REPLACED.equals(action)) {
+            ensureInitialDay(context);
             updateAll(context);
         } else if (ACTION_REFRESH.equals(action)) {
             ensureInitialDay(context);
             updateAll(context);
+        }
+        if(providerClass()==TodayScheduleWidgetProvider.class && (ACTION_REFRESH.equals(action)||ACTION_AUTO_TOMORROW.equals(action)||ACTION_RESET_TODAY.equals(action))) {
+            try{
+                if(ACTION_AUTO_TOMORROW.equals(action)||ACTION_RESET_TODAY.equals(action))
+                    context.sendBroadcast(new Intent(context,WhiteTodayScheduleWidgetProvider.class).setAction(action));
+                else WhiteTodayScheduleWidgetProvider.refreshAll(context);
+            }catch(RuntimeException ignored){}
+            try{WeekScheduleWidgetProvider.refreshAll(context);}catch(RuntimeException ignored){}
+            try{WhiteWeekScheduleWidgetProvider.refreshAll(context);}catch(RuntimeException ignored){}
         }
     }
 
     @Override
     public void onDisabled(Context context) {
         super.onDisabled(context);
-        WidgetUpdateScheduler.cancel(context);
+        if (!WidgetRecovery.hasWidgets(context)) {WidgetUpdateScheduler.cancel(context);WidgetRecovery.cancel(context);}
     }
 
-    private static void updateAll(Context context) {
+    protected void updateAll(Context context) {
+        ScheduleRuleStore.applySaved(context);
+        ensureInitialDay(context);
         AppWidgetManager manager = AppWidgetManager.getInstance(context);
-        ComponentName provider = new ComponentName(context, TodayScheduleWidgetProvider.class);
+        ComponentName provider = new ComponentName(context, providerClass());
         int[] ids = manager.getAppWidgetIds(provider);
         for (int id : ids) {
-            manager.updateAppWidget(id, buildSizedViews(context, manager.getAppWidgetOptions(id)));
+            updateOne(context, manager, id, manager.getAppWidgetOptions(id));
         }
         if (ids.length > 0) {
             scheduleNextRefresh(context);
         }
     }
 
-    private static RemoteViews buildSizedViews(Context context, Bundle options) {
+    @Override public void onRestored(Context c,int[] oldIds,int[] newIds){
+        AppWidgetManager manager=AppWidgetManager.getInstance(c);
+        for(int id:newIds){Bundle options=new Bundle();options.putBoolean(AppWidgetManager.OPTION_APPWIDGET_RESTORE_COMPLETED,true);manager.updateAppWidgetOptions(id,options);}
+        WidgetRecovery.begin(c,null);
+    }
+
+    private void updateOne(Context c,AppWidgetManager manager,int id,Bundle options){
+        try{manager.updateAppWidget(id,buildSizedViews(c,options));WidgetDiagnostics.submitted(c,white()?"今日白色":"今日深色",id);}
+        catch(RuntimeException failed){
+            WidgetDiagnostics.failure(c,"daily-layout",id,failed);
+            // A failing responsive-layout host must not blank all other widget instances.
+            try{Bundle size=options==null?new Bundle():options;int[] w=WidgetSizePolicy.range(size.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH,0),size.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH,0),250),h=WidgetSizePolicy.range(size.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT,0),size.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT,0),120);manager.updateAppWidget(id,buildViews(c,w[0],h[1]));WidgetDiagnostics.submitted(c,"daily-fallback",id);}
+            catch(RuntimeException unavailable){WidgetDiagnostics.failure(c,"daily-fallback",id,unavailable);}
+        }
+    }
+
+    private RemoteViews buildSizedViews(Context context, Bundle options) {
         if (options == null) options = new Bundle();
         int rawMinWidth = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH, 0);
         int rawMaxWidth = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH, 0);
         int rawMinHeight = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, 0);
         int rawMaxHeight = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT, 0);
+        if(WidgetHostPolicy.singleLayout(context.getResources().getConfiguration().smallestScreenWidthDp)){
+            int[] size=WidgetHostPolicy.currentSize(rawMinWidth,rawMaxWidth,rawMinHeight,rawMaxHeight,250,120,context.getResources().getConfiguration().orientation==android.content.res.Configuration.ORIENTATION_LANDSCAPE);
+            return buildViews(context,size[0],size[1]);
+        }
         if (Build.VERSION.SDK_INT >= 31) {
             ArrayList<SizeF> sizes = options.getParcelableArrayList(AppWidgetManager.OPTION_APPWIDGET_SIZES);
             Map<SizeF, RemoteViews> exactViews = new LinkedHashMap<>();
@@ -154,8 +194,7 @@ public class TodayScheduleWidgetProvider extends AppWidgetProvider {
         return new RemoteViews(buildViews(context, maxWidth, minHeight), buildViews(context, minWidth, maxHeight));
     }
 
-    private static RemoteViews buildViews(Context context, float width, float height) {
-        ScheduleRuleStore.applySaved(context);
+    private RemoteViews buildViews(Context context, float width, float height) {
         LocalDate today = ScheduleRepository.today();
         int dayOffset = getDayOffset(context);
         LocalDate shownDate = today.plusDays(dayOffset);
@@ -172,7 +211,9 @@ public class TodayScheduleWidgetProvider extends AppWidgetProvider {
         boolean tablet = context.getResources().getConfiguration().smallestScreenWidthDp >= 600;
         WidgetLayoutPolicy layout = new WidgetLayoutPolicy(width, height, context.getResources().getConfiguration().fontScale, tablet);
         int rowLimit = layout.rowsForCount(visibleSessions.size());
-        RemoteViews views = new RemoteViews(context.getPackageName(), layout.phoneLayout ? R.layout.widget_phone : R.layout.widget_today);
+        RemoteViews views = new RemoteViews(context.getPackageName(), WidgetLayoutEpoch.layout(context,white()
+                ? (layout.phoneLayout ? R.layout.widget_phone_white : R.layout.widget_today_white)
+                : (layout.phoneLayout ? R.layout.widget_phone : R.layout.widget_today)));
         applySizing(context, views, layout);
         views.setViewVisibility(R.id.widget_summary, layout.compact && !visibleSessions.isEmpty() ? View.GONE : View.VISIBLE);
         String dayLabel = dayOffset == 0 ? "今天" : "明天";
@@ -218,7 +259,7 @@ public class TodayScheduleWidgetProvider extends AppWidgetProvider {
                         session.getRoom() + (layout.compact ? "" : " · " + session.getType() + " · " + session.getPeriods())
                 );
                 views.setTextViewText(COURSE_STATUSES[i], status.getLabel());
-                views.setTextColor(COURSE_STATUSES[i], widgetStatusColor(status));
+                views.setTextColor(COURSE_STATUSES[i], white() ? (status==CourseStatus.IN_PROGRESS?0xFF08785B:0xFF255A84) : widgetStatusColor(status));
             } else {
                 views.setViewVisibility(COURSE_ROWS[i], View.GONE);
             }
@@ -246,27 +287,34 @@ public class TodayScheduleWidgetProvider extends AppWidgetProvider {
                 context, 0, openIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         views.setOnClickPendingIntent(R.id.widget_root, openPendingIntent);
 
-        Intent refreshIntent = new Intent(context, TodayScheduleWidgetProvider.class);
-        refreshIntent.setAction(ACTION_REFRESH);
+        Intent refreshIntent = new Intent(context, providerClass());
+        refreshIntent.setAction(ACTION_REFRESH).addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
         PendingIntent refreshPendingIntent = PendingIntent.getBroadcast(
                 context, 1, refreshIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         views.setOnClickPendingIntent(R.id.widget_refresh, refreshPendingIntent);
 
-        Intent todayIntent = new Intent(context, TodayScheduleWidgetProvider.class);
-        todayIntent.setAction(ACTION_SHOW_TODAY);
+        Intent todayIntent = new Intent(context, providerClass());
+        todayIntent.setAction(ACTION_SHOW_TODAY).addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
         PendingIntent todayPendingIntent = PendingIntent.getBroadcast(
                 context, 2, todayIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         views.setOnClickPendingIntent(R.id.widget_previous, todayPendingIntent);
 
-        Intent tomorrowIntent = new Intent(context, TodayScheduleWidgetProvider.class);
-        tomorrowIntent.setAction(ACTION_SHOW_TOMORROW);
+        Intent tomorrowIntent = new Intent(context, providerClass());
+        tomorrowIntent.setAction(ACTION_SHOW_TOMORROW).addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
         PendingIntent tomorrowPendingIntent = PendingIntent.getBroadcast(
                 context, 3, tomorrowIntent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         views.setOnClickPendingIntent(R.id.widget_next, tomorrowPendingIntent);
         return views;
     }
 
-    private static void applySizing(Context context, RemoteViews views, WidgetLayoutPolicy layout) {
+    private void applySizing(Context context, RemoteViews views, WidgetLayoutPolicy layout) {
+        if(white()){
+            views.setInt(R.id.widget_root,"setBackgroundResource",R.drawable.bg_widget_white);
+            views.setTextColor(R.id.widget_date,0xFF213547);
+            for(int id:new int[]{R.id.widget_summary,R.id.widget_more,R.id.widget_empty,R.id.widget_refresh})views.setTextColor(id,0xFF536B7B);
+            for(int id:new int[]{R.id.widget_previous,R.id.widget_next})views.setTextColor(id,0xFF255A84);
+            for(int i=0;i<COURSE_ROWS.length;i++){views.setInt(COURSE_ROWS[i],"setBackgroundResource",R.drawable.bg_widget_row_white);views.setTextColor(COURSE_NAMES[i],0xFF213547);views.setTextColor(COURSE_TIMES[i],0xFF255A84);views.setTextColor(COURSE_DETAILS[i],0xFF536B7B);}
+        }
         float density = context.getResources().getDisplayMetrics().density;
         int padding = Math.round(layout.padding * density);
         views.setViewPadding(R.id.widget_root, padding, padding, padding, padding);
@@ -286,7 +334,7 @@ public class TodayScheduleWidgetProvider extends AppWidgetProvider {
         }
     }
 
-    private static void scheduleNextRefresh(Context context) {
+    private void scheduleNextRefresh(Context context) {
         LocalDate today = ScheduleRepository.today();
         WidgetUpdateScheduler.scheduleNext(
                 context,
@@ -295,23 +343,24 @@ public class TodayScheduleWidgetProvider extends AppWidgetProvider {
         );
     }
 
-    private static int getDayOffset(Context context) {
-        return context.getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE).getInt(KEY_DAY_OFFSET, 0);
+    private int getDayOffset(Context context) {
+        return context.getSharedPreferences(preferencesName(), Context.MODE_PRIVATE).getInt(KEY_DAY_OFFSET, 0);
     }
 
-    private static void setDayOffset(Context context, int offset) {
-        context.getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE)
+    private void setDayOffset(Context context, int offset) {
+        context.getSharedPreferences(preferencesName(), Context.MODE_PRIVATE)
                 .edit()
                 .putInt(KEY_DAY_OFFSET, offset == 1 ? 1 : 0)
+                .putString(KEY_SELECTED_ON,ScheduleRepository.today().toString())
                 .apply();
     }
 
-    private static void ensureInitialDay(Context context) {
-        SharedPreferences preferences = context.getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
-        if (!preferences.contains(KEY_DAY_OFFSET)) {
-            int offset = ScheduleRepository.now().getHour() >= 22 ? 1 : 0;
-            preferences.edit().putInt(KEY_DAY_OFFSET, offset).apply();
-        }
+    private void ensureInitialDay(Context context) {
+        SharedPreferences preferences = context.getSharedPreferences(preferencesName(), Context.MODE_PRIVATE);
+        LocalDate chosen=null;
+        try{String value=preferences.getString(KEY_SELECTED_ON,"");if(!value.isEmpty())chosen=LocalDate.parse(value);}catch(RuntimeException ignored){}
+        int offset=DailyWidgetSelectionPolicy.offset(preferences.contains(KEY_DAY_OFFSET),preferences.getInt(KEY_DAY_OFFSET,0),chosen,ScheduleRepository.today(),ScheduleRepository.now().getHour());
+        if(chosen==null||!chosen.equals(ScheduleRepository.today())||offset!=getDayOffset(context))setDayOffset(context,offset);
     }
 
     private static int widgetStatusColor(CourseStatus status) {

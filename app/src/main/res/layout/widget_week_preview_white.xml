@@ -1,0 +1,5 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="250dp" android:layout_height="360dp" android:orientation="vertical" android:padding="10dp" android:background="@drawable/bg_widget_white">
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="竖条周课表 · 白色 · 预览示意" android:textSize="14sp" android:textStyle="bold" android:textColor="#213547" />
+    <TextView android:layout_width="match_parent" android:layout_height="36dp" android:text="‹ 上周         回到本周         下周 ›" android:gravity="center" android:textSize="11sp" android:textColor="#255A84" />
+    <ImageView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:scaleType="fitCenter" android:src="@drawable/week_widget_preview_white" android:contentDescription="白色背景和彩色课程方块，预览不含真实课表" />
+</LinearLayout>

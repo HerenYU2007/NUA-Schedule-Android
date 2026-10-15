@@ -1,0 +1,6 @@
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:description="@string/widget_description" android:initialLayout="@layout/widget_today_white"
+    android:previewLayout="@layout/widget_picker_preview_white" android:previewImage="@drawable/widget_picker_preview_white_bitmap"
+    android:minWidth="180dp" android:minHeight="120dp" android:minResizeWidth="160dp" android:minResizeHeight="100dp"
+    android:resizeMode="horizontal|vertical" android:targetCellWidth="4" android:targetCellHeight="2"
+    android:updatePeriodMillis="1800000" android:widgetCategory="home_screen" />

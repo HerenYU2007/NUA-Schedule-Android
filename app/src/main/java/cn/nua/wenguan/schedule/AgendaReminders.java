@@ -25,7 +25,7 @@ public final class AgendaReminders {
         try {
             AlarmManager alarms=c.getSystemService(AlarmManager.class); if(alarms==null)return;
             PendingIntent pending=PendingIntent.getBroadcast(c,8429,new Intent(c,AgendaReminderReceiver.class).setAction("AGENDA_REMINDER"),PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE);
-            alarms.cancel(pending); AgendaEvent next=next(c); if(next==null)return;
+            alarms.cancel(pending); NotificationAccess.channels(c);if(!NotificationAccess.channelAllowed(c,NotificationAccess.AGENDA))return; AgendaEvent next=next(c); if(next==null)return;
             long at=Math.max(System.currentTimeMillis()+1500,due(next));
             if(Build.VERSION.SDK_INT<31||alarms.canScheduleExactAlarms()) {
                 try { alarms.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,at,pending); return; } catch(SecurityException denied) { }

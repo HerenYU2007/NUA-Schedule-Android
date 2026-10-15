@@ -1,42 +1,20 @@
 package cn.nua.wenguan.schedule;
-
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Build;
-import cn.nua.wenguan.schedule.data.ScheduleRepository;
+import android.content.*;
 import cn.nua.wenguan.schedule.model.CourseSession;
-import java.time.ZonedDateTime;
-
 public final class ReminderReceiver extends BroadcastReceiver {
-    @Override public void onReceive(Context c, Intent i) {
-        if (Intent.ACTION_MY_PACKAGE_REPLACED.equals(i.getAction()) || Intent.ACTION_BOOT_COMPLETED.equals(i.getAction())) LegacySyncCleanup.cancel(c);
-        if (!"CLASS_REMINDER".equals(i.getAction())) {
-            ReminderScheduler.scheduleNext(c);
-            return;
-        }
-        if (!ReminderScheduler.enabled(c)) return;
-        CourseSession s = ReminderScheduler.next(c);
-        if (s == null) return;
-        long due = ZonedDateTime.of(s.getDate(), s.getStartTime(), ScheduleRepository.SCHOOL_ZONE)
-                .minusMinutes(ReminderScheduler.minutesBefore(c)).toInstant().toEpochMilli();
-        if (due > System.currentTimeMillis() + 1000L) { ReminderScheduler.scheduleNext(c); return; }
-        ReminderScheduler.markFired(c, s);
-        NotificationManager m = c.getSystemService(NotificationManager.class);
-        if (m != null && m.areNotificationsEnabled()
-                && (Build.VERSION.SDK_INT < 33 || c.checkSelfPermission("android.permission.POST_NOTIFICATIONS") == android.content.pm.PackageManager.PERMISSION_GRANTED)) {
-            m.createNotificationChannel(new NotificationChannel("class_reminders", "上课提醒", NotificationManager.IMPORTANCE_HIGH));
-            PendingIntent open = PendingIntent.getActivity(c, 0, new Intent(c, MainActivity.class),
-                    PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-            m.notify(ReminderScheduler.identity(s).hashCode(), new Notification.Builder(c, "class_reminders")
-                    .setSmallIcon(R.drawable.ic_notification).setContentTitle("即将上课 · " + s.getCourse())
-                    .setContentText(s.getTimeRange() + " · " + s.getRoom())
-                    .setStyle(new Notification.BigTextStyle().bigText(s.getTimeRange() + " · " + s.getRoom()))
-                    .setVisibility(Notification.VISIBILITY_PRIVATE).setAutoCancel(true).setContentIntent(open).build());
+    @Override public void onReceive(Context c,Intent i){
+        if(Intent.ACTION_MY_PACKAGE_REPLACED.equals(i.getAction())||Intent.ACTION_BOOT_COMPLETED.equals(i.getAction()))LegacySyncCleanup.cancel(c);
+        if("CLASS_REMINDER".equals(i.getAction())&&ReminderScheduler.enabled(c)){
+            java.util.List<CourseSession> due=new java.util.ArrayList<>();java.util.List<String> titles=new java.util.ArrayList<>();
+            for(CourseSession s:ReminderScheduler.candidates(c)){if(ReminderScheduler.scheduledDue(c,s)>System.currentTimeMillis()+1000L)break;due.add(s);if(ReminderPreferences.mode(c,s)==2)titles.add(s.getCourse()+" · "+s.getTimeRange()+" · "+s.getRoom());}
+            boolean alarmStarted=false;
+            if(!titles.isEmpty()&&ReminderScheduler.exactAllowed(c))try{c.startForegroundService(new Intent(c,CourseAlarmService.class).putExtra("title",titles.size()>1?"同时有"+titles.size()+"门课程":due.stream().filter(s->ReminderPreferences.mode(c,s)==2).findFirst().get().getCourse()).putExtra("body",String.join("\n",titles)));alarmStarted=true;}catch(RuntimeException denied){}
+            for(CourseSession s:due){
+                int mode=ReminderPreferences.mode(c,s);boolean sent=false;
+                if(mode==2&&alarmStarted)sent=true;
+                if(!sent)sent=NotificationAccess.post(c,NotificationAccess.CLASSES,ReminderScheduler.identity(s).hashCode(),"即将上课 · "+s.getCourse(),s.getTimeRange()+" · "+s.getRoom()+(mode==2&&!ReminderScheduler.exactAllowed(c)?"（未授权准时闹钟，改为通知）":""),false);
+                if(sent)ReminderScheduler.markFired(c,s);else ReminderScheduler.failed(c,s);
+            }
         }
         ReminderScheduler.scheduleNext(c);
     }

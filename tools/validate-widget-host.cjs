@@ -30,7 +30,7 @@ assert(provider.includes('WidgetSizePolicy.current') && provider.includes('Widge
 assert(provider.includes('i < rowLimit'), 'Do not clip three fixed course rows');
 assert(provider.includes('visibleSessions.size() - rowLimit') && layout.includes('@+id/widget_more'), 'Hidden courses must remain discoverable');
 assert(provider.includes('smallestScreenWidthDp >= 600'), 'Tablet detection independent of widget height/orientation');
-assert(provider.includes('layout.phoneLayout ? R.layout.widget_phone : R.layout.widget_today'), 'Separate phone layout');
+assert(provider.includes('layout.phoneLayout ? R.layout.widget_phone : R.layout.widget_today')&&provider.includes('layout.phoneLayout ? R.layout.widget_phone_white : R.layout.widget_today_white'), 'Separate phone layout and independent white variants');
 const courseTag = phoneLayout.match(/<LinearLayout\b[^>]*android:id="@\+id\/widget_courses"[^>]*>/s)?.[0];
 assert(courseTag && courseTag.includes('android:gravity="top"'), 'Course list must start at top, not vertically centred');
 assert(!courseTag.includes('center_vertical'), 'No vertical centring of the whole course list');

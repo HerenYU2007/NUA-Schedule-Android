@@ -163,6 +163,7 @@ public class ScheduleSyncActivity extends AppearanceActivity {
         addressText = findViewById(R.id.sync_address);
         browserProblem = findViewById(R.id.sync_browser_problem);
         importButton = findViewById(R.id.import_current_page);
+        applyDebugUi();
         try {
             navigationScript = asset("schedule-navigation.js");
             extractionScript = asset("schedule-extract.js");
@@ -189,7 +190,7 @@ public class ScheduleSyncActivity extends AppearanceActivity {
                 text.setText(asset("xls-library-notice.txt") + "\n\n" + asset("LGPL-2.1.txt"));
                 text.setTextSize(13);
                 text.setPadding(dp(16), dp(10), dp(16), dp(10));
-                ScrollView scroll = new ScrollView(this);
+                ScrollView scroll = new cn.nua.wenguan.schedule.ui.ResponsiveScrollView(this);
                 scroll.addView(text);
                 new AlertDialog.Builder(this).setTitle("XLS 组件许可")
                         .setView(scroll).setPositiveButton("关闭", null).show();
@@ -212,6 +213,14 @@ public class ScheduleSyncActivity extends AppearanceActivity {
         catch (android.content.ActivityNotFoundException error) {
             Toast.makeText(this, "没有可用的文件选择器", Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void applyDebugUi() {
+        boolean debug=DebugSettings.enabled(this);
+        int visibility=debug?View.VISIBLE:View.GONE;
+        for(int id:new int[]{R.id.sync_logout,R.id.sync_home,R.id.sync_address,R.id.sync_debug_files,R.id.sync_diagnostics})
+            findViewById(id).setVisibility(visibility);
+        importButton.setText(debug?"重新获取课表（清空登录）":"重新登录");
     }
 
     private String asset(String name) throws java.io.IOException {
@@ -919,6 +928,7 @@ public class ScheduleSyncActivity extends AppearanceActivity {
         reviewing = true;
         handler.removeCallbacks(poll);
         LocalDate[] startDate = { ScheduleRepository.schoolStartDate() };
+        boolean[] dateChosen = { ScheduleRepository.hasImportedRules() };
         LinearLayout body = new LinearLayout(this);
         body.setOrientation(LinearLayout.VERTICAL);
         body.setPadding(dp(20), dp(10), dp(20), dp(10));
@@ -939,12 +949,14 @@ public class ScheduleSyncActivity extends AppearanceActivity {
         body.addView(info);
         Button dateButton = new Button(this);
         dateButton.setText("开学时间：" + startDate[0]);
+        if (!dateChosen[0]) dateButton.setText("首次导入 · 请选择开学日期");
         TextView weekHint = new TextView(this);
         weekHint.setText(ScheduleRepository.firstWeekText(startDate[0]));
         weekHint.setTextSize(13);
         dateButton.setOnClickListener(v -> {
             DatePickerDialog picker = new DatePickerDialog(this, (view, year, month, day) -> {
                 startDate[0] = LocalDate.of(year, month + 1, day);
+                dateChosen[0] = true;
                 dateButton.setText("开学时间：" + startDate[0]);
                 weekHint.setText(ScheduleRepository.firstWeekText(startDate[0]));
             }, startDate[0].getYear(), startDate[0].getMonthValue() - 1, startDate[0].getDayOfMonth());
@@ -954,6 +966,8 @@ public class ScheduleSyncActivity extends AppearanceActivity {
         body.addView(dateButton);
         body.addView(weekHint);
         List<String> warnings = new ArrayList<>(result.getWarnings());
+        List<String> conflicts = cn.nua.wenguan.schedule.data.ScheduleConflicts.courses(result.getRules());
+        if (!conflicts.isEmpty()) warnings.add("部分上课时间重叠，请核对：" + String.join("；", conflicts));
         JSONArray pageWarnings = metadata.optJSONArray("warnings");
         if (pageWarnings != null) for (int i = 0; i < pageWarnings.length(); i++) warnings.add(pageWarnings.optString(i));
         CheckBox checked = new CheckBox(this);
@@ -966,7 +980,7 @@ public class ScheduleSyncActivity extends AppearanceActivity {
             checked.setText("已核对以上提示，仍要导入识别出的课程");
             body.addView(checked);
         }
-        ScrollView scroll = new ScrollView(this);
+        ScrollView scroll = new cn.nua.wenguan.schedule.ui.ResponsiveScrollView(this);
         scroll.addView(body);
         reviewDialog = new AlertDialog.Builder(this).setTitle("确认课表 · 不会立即覆盖")
                 .setView(scroll).setNegativeButton("取消", null).setPositiveButton("确认导入", null).create();
@@ -976,6 +990,7 @@ public class ScheduleSyncActivity extends AppearanceActivity {
             statusText.setText("已取消导入；点“重新获取课表”会清空登录并重新认证。");
         });
         reviewDialog.setOnShowListener(dialog -> reviewDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
+            if (!dateChosen[0]) { Toast.makeText(this, "请先选择开学日期，所在周作为第1周", Toast.LENGTH_LONG).show(); dateButton.performClick(); return; }
             if (!warnings.isEmpty() && !checked.isChecked()) {
                 Toast.makeText(this, "请先核对并勾选提示", Toast.LENGTH_SHORT).show();
                 return;
@@ -986,12 +1001,22 @@ public class ScheduleSyncActivity extends AppearanceActivity {
                 setResult(RESULT_OK);
                 Toast.makeText(this, "课表已导入，小组件已更新", Toast.LENGTH_LONG).show();
                 reviewDialog.dismiss();
-                finish();
+                flowStopped = true;
+                new AlertDialog.Builder(this).setIcon(R.drawable.ic_ui_calendar).setTitle("课表导入完成")
+                        .setMessage(result.getCourseCount()+"门课程已保存\n开学时间："+startDate[0]+"\n小组件和提醒已刷新。你也可以点击课程，在本机修改安排。")
+                        .setPositiveButton("查看课表",(done,which)->finish()).setOnCancelListener(done->finish()).show();
             } catch (JSONException | RuntimeException error) {
                 Toast.makeText(this, "保存失败，原课表未被替换：" + error.getMessage(), Toast.LENGTH_LONG).show();
             }
         }));
         reviewDialog.show();
+        if (reviewDialog.getWindow() != null) {
+            android.graphics.drawable.GradientDrawable surface = new android.graphics.drawable.GradientDrawable();
+            surface.setColor(getColor(R.color.surface)); surface.setCornerRadius(dp(24));
+            reviewDialog.getWindow().setBackgroundDrawable(surface);
+            reviewDialog.getWindow().setWindowAnimations(R.style.TopCourseSheetAnimation);
+        }
+        if (!dateChosen[0]) dateButton.postDelayed(() -> { if (reviewDialog != null && reviewDialog.isShowing()) dateButton.performClick(); }, 250);
         attempts.succeed();
         handler.removeCallbacks(attemptWatchdog);
         scroll.getLayoutParams().height = Math.min(dp(420), getResources().getDisplayMetrics().heightPixels / 2);
@@ -1007,6 +1032,7 @@ public class ScheduleSyncActivity extends AppearanceActivity {
     }
 
     private void refreshWidget() {
+        ScheduleChanges.refresh(this);
         Intent intent = new Intent(this, TodayScheduleWidgetProvider.class);
         intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
         AppWidgetManager manager = AppWidgetManager.getInstance(this);
@@ -1093,6 +1119,7 @@ public class ScheduleSyncActivity extends AppearanceActivity {
 
     @Override protected void onResume() {
         super.onResume();
+        applyDebugUi();
         active = true;
         if (pausedAt > 0L && flowDeadline > 0L)
             flowDeadline += SystemClock.elapsedRealtime() - pausedAt;

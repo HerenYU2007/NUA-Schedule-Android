@@ -1,0 +1,5 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="300dp" android:layout_height="160dp" android:orientation="vertical" android:padding="14dp" android:background="@drawable/bg_widget_white">
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="今日列表 · 白色 · 预览示意" android:textColor="#213547" android:textSize="15sp" android:textStyle="bold" />
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:padding="10dp" android:background="@drawable/bg_widget_row_white" android:text="08:55—11:40   课程名称\n教室地点                 未开始" android:textColor="#255A84" android:textSize="13sp" />
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:padding="10dp" android:background="@drawable/bg_widget_row_white" android:text="14:00—15:40   课程名称\n教室地点                 未开始" android:textColor="#255A84" android:textSize="13sp" />
+</LinearLayout>

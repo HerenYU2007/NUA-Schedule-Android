@@ -11,20 +11,25 @@ import java.util.List;
 /** Separate local data: school sync/clear never removes personal agenda items. */
 public final class AgendaStore {
     private AgendaStore() { }
-    public static List<AgendaEvent> load(Context c) {
+    private static String cachedRaw;
+    private static List<AgendaEvent> cachedEvents;
+    public static String revision(Context c){return c.getSharedPreferences("agenda_events",0).getString("events","[]");}
+    public static synchronized List<AgendaEvent> load(Context c) {
         try {
             String raw=c.getSharedPreferences("agenda_events",0).getString("events","[]");
             if(raw.length()>1024*1024) return null;
+            if(raw.equals(cachedRaw)&&cachedEvents!=null)return new ArrayList<>(cachedEvents);
             JSONArray array=new JSONArray(raw); if(array.length()>2000)return null;
             List<AgendaEvent> result=new ArrayList<>();
             for(int i=0;i<array.length();i++) {
                 JSONObject e=array.getJSONObject(i);
                 result.add(new AgendaEvent(e.getString("id"),e.getString("title"),e.optString("place"),LocalDate.parse(e.getString("date")),LocalTime.parse(e.getString("start")),LocalTime.parse(e.getString("end")),e.optBoolean("allDay"),e.optBoolean("done"),e.optBoolean("remind")));
             }
+            cachedRaw=raw;cachedEvents=new ArrayList<>(result);
             return result;
         } catch(Exception unreadable) { return null; }
     }
-    public static boolean put(Context c, AgendaEvent event, boolean delete) {
+    public static synchronized boolean put(Context c, AgendaEvent event, boolean delete) {
         List<AgendaEvent> events=load(c); if(events==null)return false;
         events.removeIf(e->e.id.equals(event.id)); if(!delete)events.add(event);
         if(events.size()>2000)return false;

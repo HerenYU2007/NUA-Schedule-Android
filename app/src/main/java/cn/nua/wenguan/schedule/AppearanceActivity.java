@@ -10,6 +10,7 @@ public abstract class AppearanceActivity extends Activity {
     @Override protected void onCreate(Bundle state) {
         appliedTheme = AppearanceSettings.theme(this);
         super.onCreate(state);
+        cn.nua.wenguan.schedule.ui.UiPerformance.configure(getWindow());
         if (android.os.Build.VERSION.SDK_INT >= 27) {
             android.view.View decor = getWindow().getDecorView();
             int flags = decor.getSystemUiVisibility();

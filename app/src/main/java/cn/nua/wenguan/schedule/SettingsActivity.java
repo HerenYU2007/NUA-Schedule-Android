@@ -31,8 +31,17 @@ public class SettingsActivity extends AppearanceActivity {
         clearSchedule = findViewById(R.id.clear_schedule);
 
         findViewById(R.id.set_school_start).setOnClickListener(v -> showSchoolStartPicker());
+        findViewById(R.id.widget_diagnostics).setOnClickListener(v->showWidgetDiagnostics());
         findViewById(R.id.add_widget).setOnClickListener(v -> addDesktopWidget());
         findViewById(R.id.reminder_button).setOnClickListener(v -> ReminderSettings.show(this));
+        findViewById(R.id.background_help).setOnClickListener(v -> BackgroundHelp.show(this));
+        findViewById(R.id.transfer_schedule).setOnClickListener(v -> startActivity(new Intent(this,ScheduleTransferActivity.class)));
+        findViewById(R.id.debug_mode).setOnClickListener(v -> new AlertDialog.Builder(this)
+                .setTitle("调试模式").setSingleChoiceItems(new String[]{"关闭 · 简洁登录页", "开启 · 显示原有辅助控件"}, DebugSettings.enabled(this)?1:0, (dialog,which)->{
+                    if(DebugSettings.save(this,which==1)){dialog.dismiss();updateUi();}
+                    else Toast.makeText(this,"设置保存失败，请重试",Toast.LENGTH_LONG).show();
+                })
+                .setNegativeButton("取消",null).show());
         findViewById(R.id.manual_import).setOnClickListener(v -> startActivity(new Intent(this, ScheduleSyncActivity.class).putExtra("manual_import", true)));
         findViewById(R.id.theme_settings).setOnClickListener(v -> new AlertDialog.Builder(this)
                 .setTitle("界面主题").setSingleChoiceItems(new String[]{"跟随系统", "浅色", "深色"}, AppearanceSettings.theme(this), (dialog, which) -> {
@@ -52,10 +61,12 @@ public class SettingsActivity extends AppearanceActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        ScheduleChanges.refreshAsync(this);
         updateUi();
     }
 
     private void updateUi() {
+        ((TextView)findViewById(R.id.debug_mode)).setText("调试模式："+(DebugSettings.enabled(this)?"已开启":"已关闭"));
         ((TextView) findViewById(R.id.theme_settings)).setText("界面主题：" + AppearanceSettings.themeLabel(this));
         ((TextView) findViewById(R.id.mode_settings)).setText("课表展示：" + (AppearanceSettings.grid(this) ? "竖条周课表" : "列表课表"));
         boolean imported = ScheduleRepository.hasImportedRules();
@@ -111,8 +122,13 @@ public class SettingsActivity extends AppearanceActivity {
     }
 
     private void addDesktopWidget() {
+        Class<?>[] providers={TodayScheduleWidgetProvider.class,cn.nua.wenguan.schedule.widget.WhiteTodayScheduleWidgetProvider.class,cn.nua.wenguan.schedule.widget.WeekScheduleWidgetProvider.class,cn.nua.wenguan.schedule.widget.WhiteWeekScheduleWidgetProvider.class};
+        new AlertDialog.Builder(this).setTitle("选择小组件样式").setItems(new String[]{"今日列表 · 深色","今日列表 · 白色","竖条周课表 · 深色","竖条周课表 · 白色"},(d,w)->pinWidget(providers[w])).show();
+    }
+
+    private void pinWidget(Class<?> type) {
         AppWidgetManager manager = AppWidgetManager.getInstance(this);
-        ComponentName component = new ComponentName(this, TodayScheduleWidgetProvider.class);
+        ComponentName component = new ComponentName(this, type);
         try {
             if (manager.isRequestPinAppWidgetSupported()
                     && manager.requestPinAppWidget(component, null, null)) {
@@ -126,13 +142,27 @@ public class SettingsActivity extends AppearanceActivity {
                 .setPositiveButton("知道了", null).show();
     }
 
-    private void requestWidgetRefresh() {
-        ReminderScheduler.scheduleNext(this);
-        Intent intent = new Intent(this, TodayScheduleWidgetProvider.class);
-        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
-        AppWidgetManager manager = AppWidgetManager.getInstance(this);
-        ComponentName component = new ComponentName(this, TodayScheduleWidgetProvider.class);
-        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, manager.getAppWidgetIds(component));
-        sendBroadcast(intent);
+    private void showWidgetDiagnostics(){
+        AlertDialog dialog=new AlertDialog.Builder(this).setTitle("桌面小组件刷新")
+                .setMessage(cn.nua.wenguan.schedule.widget.WidgetDiagnostics.summary(this))
+                .setPositiveButton("立即重建",null).setNeutralButton("复制诊断",null).setNegativeButton("关闭",null).create();
+        dialog.setOnShowListener(ignored->{
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v->{
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
+                cn.nua.wenguan.schedule.widget.WidgetLayoutEpoch.force(getApplicationContext());
+                cn.nua.wenguan.schedule.widget.WidgetRecovery.begin(getApplicationContext(),()->runOnUiThread(()->{
+                    if(!isFinishing()&&!isDestroyed()&&dialog.isShowing()){
+                        dialog.setMessage(cn.nua.wenguan.schedule.widget.WidgetDiagnostics.summary(this));dialog.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(true);
+                    }
+                }));
+            });
+            dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setOnClickListener(v->{
+                android.content.ClipboardManager clipboard=getSystemService(android.content.ClipboardManager.class);
+                if(clipboard!=null)clipboard.setPrimaryClip(android.content.ClipData.newPlainText("小组件诊断",cn.nua.wenguan.schedule.widget.WidgetDiagnostics.summary(this)));
+                Toast.makeText(this,"已复制，不含课表或登录信息",Toast.LENGTH_SHORT).show();
+            });
+        });dialog.show();
     }
+    private void requestWidgetRefresh(){ScheduleChanges.refreshAsync(this);}
+    @Override public void onRequestPermissionsResult(int request,String[] permissions,int[] grants){super.onRequestPermissionsResult(request,permissions,grants);ScheduleChanges.refresh(this);updateUi();}
 }

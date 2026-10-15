@@ -12,6 +12,8 @@ public final class CourseSession implements Comparable<CourseSession> {
     private final String room;
     private final String type;
     private final String teacher;
+    private String ruleId = "", credits = "", note = "";
+    private int color;
 
     public CourseSession(
             LocalDate date,
@@ -41,9 +43,18 @@ public final class CourseSession implements Comparable<CourseSession> {
     public String getRoom() { return room; }
     public String getType() { return type; }
     public String getTeacher() { return teacher; }
+    public CourseSession(LocalDate date, LocalTime startTime, LocalTime endTime, String periods, String course, String room,
+            String type, String teacher, String ruleId, int color, String credits, String note) {
+        this(date, startTime, endTime, periods, course, room, type, teacher);
+        this.ruleId = ruleId; this.color = color; this.credits = credits; this.note = note;
+    }
+    public String getRuleId() { return ruleId; }
+    public int getColor() { return color; }
+    public String getCredits() { return credits; }
+    public String getNote() { return note; }
 
     public String getTimeRange() {
-        return String.format("%02d:%02d–%02d:%02d",
+        return String.format(java.util.Locale.ROOT,"%02d:%02d–%02d:%02d",
                 startTime.getHour(), startTime.getMinute(), endTime.getHour(), endTime.getMinute());
     }
 

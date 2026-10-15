@@ -1,43 +1,33 @@
 package cn.nua.wenguan.schedule.ui;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
-import android.os.Build;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
-import android.widget.Toast;
-import cn.nua.wenguan.schedule.data.AgendaStore;
+import android.app.*;
+import android.widget.*;
+import cn.nua.wenguan.schedule.NotificationAccess;
+import cn.nua.wenguan.schedule.data.*;
 import cn.nua.wenguan.schedule.model.AgendaEvent;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.UUID;
-
+import java.time.*;
+import java.util.*;
 public final class AgendaEditor {
     private AgendaEditor() { }
     public static void show(Activity a,AgendaEvent old,LocalDate selected,Runnable changed){
         LocalDate[] date={old==null?selected:old.date};LocalTime[] start={old==null?LocalTime.of(9,0):old.start},end={old==null?LocalTime.of(10,0):old.end};
-        LinearLayout form=new LinearLayout(a);form.setOrientation(LinearLayout.VERTICAL);int pad=Math.round(20*a.getResources().getDisplayMetrics().density);form.setPadding(pad,pad,pad,pad);
-        EditText title=new EditText(a);title.setHint("日程标题（必填）");title.setSingleLine(true);title.setFilters(new android.text.InputFilter[]{new android.text.InputFilter.LengthFilter(80)});title.setText(old==null?"":old.title);form.addView(title);
-        EditText place=new EditText(a);place.setHint("地点（可选）");place.setSingleLine(true);place.setFilters(new android.text.InputFilter[]{new android.text.InputFilter.LengthFilter(200)});place.setText(old==null?"":old.place);form.addView(place);
-        Button day=new Button(a);day.setText("日期："+date[0]);day.setOnClickListener(v->new DatePickerDialog(a,(view,y,m,d)->{date[0]=LocalDate.of(y,m+1,d);day.setText("日期："+date[0]);},date[0].getYear(),date[0].getMonthValue()-1,date[0].getDayOfMonth()).show());form.addView(day);
-        CheckBox all=new CheckBox(a);all.setText("全天日程");all.setChecked(old!=null&&old.allDay);form.addView(all);
-        Button from=new Button(a),to=new Button(a);from.setText("开始："+start[0]);to.setText("结束："+end[0]);form.addView(from);form.addView(to);
-        from.setOnClickListener(v->new TimePickerDialog(a,(view,h,m)->{start[0]=LocalTime.of(h,m);from.setText("开始："+start[0]);},start[0].getHour(),start[0].getMinute(),true).show());
-        to.setOnClickListener(v->new TimePickerDialog(a,(view,h,m)->{end[0]=LocalTime.of(h,m);to.setText("结束："+end[0]);},end[0].getHour(),end[0].getMinute(),true).show());
-        from.setEnabled(!all.isChecked());to.setEnabled(!all.isChecked());all.setOnCheckedChangeListener((b,value)->{from.setEnabled(!value);to.setEnabled(!value);});
-        CheckBox remind=new CheckBox(a);remind.setText("提醒：提前15分钟（全天日程为当日09:00）\n系统省电或未授权可能延迟/阻止通知");remind.setChecked(old!=null&&old.remind);form.addView(remind);
-        ScrollView scroll=new ScrollView(a);scroll.addView(form);
-        AlertDialog dialog=new AlertDialog.Builder(a).setTitle(old==null?"添加日程":"编辑日程").setView(scroll).setNegativeButton("取消",null).setPositiveButton("保存",null).setNeutralButton(old==null?"":"删除",old==null?null:(d,w)->new AlertDialog.Builder(a).setTitle("删除这条日程？").setNegativeButton("取消",null).setPositiveButton("删除",(confirm,which)->{if(AgendaStore.put(a,old,true))changed.run();else Toast.makeText(a,"删除失败，原数据保留",Toast.LENGTH_LONG).show();}).show()).create();
-        dialog.setOnShowListener(d->dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(v->{try{
+        LinearLayout form=EditUi.column(a),basic=EditUi.card(a);form.addView(basic);
+        EditText title=EditUi.field(a,basic,"日程标题（必填）",old==null?"":old.title,80),place=EditUi.field(a,basic,"地点（选填）",old==null?"":old.place,200);
+        final TextView[] day={null},from={null},to={null};
+        day[0]=EditUi.row(a,basic,"日期",date[0].toString(),()->new DatePickerDialog(a,(view,y,m,d)->{date[0]=LocalDate.of(y,m+1,d);day[0].setText("日期    "+date[0]+"  ›");},date[0].getYear(),date[0].getMonthValue()-1,date[0].getDayOfMonth()).show());
+        CheckBox all=new CheckBox(a);all.setText("全天日程");all.setChecked(old!=null&&old.allDay);basic.addView(all);
+        from[0]=EditUi.row(a,basic,"开始时间",start[0].toString(),()->new TimePickerDialog(a,(v,h,m)->{start[0]=LocalTime.of(h,m);from[0].setText("开始时间    "+start[0]+"  ›");},start[0].getHour(),start[0].getMinute(),true).show());
+        to[0]=EditUi.row(a,basic,"结束时间",end[0].toString(),()->new TimePickerDialog(a,(v,h,m)->{end[0]=LocalTime.of(h,m);to[0].setText("结束时间    "+end[0]+"  ›");},end[0].getHour(),end[0].getMinute(),true).show());
+        from[0].setEnabled(!all.isChecked());to[0].setEnabled(!all.isChecked());all.setOnCheckedChangeListener((b,value)->{from[0].setEnabled(!value);to[0].setEnabled(!value);});
+        LinearLayout options=EditUi.card(a);form.addView(options);CheckBox remind=new CheckBox(a);remind.setText("开启日程提醒");remind.setChecked(old!=null&&old.remind);options.addView(remind);options.addView(EditUi.text(a,"提前15分钟；全天日程为当天09:00。通知或准时提醒权限未允许时，可能无法及时提醒。",13,false));
+        final Dialog[] dialog={null};
+        Runnable[] save={null};save[0]=()->{try{
             AgendaEvent event=new AgendaEvent(old==null?UUID.randomUUID().toString():old.id,title.getText().toString(),place.getText().toString(),date[0],start[0],end[0],all.isChecked(),old!=null&&old.done,remind.isChecked());
-            if(!AgendaStore.put(a,event,false))throw new IllegalArgumentException("日程保存失败，原数据保留");
-            dialog.dismiss();changed.run();
-            if(event.remind&&Build.VERSION.SDK_INT>=33&&a.checkSelfPermission("android.permission.POST_NOTIFICATIONS")!=android.content.pm.PackageManager.PERMISSION_GRANTED)a.requestPermissions(new String[]{"android.permission.POST_NOTIFICATIONS"},8429);
-        }catch(IllegalArgumentException error){Toast.makeText(a,error.getMessage(),Toast.LENGTH_LONG).show();}}));dialog.show();
-        if(old==null)dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setVisibility(android.view.View.GONE);
+            java.util.List<AgendaEvent> events=AgendaStore.load(a);if(events==null)throw new IllegalArgumentException("原日程读取失败，未覆盖");
+            Runnable commit=()->{if(!AgendaStore.put(a,event,false)){Toast.makeText(a,"保存失败，原日程保留",Toast.LENGTH_LONG).show();return;}dialog[0].dismiss();changed.run();if(event.remind&&!NotificationAccess.allowed(a))NotificationAccess.request(a);};
+            java.util.List<String> conflicts=ScheduleConflicts.agenda(event,events,ScheduleRepository.sessionsOn(event.date));
+            if(conflicts.isEmpty())commit.run();else new AlertDialog.Builder(a).setTitle("这个时段已有安排").setMessage(String.join("、",conflicts)+"\n仍要保存吗？").setNegativeButton("返回修改",null).setPositiveButton("仍然保存",(d,w)->commit.run()).show();
+        }catch(IllegalArgumentException error){Toast.makeText(a,error.getMessage(),Toast.LENGTH_LONG).show();}};
+        if(old!=null){Button delete=new Button(a);delete.setText("删除日程");delete.setOnClickListener(v->new AlertDialog.Builder(a).setTitle("删除这条日程？").setNegativeButton("取消",null).setPositiveButton("删除",(d,w)->{if(AgendaStore.put(a,old,true)){dialog[0].dismiss();changed.run();}else Toast.makeText(a,"删除失败，原日程保留",Toast.LENGTH_LONG).show();}).show());form.addView(delete);}
+        dialog[0]=EditUi.sheet(a,old==null?"添加日程":"编辑日程",form,"保存",save[0]);
     }
 }

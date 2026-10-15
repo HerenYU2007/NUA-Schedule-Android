@@ -19,10 +19,6 @@ public final class OfficialScheduleParser {
             "第?\\s*(" + NUMBERS + ")\\s*周\\s*[(（]?\\s*([单双])?(?:周)?\\s*[,，;；()（）\\s]*"
             + "(?:星期|周)\\s*([一二三四五六日天1-7])\\s*[,，;；(（\\s]*"
             + "第?\\s*(\\d+)\\s*(?:[-—–~至]\\s*(\\d+))?\\s*节");
-    private static final String[] START = {"", "08:00", "08:50", "10:00", "10:50", "14:00",
-            "14:50", "16:00", "16:50", "18:30", "19:20", "20:30", "21:15"};
-    private static final String[] END = {"", "08:50", "09:40", "10:50", "11:40", "14:50",
-            "15:40", "16:50", "17:40", "19:20", "20:10", "21:15", "22:00"};
 
     private OfficialScheduleParser() { }
 
@@ -103,7 +99,7 @@ public final class OfficialScheduleParser {
                     if (dedup.add(key)) {
                         String periods = slot.first == slot.last ? "第" + slot.first + "节"
                                 : "第" + slot.first + "–" + slot.last + "节";
-                        rules.add(new ScheduleRule(week, week, slot.day, START[slot.first], END[slot.last],
+                        rules.add(new ScheduleRule(week, week, slot.day, SchoolPeriodTimes.start(slot.first), SchoolPeriodTimes.end(slot.last),
                                 periods, course, room, type, teacher));
                         courses.add(course);
                     }
@@ -124,7 +120,7 @@ public final class OfficialScheduleParser {
             if (parity != null) weeks.removeIf(week -> "单".equals(parity) ? week % 2 == 0 : week % 2 != 0);
             int first = Integer.parseInt(matcher.group(4));
             int last = matcher.group(5) == null ? first : Integer.parseInt(matcher.group(5));
-            if (weeks.isEmpty() || first < 1 || last >= END.length || last < first) {
+            if (weeks.isEmpty() || first < 1 || last > 12 || last < first) {
                 throw new IllegalArgumentException("课表包含无法支持的周次或节次，请先核对完整课表。");
             }
             int day = "一二三四五六日".indexOf(matcher.group(3)) + 1;

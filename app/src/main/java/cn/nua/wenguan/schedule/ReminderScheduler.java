@@ -23,7 +23,7 @@ public final class ReminderScheduler {
         scheduleNext(c);
     }
     public static String identity(CourseSession s) {
-        return s.getDate() + "|" + s.getStartTime() + "|" + s.getEndTime() + "|" + s.getCourse();
+        return s.getDate() + "|" + s.getStartTime() + "|" + s.getEndTime() + "|" + (s.getRuleId().isEmpty()?s.getCourse():s.getRuleId());
     }
     private static Set<String> fired(Context c) {
         return new HashSet<>(c.getSharedPreferences("reminders", 0).getStringSet("fired", new HashSet<>()));
@@ -34,20 +34,41 @@ public final class ReminderScheduler {
         keys.removeIf(k -> k.length() < 10 || k.substring(0, 10).compareTo(today) < 0);
         keys.add(identity(s));
         c.getSharedPreferences("reminders", 0).edit().putStringSet("fired", keys).apply();
+        c.getSharedPreferences("reminder_retry",0).edit().remove(retryKey(s)).remove(retryKey(s)+"_count").apply();
     }
     public static CourseSession next(Context c) {
+        java.util.List<CourseSession> candidates=candidates(c);
+        return candidates.isEmpty()?null:candidates.get(0);
+    }
+    public static long due(Context c,CourseSession s){return ZonedDateTime.of(s.getDate(),s.getStartTime(),ScheduleRepository.SCHOOL_ZONE).minusMinutes(ReminderPreferences.minutes(c,s)).toInstant().toEpochMilli();}
+    public static java.util.List<CourseSession> candidates(Context c) {
+        if(!enabled(c)||!NotificationAccess.allowed(c))return java.util.Collections.emptyList();
         ScheduleRuleStore.applySaved(c);
         Set<String> keys = fired(c);
         ZonedDateTime now = ScheduleRepository.now();
+        java.util.List<CourseSession> result=new java.util.ArrayList<>();
+        boolean exact=exactAllowed(c),notifications=NotificationAccess.channelAllowed(c,NotificationAccess.CLASSES),alarms=NotificationAccess.channelAllowed(c,NotificationAccess.ALARM);
+        if(!notifications&&!alarms)return result;
+        long instant=now.toInstant().toEpochMilli();
         for (int day = 0; day < 366; day++) {
             LocalDate date = now.toLocalDate().plusDays(day);
             for (CourseSession s : ScheduleRepository.sessionsOn(date)) {
-                ZonedDateTime start = ZonedDateTime.of(s.getDate(), s.getStartTime(), ScheduleRepository.SCHOOL_ZONE);
-                if (start.isAfter(now) && !keys.contains(identity(s))) return s;
+                int mode=ReminderPreferences.mode(c,s);
+                long end=ZonedDateTime.of(s.getDate(),s.getEndTime(),ScheduleRepository.SCHOOL_ZONE).toInstant().toEpochMilli();
+                if ((mode==2&&exact?alarms:notifications) && ReminderPolicy.eligible(instant,end,due(c,s),mode==2&&!exact?1:mode,keys.contains(identity(s)))) result.add(s);
+            }
+            if(!result.isEmpty()){
+                long earliest=Long.MAX_VALUE;for(CourseSession s:result)earliest=Math.min(earliest,scheduledDue(c,s));
+                long nextDayEarliest=date.plusDays(1).atStartOfDay(ScheduleRepository.SCHOOL_ZONE).minusMinutes(120).toInstant().toEpochMilli();
+                if(nextDayEarliest>earliest)break;
             }
         }
-        return null;
+        result.sort(java.util.Comparator.comparingLong(s->scheduledDue(c,s)));
+        return result;
     }
+    private static String retryKey(CourseSession s){return java.util.UUID.nameUUIDFromBytes(identity(s).getBytes(java.nio.charset.StandardCharsets.UTF_8)).toString();}
+    public static long scheduledDue(Context c,CourseSession s){return Math.max(due(c,s),c.getSharedPreferences("reminder_retry",0).getLong(retryKey(s),0));}
+    public static void failed(Context c,CourseSession s){android.content.SharedPreferences p=c.getSharedPreferences("reminder_retry",0);String key=retryKey(s);int count=p.getInt(key+"_count",0)+1;long retry=count<2?System.currentTimeMillis()+60000:ZonedDateTime.of(s.getDate(),s.getEndTime(),ScheduleRepository.SCHOOL_ZONE).toInstant().toEpochMilli()+1000;p.edit().putInt(key+"_count",count).putLong(key,retry).apply();}
     public static boolean exactAllowed(Context c) {
         AlarmManager a = c.getSystemService(AlarmManager.class);
         return a != null && (Build.VERSION.SDK_INT < 31 || a.canScheduleExactAlarms());
@@ -59,13 +80,17 @@ public final class ReminderScheduler {
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         a.cancel(p);
         if (!enabled(c)) return;
+        NotificationAccess.channels(c);
         CourseSession s = next(c);
         if (s == null) return;
         long at = Math.max(System.currentTimeMillis() + 1500L,
-                ZonedDateTime.of(s.getDate(), s.getStartTime(), ScheduleRepository.SCHOOL_ZONE)
-                        .minusMinutes(minutesBefore(c)).toInstant().toEpochMilli());
+                scheduledDue(c,s));
         try {
-            if (exactAllowed(c)) a.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, at, p);
+            if (exactAllowed(c) && ReminderPreferences.mode(c,s)==2) {
+                PendingIntent show=PendingIntent.getActivity(c,7231,new Intent(c,MainActivity.class),PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE);
+                a.setAlarmClock(new AlarmManager.AlarmClockInfo(at,show),p);
+            }
+            else if (exactAllowed(c)) a.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, at, p);
             else a.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, at, p);
         } catch (SecurityException denied) { a.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, at, p); }
     }

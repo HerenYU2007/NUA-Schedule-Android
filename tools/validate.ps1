@@ -1,10 +1,36 @@
-param([string]$ExportedXls)
+param([string]$ExportedXls, [string]$JsonTestJar = "E:\AndroidBuildTemp\test-deps\json-20260814.jar")
 $ErrorActionPreference = "Stop"
 $ProjectRoot = Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path)
 $Output = Join-Path $ProjectRoot "tools\out"
 New-Item -ItemType Directory -Force -Path $Output | Out-Null
 
 $Sources = @(
+    (Join-Path $ProjectRoot "app\src\main\java\cn\nua\wenguan\schedule\ui\WeekPrefetchPolicy.java"),
+    (Join-Path $ProjectRoot "tools\ValidateFastPaging.java"),
+    (Join-Path $ProjectRoot "app\src\main\java\cn\nua\wenguan\schedule\ui\GridOccupancyPolicy.java"),
+    (Join-Path $ProjectRoot "app\src\main\java\cn\nua\wenguan\schedule\ui\AgendaGridPolicy.java"),
+    (Join-Path $ProjectRoot "app\src\main\java\cn\nua\wenguan\schedule\data\AgendaConflictIndex.java"),
+    (Join-Path $ProjectRoot "tools\ValidateConflictGrid.java"),
+    (Join-Path $ProjectRoot "app\src\main\java\cn\nua\wenguan\schedule\ui\OutsideTapPolicy.java"),
+    (Join-Path $ProjectRoot "app\src\main\java\cn\nua\wenguan\schedule\ui\WeekPagerPolicy.java"),
+    (Join-Path $ProjectRoot "app\src\main\java\cn\nua\wenguan\schedule\widget\WidgetHostPolicy.java"),
+    (Join-Path $ProjectRoot "app\src\main\java\cn\nua\wenguan\schedule\widget\LatestTaskQueue.java"),
+    (Join-Path $ProjectRoot "app\src\main\java\cn\nua\wenguan\schedule\UpdateCheckPolicy.java"),
+    (Join-Path $ProjectRoot "tools\ValidateUpgradeUi.java"),
+    (Join-Path $ProjectRoot "app\src\main\java\cn\nua\wenguan\schedule\widget\WidgetRecoveryPolicy.java"),
+    (Join-Path $ProjectRoot "app\src\main\java\cn\nua\wenguan\schedule\widget\DailyWidgetSelectionPolicy.java"),
+    (Join-Path $ProjectRoot "tools\ValidateWidgetRecovery.java"),
+    (Join-Path $ProjectRoot "app\src\main\java\cn\nua\wenguan\schedule\ui\GridPlacementPolicy.java"),
+    (Join-Path $ProjectRoot "tools\ValidateGridInteractions.java"),
+    (Join-Path $ProjectRoot "app\src\main\java\cn\nua\wenguan\schedule\data\SchoolPeriodTimes.java"),
+    (Join-Path $ProjectRoot "app\src\main\java\cn\nua\wenguan\schedule\data\SlotEditPolicy.java"),
+    (Join-Path $ProjectRoot "app\src\main\java\cn\nua\wenguan\schedule\widget\WeekBitmapPolicy.java"),
+    (Join-Path $ProjectRoot "tools\ValidateLocal123.java"),
+    (Join-Path $ProjectRoot "app\src\main\java\cn\nua\wenguan\schedule\ReminderPolicy.java"),
+    (Join-Path $ProjectRoot "app\src\main\java\cn\nua\wenguan\schedule\data\ScheduleConflicts.java"),
+    (Join-Path $ProjectRoot "app\src\main\java\cn\nua\wenguan\schedule\data\ScheduleExport.java"),
+    (Join-Path $ProjectRoot "tools\ValidateFeatureBatch.java"),
+    (Join-Path $ProjectRoot "tools\ValidateBackupRoundTrip.java"),
     (Join-Path $ProjectRoot "app\src\main\java\cn\nua\wenguan\schedule\UpdateRouteRanking.java"),
     (Join-Path $ProjectRoot "app\src\main\java\cn\nua\wenguan\schedule\UpdateMirrorPolicy.java"),
     (Join-Path $ProjectRoot "app\src\main\java\cn\nua\wenguan\schedule\UpdateDownload.java"),
@@ -47,6 +73,24 @@ if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 & java -cp $Output ValidateUiPolicy
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+& java -cp $Output ValidateFastPaging
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+& java -cp $Output ValidateConflictGrid
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+& java -cp $Output ValidateUpgradeUi
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+& java -cp $Output ValidateLocal123
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+& java -cp $Output ValidateGridInteractions
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+& java -cp $Output ValidateWidgetRecovery
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+& java -cp "$Output;$AndroidJar;$JxlJar" ValidateFeatureBatch
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+if (Test-Path -LiteralPath $JsonTestJar) {
+    & java -cp "$JsonTestJar;$Output;$AndroidJar;$JxlJar" ValidateBackupRoundTrip
+    if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+} else { Write-Output "JSON JVM round-trip test skipped: pass -JsonTestJar with a standalone org.json runtime (test-only, not an app dependency)." }
 & java -cp $Output ValidatePeriodGrid
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 & java -cp $Output ValidateWidgetSize

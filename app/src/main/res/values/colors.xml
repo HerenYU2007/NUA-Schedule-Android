@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="launcher_background">#FCF9F0</color>
     <color name="brand_navy">#1F4E78</color>
     <color name="page_background">#F7F9FB</color>
     <color name="text_primary">#243746</color>

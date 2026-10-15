@@ -1,0 +1,6 @@
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:description="@string/week_widget_description" android:initialLayout="@layout/widget_week_white"
+    android:previewLayout="@layout/widget_week_preview_white" android:previewImage="@drawable/week_widget_preview_white"
+    android:minWidth="250dp" android:minHeight="360dp" android:minResizeWidth="250dp" android:minResizeHeight="320dp"
+    android:resizeMode="horizontal|vertical" android:targetCellWidth="4" android:targetCellHeight="5"
+    android:updatePeriodMillis="1800000" android:widgetCategory="home_screen" />

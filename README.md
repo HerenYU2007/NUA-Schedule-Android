@@ -34,7 +34,7 @@
 
 源码公开，采用 [PolyForm Noncommercial 1.0.0](LICENSE)：允许非商业使用、修改和分享，须遵守许可及保留声明；商业用途请先联系维护者获取授权。它是非商用源码许可，不属于 OSI 定义的开源许可。第三方库保留原有许可，详见 [第三方组件](third_party/README.md) 和 [NOTICE](NOTICE)。
 
-开发环境：JDK 17、Android SDK 35、Gradle 8.7；本机 E 盘构建可运行 `.\\build-on-e.ps1`。[发布说明](GITHUB_PUBLISH.md) · [连续切周验证记录](DEVELOPMENT-1.2.3-FAST-PAGING.md)
+开发环境：JDK 17、Android SDK 35、Gradle 8.7；本机 E 盘构建可运行 `.\build-on-e.ps1`。[发布说明](GITHUB_PUBLISH.md) · [连续切周验证记录](DEVELOPMENT-1.2.3-FAST-PAGING.md)
 
 ## 协助开发
 

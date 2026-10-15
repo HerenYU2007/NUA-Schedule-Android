@@ -3,7 +3,7 @@
   "repository": "HerenYU2007/NUA-Schedule-Android",
   "timezone": "Asia/Shanghai",
   "startedAt": "2026-10-14T15:49:55.069Z",
-  "updatedAt": "2026-10-15T03:30:07.077Z",
+  "updatedAt": "2026-10-15T05:28:49.661Z",
   "assets": [
     {
       "id": 640447553,
@@ -27,7 +27,7 @@
     },
     {
       "id": 642535730,
-      "count": 0
+      "count": 2
     }
   ],
   "daily": [
@@ -40,10 +40,10 @@
     },
     {
       "date": "2026-10-15",
-      "total": 69,
-      "currentTotal": 69,
+      "total": 71,
+      "currentTotal": 71,
       "currentAssets": 6,
-      "sampledAt": "2026-10-15T03:30:07.077Z"
+      "sampledAt": "2026-10-15T05:28:49.661Z"
     }
   ]
 }
